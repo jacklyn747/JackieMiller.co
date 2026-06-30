@@ -59,6 +59,7 @@ export default function Cover() {
             fontSize: "clamp(160px, 26vw, 520px)",
             letterSpacing: "0.05em",
             lineHeight: 1,
+            paddingBottom: "0.12em",
             background: "linear-gradient(175deg, rgba(241,238,229,0.22) 0%, rgba(241,238,229,0.14) 35%, rgba(241,238,229,0.07) 70%, rgba(241,238,229,0.03) 100%)",
             WebkitBackgroundClip: "text",
             backgroundClip: "text",

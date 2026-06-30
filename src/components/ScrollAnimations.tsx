@@ -6,6 +6,24 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 export default function ScrollAnimations() {
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Cover page-turn — pin the cover, scrub it upward as user scrolls
+      // Creates the feel of lifting the front cover of a journal
+      const cover = document.querySelector<HTMLElement>(".cover");
+      if (cover) {
+        gsap.to(cover, {
+          yPercent: -100,
+          ease: "none",
+          scrollTrigger: {
+            trigger: cover,
+            start: "top top",
+            end: "+=100%",
+            scrub: 1.2,
+            pin: true,
+            pinSpacing: false,
+          },
+        });
+      }
+
       // Section entrance — every .rv element fades + rises in when scrolled to
       gsap.utils.toArray<HTMLElement>(".rv").forEach((el) => {
         gsap.fromTo(

@@ -102,3 +102,51 @@ body, main section {
   pointer-events: none;
   z-index: 1;
 }
+
+/* ─── FIELD NOTES PROSE ─── */
+.fn-prose {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.fn-prose p { margin-bottom: 1.4em; }
+.fn-prose h2 {
+  font-family: var(--font-serif), serif;
+  font-size: 27px;
+  line-height: 1.25;
+  margin: 2em 0 0.7em;
+}
+.fn-prose h3 {
+  font-family: var(--font-serif), serif;
+  font-size: 21px;
+  margin: 1.8em 0 0.6em;
+}
+.fn-prose a { color: var(--ox); text-underline-offset: 3px; }
+.fn-prose ul, .fn-prose ol { margin: 0 0 1.4em 1.4em; }
+.fn-prose li { margin-bottom: 0.5em; }
+.fn-prose blockquote {
+  border-left: 2px solid var(--ox);
+  padding-left: 1.2em;
+  margin: 0 0 1.4em;
+  font-style: italic;
+  color: var(--ink-mid);
+}
+.fn-prose code {
+  font-size: 0.88em;
+  background: var(--ink-dim);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.fn-prose pre {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  margin-bottom: 1.4em;
+}
+.fn-prose pre code { background: none; padding: 0; }
+.fn-prose hr {
+  border: none;
+  border-top: 1px solid var(--ink-dim);
+  margin: 2.5em 0;
+}

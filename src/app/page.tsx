@@ -1,12 +1,14 @@
 import Cover from "@/components/Cover";
 import Nav from "@/components/Nav";
 import ScrollAnimations from "@/components/ScrollAnimations";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
     <>
       <Nav />
       <ScrollAnimations />
+      <ThemeToggle />
       <main>
         <Cover />
 
@@ -24,7 +26,7 @@ export default function Home() {
         </section>
 
         <section id="built" style={{ minHeight: "100vh", background: "var(--ox)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p className="rv" style={{ fontFamily: "var(--font-serif)", fontSize: 32, color: "var(--paper)", opacity: 0.5 }}>03 — What I&apos;ve Built</p>
+          <p className="rv" style={{ fontFamily: "var(--font-serif)", fontSize: 32, color: "var(--ox-fg)", opacity: 0.5 }}>03 — What I&apos;ve Built</p>
         </section>
 
         <section id="behind" style={{ minHeight: "100vh", background: "var(--paper)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -32,7 +34,7 @@ export default function Home() {
         </section>
 
         <section id="threads" style={{ minHeight: "100vh", background: "var(--ox)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p className="rv" style={{ fontFamily: "var(--font-serif)", fontSize: 32, color: "var(--paper)", opacity: 0.5 }}>05 — Loose Threads</p>
+          <p className="rv" style={{ fontFamily: "var(--font-serif)", fontSize: 32, color: "var(--ox-fg)", opacity: 0.5 }}>05 — Loose Threads</p>
         </section>
       </main>
     </>

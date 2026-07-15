@@ -1,5 +1,18 @@
 # Creative Brief — The Dreamscape Homepage
-*Captured 2026-07-15 from Jacklyn's direction + interview. This is the governing vision doc for the homepage rebuild.*
+*Captured 2026-07-15 from Jacklyn's direction + interview. This is the governing vision doc for the rebuild.*
+
+> ## SCOPE CHANGE — 2026-07-15 (Jacklyn's decision): FULL GROUND-UP REBUILD
+> This is no longer a homepage patch — it is a **complete rebuild of JackieMiller.co from scratch**, as the immersive dreamscape described below.
+>
+> **Why nothing is worth saving:** the current homepage is broken for real visitors (a white client-side crash — "there's a problem"), and even the old cover relied on a fragile scroll-reveal pattern that hides ALL content when the JavaScript hiccups. Do not debug it. Do not port it. Start clean.
+>
+> **The only thing to carry forward:** the Field Notes content — the published posts in `content/field-notes/`. Everything else (the Cover component, the placeholder sections 00–05, the GSAP scroll-reveal) is discarded.
+>
+> **Build under the operating-layer rules** (this is a Tier-2 project):
+> 1. Run `authority-setup` first — declare the standards that govern it (WCAG 2.2 AA, mobile breakpoints, Core Web Vitals) in an AUTHORITIES.md, before building.
+> 2. **The deploy gate this week's disaster earned, now mandatory:** every deploy ends by loading the REAL domain `https://jackiemiller.co` in a REAL, foreground browser and confirming a human sees the intended page. NEVER trust a green build log, a 200 status, or the in-app preview pane — the preview pane freezes CSS/JS animations and shows false blank/black screens, and a build can pass while the live URL 404s or crashes. Verify at the URL a human types, with human-visible rendering, or it isn't done.
+> 3. Prefer robust-by-default: content visible without JS; animation is enhancement, never a prerequisite for seeing the page.
+> 4. Do the NanoBanana render iteration WITH Jacklyn before writing component code.
 
 ## The vision, in her words (distilled)
 

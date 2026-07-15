@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Wiki
+
+Strategy and system-design docs live in [`docs/`](docs/):
+
+- [Positioning strategy](docs/positioning.md) — the "AI for work you sign your name to" framing, research findings, language direction, and site copy structure.
+- [System architecture](docs/system-architecture.md) — the four-layer verification system (Skills → ledgers → triggers → MCP connectors) and how it maps to each vertical.
+
 ## Getting Started
 
 First, run the development server:

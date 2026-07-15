@@ -88,7 +88,7 @@ export default function FieldNotesPage() {
                   fontWeight: 600,
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--ox)",
+                  color: "var(--ox-accent)",
                 }}
               >
                 {note.date}

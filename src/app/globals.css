@@ -8,6 +8,7 @@
   --paper:   #F1EEE5;
   --paper2:  #EDE9DF;
   --ox:      #5D0F0E;
+  --ox-accent: #5D0F0E; /* red for small text/links — must stay readable on paper */
   --ox-dim:  rgba(93,15,14,0.18);
   --ox-fg:   #F1EEE5;
   --ink-dim: rgba(26,22,20,0.12);
@@ -29,6 +30,7 @@
   --paper:   #171310;
   --paper2:  #1C1714;
   --ox:      #4A1210;
+  --ox-accent: #B04A44; /* dark --ox works as a surface but fails as text on dark paper */
   --ox-dim:  rgba(176,74,68,0.22);
   --ox-fg:   #E7E1D3;
   --ink-dim: rgba(231,225,211,0.12);
@@ -121,11 +123,11 @@ body, main section {
   font-size: 21px;
   margin: 1.8em 0 0.6em;
 }
-.fn-prose a { color: var(--ox); text-underline-offset: 3px; }
+.fn-prose a { color: var(--ox-accent); text-underline-offset: 3px; }
 .fn-prose ul, .fn-prose ol { margin: 0 0 1.4em 1.4em; }
 .fn-prose li { margin-bottom: 0.5em; }
 .fn-prose blockquote {
-  border-left: 2px solid var(--ox);
+  border-left: 2px solid var(--ox-accent);
   padding-left: 1.2em;
   margin: 0 0 1.4em;
   font-style: italic;

@@ -43,9 +43,9 @@ export default function Nav() {
       <nav
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-[500] flex items-center justify-between px-12 h-14 border-b"
-        style={{ background: "var(--ink)", borderColor: "rgba(241,238,229,0.1)" }}
+        style={{ background: "var(--nav-bg)", borderColor: "rgba(241,238,229,0.1)", transition: "opacity 0.5s ease, background-color 0.45s ease" }}
       >
-        <span style={{ fontFamily: "var(--font-hand)", fontSize: 22, fontWeight: 600, color: "var(--paper)", letterSpacing: "0.01em" }}>
+        <span style={{ fontFamily: "var(--font-hand)", fontSize: 22, fontWeight: 600, color: "var(--nav-fg)", letterSpacing: "0.01em" }}>
           Jackie Miller
         </span>
         <ul className="flex gap-9 list-none">

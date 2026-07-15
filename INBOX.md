@@ -1,6 +1,9 @@
 # Inbox — routed items awaiting a JackieMiller.co session
 
-- 2026-07-15: ~~Review the surprise dark mode~~ **DECIDED 2026-07-15: keep it** (Jacklyn likes it). Remaining: quick visual QA of dark mode on mobile in the next site session.
-- 2026-07-15: **Rebase PR #2 (Field Notes) onto new main** — likely conflicts: both branches fix the gsap dependency and touch globals.css.
-- 2026-07-15: **Decide PR #1** ("project wiki: positioning strategy," from an older cloud session) — review, merge, or close; it predates the ops system.
-- 2026-07-15: **Dreamscape homepage rebuild** — full creative brief captured and interviewed, see [docs/brief-dreamscape-homepage.md](docs/brief-dreamscape-homepage.md). Prereqs in order: merge PR #2, rebase vs dark-mode main, decide PR #1, then NanoBanana render iteration with Jacklyn.
+- 2026-07-15: **Dreamscape homepage rebuild** — brief at [docs/brief-dreamscape-homepage.md](docs/brief-dreamscape-homepage.md). All code prereqs cleared 2026-07-15 (PR #2 merged, PR #1 merged, dark-mode QA done). **Next step is the NanoBanana render iteration, which needs Jacklyn in-session** (her Gemini access). Mobile findings from QA that the rebuild must solve, since the current homepage chrome is placeholder-era: nav brand overlaps links and the link list overflows a 375px viewport (last two sections unreachable); the fixed theme-toggle pill collides with the cover's bottom-center CTA; the cover tagline clips at 375px. None fixed on the old homepage on purpose — it's being replaced.
+
+## Drained 2026-07-15 (this session)
+
+- ~~Dark mode mobile QA~~ — done. Field Notes pages are solid on mobile dark; one real defect found and fixed on the branch before merge: dark `--ox` (#4A1210) is a fine surface color but illegible (~1.2:1) as small text — dates/links/blockquote rules now use new `--ox-accent` (#B04A44 dark, unchanged in light). Homepage findings folded into the Dreamscape item above. Note for future browser QA: the preview pane freezes animation timelines (`visibilityState: hidden`), so entrance-animated content screenshots as blank — that's the tool, not the site.
+- ~~Rebase PR #2 onto new main~~ — done and merged (squash, `6031867`). Conflicts were package.json/lockfile only (both branches added gsap; kept gsap + marked); globals.css auto-merged cleanly.
+- ~~Decide PR #1~~ — **merged** (squash, `e690d46`): the positioning + system-architecture docs are the canon site copy will be written against, and it merged clean. The in-repo end-of-day skill and its setup prompt were removed in a follow-up commit (`6683178`) — superseded by the matured Claude-Ops global copy.

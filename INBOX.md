@@ -1,6 +1,5 @@
 # Inbox — routed items awaiting a JackieMiller.co session
 
-- 2026-07-15: **Dreamscape homepage rebuild** — brief at [docs/brief-dreamscape-homepage.md](docs/brief-dreamscape-homepage.md). All code prereqs cleared 2026-07-15 (PR #2 merged, PR #1 merged, dark-mode QA done). **Next step is the NanoBanana render iteration, which needs Jacklyn in-session** (her Gemini access). Mobile findings from QA that the rebuild must solve, since the current homepage chrome is placeholder-era: nav brand overlaps links and the link list overflows a 375px viewport (last two sections unreachable); the fixed theme-toggle pill collides with the cover's bottom-center CTA; the cover tagline clips at 375px. None fixed on the old homepage on purpose — it's being replaced.
 
 ## Drained 2026-07-15 (this session)
 

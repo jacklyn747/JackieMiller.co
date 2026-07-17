@@ -59,8 +59,12 @@ Practical settings: landscape, widest/highest resolution offered (we'll serve ~2
 
 - **2026-07-17 — Day master v1 received.** Vibe: nailed (oxblood croc journal, leopard silk, whiskey, seals — boards realized). Accepted deviation: slight cinematic tilt instead of true 90° overhead — fine because hotspot coords are image-relative and ALL variants must be edits of this exact image. Flag: photo + postcard portals sit in the right third → mobile = tighter hero crop + nav list fallback (brief's plan B), not re-composition. Open: folder label rendered readable as "Scripts & Synopses" — Jacklyn to confirm or change. Postcard scribble partly garbled — acceptable at page scale.
 
+- **2026-07-17 — Night edit v1 received.** Object-by-object comparison against day master: zero composition drift — every object in identical position, so shared hotspot coordinates are confirmed viable. Lamp pool on journal/envelope, amber glow in the whiskey glass, window dark, photo warmed to sepia under lamplight. The day/night toggle exists in pictures now. Note: folder label "Scripts & Synopses" persists in both masters — changing it later means re-editing both.
+
 ## Status
 
-- [ ] Day master approved (v1 candidate in hand — pending folder-label call)
-- [ ] Night edit approved
-- [ ] Variants approved (or plan-B CSS hover chosen)
+- [x] Day master v1 in hand (pending Jacklyn's explicit approval + folder-label call)
+- [x] Night edit v1 in hand — matched pair confirmed, no drift
+- [ ] Finals downloaded at max res into `public/scene/` (`desk-day`, `desk-night`)
+- [ ] Variants approved (or plan-B CSS hover chosen) — next: test ONE variant (journal opening) on the day master to see if edit quality holds
+- [ ] Jacklyn declares render phase done → build begins

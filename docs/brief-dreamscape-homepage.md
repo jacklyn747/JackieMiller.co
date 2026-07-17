@@ -18,6 +18,8 @@
 
 Jackie's corner of the internet — ideas, aesthetic, and personality turned into an immersive digital world that actually feels like her. **A quirky but expensive journal theme**: personalized, leather, intentional, curated details, tactile, premium paper, sophisticated, hand-crafted. Think *luxury Paper Republic* — charms, cords, clips, custom stickers, labels, inserts, loops, fountain pen.
 
+> **VIBE AMENDMENT — 2026-07-17 (Jacklyn's mood boards; supersedes the material palette above).** The aesthetic is **dark glam maximalism**: oxblood (Pantone 4975C, `#4E0000`), black, deep green, leopard/tortoise/croc textures, brass and gold, lamp- and candle-light — vintage Playboy-era luxury, sultry and expensive. "Quirky but expensive journal" stands, but the journal is oxblood croc, not cognac pebble; the desk world is moody even by day. Composition, portals, and all operating rules unchanged. Palette + revised prompts: [nanobanana-prompts.md](nanobanana-prompts.md).
+
 ## Decisions (interviewed & locked 2026-07-15)
 
 1. **The scene: writer's desk flat-lay.** Cinematic overhead view of a leather journal on a beautiful desk — fountain pen, charms, cords, clips, stickers, coffee ring, lamp light. Every object is a hotspot.

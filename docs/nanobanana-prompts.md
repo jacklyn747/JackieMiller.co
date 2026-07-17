@@ -55,8 +55,12 @@ Practical settings: landscape, widest/highest resolution offered (we'll serve ~2
 3. Adjust wording, regenerate until the day master is *right*. Only then run Prompt 2 as an edit, then variants.
 4. Approved finals go in `public/scene/` as `desk-day.webp`, `desk-night.webp`, `desk-day-journal-open.webp`, etc. Keep the winning prompts recorded here verbatim for future regeneration.
 
+## Render log
+
+- **2026-07-17 — Day master v1 received.** Vibe: nailed (oxblood croc journal, leopard silk, whiskey, seals — boards realized). Accepted deviation: slight cinematic tilt instead of true 90° overhead — fine because hotspot coords are image-relative and ALL variants must be edits of this exact image. Flag: photo + postcard portals sit in the right third → mobile = tighter hero crop + nav list fallback (brief's plan B), not re-composition. Open: folder label rendered readable as "Scripts & Synopses" — Jacklyn to confirm or change. Postcard scribble partly garbled — acceptable at page scale.
+
 ## Status
 
-- [ ] Day master approved
+- [ ] Day master approved (v1 candidate in hand — pending folder-label call)
 - [ ] Night edit approved
 - [ ] Variants approved (or plan-B CSS hover chosen)

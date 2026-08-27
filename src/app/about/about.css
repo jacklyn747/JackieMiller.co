@@ -1,0 +1,164 @@
+/* /about — "Meet Jackie", a rapid-fire interview.
+   Numbered exchanges (oxblood index = the brand's wayfinding device),
+   grotesque question / serif answer = the signature pairing.
+   Theme-aware via the site tokens; hairlines, zero radius. */
+
+.about-page {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.about-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: clamp(64px, 9vw, 112px) clamp(24px, 5vw, 48px) 128px;
+}
+
+/* ── Hero ── */
+.about-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.about-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 0;
+  border-top: 0.5px solid var(--ink-dim);
+}
+
+.about-title {
+  margin-top: 26px;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: clamp(52px, 9vw, 104px);
+  line-height: 0.98;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.about-subhead {
+  margin-top: 24px;
+  max-width: 46ch;
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: clamp(19px, 2.2vw, 25px);
+  line-height: 1.36;
+  color: var(--ox-accent);
+  text-wrap: pretty;
+}
+
+.about-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  margin-top: clamp(40px, 6vw, 64px);
+  background: var(--paper-sink, #e7e2d6);
+  overflow: hidden;
+  border: 0.5px solid var(--ink-dim);
+}
+.about-portrait img {
+  object-fit: cover;
+  object-position: center 30%;
+  /* B&W keeps oxblood the only color — a design-system rule */
+  filter: grayscale(1) contrast(1.03);
+}
+.about-portrait__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+/* ── The interview ── */
+.qa {
+  list-style: none;
+  margin: clamp(56px, 8vw, 96px) 0 0;
+  padding: 0;
+  border-top: 0.5px solid var(--ink-dim);
+}
+
+.qa-row {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 24px;
+  padding: clamp(22px, 3vw, 30px) 0;
+  border-bottom: 0.5px solid var(--ink-dim);
+}
+
+.qa-n {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ox-accent);
+  padding-top: 8px;
+}
+
+.qa-q {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+.qa-a {
+  margin-top: 12px;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: clamp(23px, 2.7vw, 30px);
+  line-height: 1.24;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-wrap: pretty;
+  max-width: 30ch;
+}
+
+/* Longer, explanatory answers read better at a calmer size */
+.qa-a.is-long {
+  font-size: clamp(19px, 2vw, 23px);
+  line-height: 1.42;
+  max-width: 52ch;
+}
+
+/* The single rationed expressive line — the identity hinge */
+.qa-a.is-accent {
+  font-style: italic;
+  color: var(--ox-accent);
+}
+
+.about-close {
+  margin-top: 40px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+@media (max-width: 600px) {
+  .qa-row {
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+  }
+  .qa-n {
+    font-size: 11px;
+    padding-top: 6px;
+  }
+}

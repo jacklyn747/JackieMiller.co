@@ -13,7 +13,6 @@ import "./site-nav.css";
 
 const LINKS = [
   { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
   { href: "/field-notes", label: "Field Notes" },
   { href: "/contact", label: "Contact" },
 ];

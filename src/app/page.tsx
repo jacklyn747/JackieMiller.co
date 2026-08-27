@@ -1,52 +1,31 @@
-import Link from "next/link";
+import { existsSync } from "fs";
+import path from "path";
+import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
+import MeetJackie from "@/components/MeetJackie";
 import ThemeToggle from "@/components/ThemeToggle";
-import "./home.css";
 
-// Interim front door. Robust and content-first — replaces the old Cover +
-// placeholder sections that rendered blank when their scroll animation failed.
-// The immersive "dreamscape" homepage remains the planned replacement.
-const DOORS = [
-  { href: "/work", title: "Work", desc: "Case studies — receipts, not highlights." },
-  { href: "/about", title: "About", desc: "Meet Jackie, in a rapid-fire interview." },
-  { href: "/field-notes", title: "Field Notes", desc: "Notes from building real systems with AI." },
-  { href: "/contact", title: "Contact", desc: "If one of these is yours too, let’s talk." },
-];
+export const metadata: Metadata = {
+  title: "Jackie Miller — Instructional Designer",
+  description:
+    "Meet Jackie Miller — instructional designer for justice-involved learners, in a rapid-fire interview. On both sides of the locked door.",
+};
+
+// The portrait appears automatically once the file is in place. Drop it at
+// public/about/portrait.(jpg|jpeg|png|webp) — no code change needed.
+function findPortrait(): string | null {
+  for (const ext of ["jpg", "jpeg", "png", "webp"]) {
+    const rel = `about/portrait.${ext}`;
+    if (existsSync(path.join(process.cwd(), "public", rel))) return `/${rel}`;
+  }
+  return null;
+}
 
 export default function Home() {
   return (
     <>
       <SiteNav />
-      <main className="home">
-        <div className="home-inner">
-          <div className="home-eyebrow">Jackie Miller — Instructional Designer · Houston, TX</div>
-
-          <h1 className="home-statement">
-            I design learning for the people usually left out of it.
-          </h1>
-          <p className="home-tag">Part architect, part artist.</p>
-
-          <div className="home-cta">
-            <Link href="/work">See the work →</Link>
-            <Link href="/about">Meet Jackie →</Link>
-          </div>
-
-          <nav className="home-doors" aria-label="Sections">
-            {DOORS.map((d, i) => (
-              <Link key={d.href} href={d.href} className="home-door">
-                <span className="home-door__n">{String(i + 1).padStart(2, "0")}</span>
-                <span className="home-door__body">
-                  <span className="home-door__title">{d.title}</span>
-                  <span className="home-door__desc">{d.desc}</span>
-                </span>
-                <span className="home-door__arrow">→</span>
-              </Link>
-            ))}
-          </nav>
-
-          <p className="home-foot">Jackie Miller · Houston, Texas</p>
-        </div>
-      </main>
+      <MeetJackie portrait={findPortrait()} />
       <ThemeToggle />
     </>
   );

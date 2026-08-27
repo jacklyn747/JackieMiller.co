@@ -146,6 +146,15 @@ const SCORE_FILL: Record<number, string> = {
 
 const DOC_FILES: Record<string, string> = {
   "Needs & Audience Analysis": `${IMG_BASE}/needs-and-audience-analysis.pdf`,
+  "Task & Content Analysis": `${IMG_BASE}/task-and-content-analysis.pdf`,
+  "Learning Objectives": `${IMG_BASE}/learning-objectives.pdf`,
+  "Instructional Strategy & Approach": `${IMG_BASE}/instructional-strategy-and-approach.pdf`,
+  "Storyboard / Wireframe": `${IMG_BASE}/storyboard-wireframe.pdf`,
+  "Content Outline / Blueprint": `${IMG_BASE}/content-outline-blueprint.pdf`,
+  "Style Guide & Design Rationale": `${IMG_BASE}/style-guide-design-rationale.pdf`,
+  "Accessibility & Inclusivity Checklist": `${IMG_BASE}/accessibility-inclusivity-checklist.pdf`,
+  "Content Quality Rubric": `${IMG_BASE}/content-quality-rubric.pdf`,
+  "Evaluation Plan": `${IMG_BASE}/evaluation-plan.pdf`,
 };
 
 const DOC_TITLES = [
@@ -597,7 +606,7 @@ export default function ContentReview() {
                   );
                 })}
                 <div style={{ borderTop: "0.5px solid rgba(241,238,229,0.12)", paddingTop: 14, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(241,238,229,0.35)" }}>
-                  1 of 10 attached. Remaining files pending.
+                  All 10 documents attached.
                 </div>
               </div>
             )}

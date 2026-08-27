@@ -8,7 +8,7 @@ import "./work.css";
 export const metadata: Metadata = {
   title: "Work — Jackie Miller",
   description:
-    "Selected case studies in instructional design and systems work — audits, revisions, and the judgment behind them.",
+    "Instructional design for correctional education — building learning experiences around the realities of incarceration, not despite them.",
 };
 
 export default function WorkPage() {
@@ -17,14 +17,38 @@ export default function WorkPage() {
       <SiteNav />
       <main className="work-page">
         <div className="work-head">
-          <div className="work-eyebrow">Selected Work</div>
-          <h1 className="work-title">Case Studies</h1>
-          <p className="work-intro">
-            A few projects, written up as receipts rather than highlights: the
-            problem as it actually arrived, the judgment calls, and the built
-            result. Indexed, not narrated.
-          </p>
+          <div className="work-eyebrow">Instructional Design</div>
+          <h1 className="work-title">
+            Designing for learners is one thing. Designing for learners inside is another.
+          </h1>
+          <p className="work-lede">Instructional design doesn’t happen in a vacuum.</p>
+          <div className="work-body">
+            <p>
+              When your learners are incarcerated, the usual assumptions behind course design can
+              disappear: reliable internet, personal devices, unrestricted access to information,
+              familiar technology, flexible learning environments, and even the ability to choose
+              when and how you learn.
+            </p>
+            <p>Far from being an afterthought, constraints directly shape the design process.</p>
+            <p>
+              I create learning experiences and instructional materials around the realities of
+              correctional education rather than adapting conventional courses as an afterthought.
+            </p>
+            <p>
+              That means thinking differently about access, motivation, technology, literacy,
+              cognitive load, autonomy, engagement, assessment, and the physical and institutional
+              environment in which learning takes place.
+            </p>
+            <p>
+              My approach combines instructional design, learning science, storytelling, and
+              firsthand knowledge of incarceration to create education that works within those
+              constraints without allowing those constraints to define what learners are capable of.
+            </p>
+          </div>
+          <p className="work-closer">Different environment. Different problems. Different design.</p>
         </div>
+
+        <div className="work-section-label">Case Studies</div>
 
         <div className="work-grid">
           {caseStudies.map((cs) => (

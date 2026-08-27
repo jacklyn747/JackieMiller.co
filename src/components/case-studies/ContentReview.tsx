@@ -22,9 +22,8 @@ import { useState } from "react";
 import "./content-review.css";
 
 const IMG_BASE = "/case-studies/content-review";
-/* Slots the author filled on the canvas. proof-after was never
-   supplied (and could not be recovered from the canvas sidecar),
-   so it renders the design's own placeholder treatment. */
+/* Slots backed by a real screenshot in public/case-studies/content-review/.
+   Any id not here falls back to the design's placeholder treatment. */
 const FILLED = new Set([
   "audit-01",
   "audit-02",
@@ -32,6 +31,7 @@ const FILLED = new Set([
   "audit-04",
   "audit-05",
   "proof-before",
+  "proof-after",
 ]);
 
 function ImageSlot({ id, placeholder }: { id: string; placeholder: string }) {

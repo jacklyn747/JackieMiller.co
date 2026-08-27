@@ -43,28 +43,34 @@ const INTERVIEW: QA[] = [
 export default function MeetJackie({ portrait }: { portrait: string | null }) {
   return (
     <main className="about-page">
-      <div className="about-wrap">
-        <div className="about-eyebrow">Instructional Designer · Houston, Texas</div>
-        <h1 className="about-title">Meet Jackie</h1>
-        <p className="about-subhead">A rapid-fire interview. No warm-up.</p>
+      <div className="mj-inner">
+        <header className="mj-head">
+          <div className="about-eyebrow">Instructional Designer · Houston, Texas</div>
+          <h1 className="about-title">Meet Jackie</h1>
+          <p className="about-subhead">A rapid-fire interview. No warm-up.</p>
+        </header>
 
-        {portrait && (
-          <div className="about-portrait">
-            <Image src={portrait} alt="Portrait of Jackie Miller" fill sizes="(max-width: 1080px) 100vw, 1080px" priority />
-          </div>
-        )}
-
-        <ol className="qa">
-          {INTERVIEW.map((item, i) => (
-            <li className="qa-row" key={i}>
-              <span className="qa-n">{String(i + 1).padStart(2, "0")}</span>
-              <div className="qa-body">
-                <p className="qa-q">{item.q}</p>
-                <p className={`qa-a${item.long ? " is-long" : ""}${item.accent ? " is-accent" : ""}`}>{item.a}</p>
+        <div className={`mj-grid${portrait ? "" : " mj-grid--solo"}`}>
+          {portrait && (
+            <div className="mj-photo">
+              <div className="mj-photo__frame">
+                <Image src={portrait} alt="Portrait of Jackie Miller" fill sizes="(max-width: 820px) 100vw, 460px" priority />
               </div>
-            </li>
-          ))}
-        </ol>
+            </div>
+          )}
+
+          <ol className="qa">
+            {INTERVIEW.map((item, i) => (
+              <li className="qa-row" key={i}>
+                <span className="qa-n">{String(i + 1).padStart(2, "0")}</span>
+                <div className="qa-body">
+                  <p className="qa-q">{item.q}</p>
+                  <p className={`qa-a${item.long ? " is-long" : ""}${item.accent ? " is-accent" : ""}`}>{item.a}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <p className="about-close">Jackie Miller · Houston, Texas</p>
       </div>

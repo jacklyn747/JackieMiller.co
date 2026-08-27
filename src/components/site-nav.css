@@ -1,0 +1,87 @@
+/* Global site nav — dark spine, sticky, brand-consistent.
+   Reuses the site's --nav-bg / --nav-fg tokens (globals.css), which hold
+   the dark journal-spine look in both light and dark themes. */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 56px;
+  padding: 0 clamp(20px, 4vw, 48px);
+  background: var(--nav-bg);
+  border-bottom: 0.5px solid rgba(241, 238, 229, 0.14);
+  transition: background-color 0.45s ease;
+}
+
+.site-nav__mark {
+  font-family: var(--font-hand), "Segoe Script", cursive;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--nav-fg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+}
+
+.site-nav__link {
+  position: relative;
+  padding: 6px 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(241, 238, 229, 0.5);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 140ms ease;
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  color: var(--nav-fg);
+  outline: none;
+}
+
+/* Current section: full-strength label with an oxblood tick beneath it */
+.site-nav__link.is-active {
+  color: var(--nav-fg);
+}
+.site-nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1.5px;
+  background: var(--ox-accent);
+}
+
+/* Phones: stack the wordmark over a spread-out link row so four labels
+   never collide on a 320-375px screen. */
+@media (max-width: 640px) {
+  .site-nav {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+    padding: 12px 20px 10px;
+  }
+  .site-nav__links {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .site-nav__link {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+}

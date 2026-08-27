@@ -1,0 +1,134 @@
+/* ─────────────────────────────────────────────────────────────
+   Content Review case study — scoped design tokens + hover states.
+
+   Ported from the Claude Design canvas "Content Review Case Study".
+   The page is a fixed dark editorial spread: it does NOT follow the
+   site's light/dark theme toggle, so --ink / --paper / --oxblood are
+   pinned here rather than inherited from globals.css (where they flip).
+   --font-serif (Instrument Serif) and --font-sans (Archivo) are set on
+   <html> by next/font and inherited; --font-grotesk aliases --font-sans
+   so the ported inline styles resolve unchanged.
+   ───────────────────────────────────────────────────────────── */
+
+.cr-root {
+  --ink: #1a1614;
+  --paper: #f1eee5;
+  --oxblood: #5d0f0e;
+  --ink-15: rgba(26, 22, 20, 0.15);
+  --ink-soft: #403a36;
+  --font-grotesk: var(--font-sans), "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  min-height: 100vh;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-grotesk);
+  overflow-x: hidden;
+}
+
+/* Body links inside the study (reversed-out on ink) */
+.cr-root a {
+  color: #e3c8c2;
+  text-decoration: none;
+}
+.cr-root a:hover {
+  color: var(--paper);
+}
+
+/* Audit card "Read the detail" / "Hide detail" toggle */
+.cr-audit-toggle {
+  transition: color 140ms ease, background 140ms ease;
+}
+.cr-audit-toggle:hover,
+.cr-audit-toggle:focus-visible {
+  color: var(--oxblood);
+  background: rgba(93, 15, 14, 0.05);
+  outline: none;
+}
+
+/* "Full Process Documentation" section header toggle */
+.cr-docs-header {
+  transition: color 140ms ease;
+}
+.cr-docs-header:hover,
+.cr-docs-header:focus-visible {
+  color: #e3c8c2;
+  outline: none;
+}
+
+/* Documentation rows — only the linked (attached) rows react to hover */
+.cr-doc-row {
+  transition: color 140ms ease, padding-left 140ms ease;
+}
+.cr-doc-row.is-linked:hover,
+.cr-doc-row.is-linked:focus-visible {
+  color: #e3c8c2;
+  padding-left: 8px;
+  outline: none;
+}
+
+/* Image slot placeholder (used where no screenshot is filled) */
+.cr-slot-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+/* ─────────────────────────────────────────────────────────────
+   Responsive layer. The source canvas was desktop-only (fixed 4-up
+   grids, 48px gutters), which clips on phones. Desktop stays pixel-
+   identical; below 720px the fixed grids reflow and gutters tighten
+   so nothing is cropped. Inline styles are overridden with the
+   media query, hence !important.
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .cr-wrap {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .cr-fullbleed {
+    margin-left: -24px !important;
+    margin-right: -24px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .cr-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    row-gap: 40px;
+  }
+  .cr-grid-process {
+    grid-template-columns: repeat(2, 1fr) !important;
+    row-gap: 44px;
+  }
+  .cr-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .cr-audit-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Rubric: label + score on one row, the bar spans full width below */
+  .cr-rubric-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 6px 16px !important;
+  }
+  .cr-rubric-bar {
+    grid-column: 1 / -1 !important;
+    order: 1; /* place the full-width bar after the label + score row */
+  }
+}
+
+/* Respect reduced-motion: the DS mandates no movement when asked */
+@media (prefers-reduced-motion: reduce) {
+  .cr-root * {
+    transition: none !important;
+  }
+}

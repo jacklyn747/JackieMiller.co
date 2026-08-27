@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getFieldNotes } from "@/lib/fieldNotes";
+import SiteNav from "@/components/SiteNav";
 import SubscribeForm from "@/components/SubscribeForm";
 
 export const metadata: Metadata = {
@@ -16,37 +17,10 @@ export default function FieldNotesPage() {
   const notes = getFieldNotes();
 
   return (
-    <main style={{ minHeight: "100vh", background: "var(--paper)" }}>
-      <header
-        className="flex items-center justify-between border-b"
-        style={{ padding: "0 32px", height: 56, borderColor: "var(--ink-dim)" }}
-      >
-        <Link
-          href="/"
-          style={{
-            fontFamily: "var(--font-hand)",
-            fontSize: 22,
-            fontWeight: 600,
-            color: "var(--ink)",
-            textDecoration: "none",
-          }}
-        >
-          Jackie Miller
-        </Link>
-        <span
-          style={{
-            fontSize: 9.5,
-            fontWeight: 600,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: "var(--ink-mid)",
-          }}
-        >
-          Field Notes
-        </span>
-      </header>
-
-      <section style={{ maxWidth: 672, margin: "0 auto", padding: "80px 24px" }}>
+    <>
+      <SiteNav />
+      <main style={{ minHeight: "100vh", background: "var(--paper)" }}>
+        <section style={{ maxWidth: 672, margin: "0 auto", padding: "80px 24px" }}>
         <h1
           style={{
             fontFamily: "var(--font-serif)",
@@ -123,6 +97,7 @@ export default function FieldNotesPage() {
           ))}
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }

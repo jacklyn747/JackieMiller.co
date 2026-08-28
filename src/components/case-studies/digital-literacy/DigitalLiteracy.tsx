@@ -186,19 +186,22 @@ export default function DigitalLiteracy() {
             <span style={{ color: "#E3C8C2", letterSpacing: "0.16em", textTransform: "uppercase", fontSize: 11 }}>Placeholder data</span> — scored against the course&apos;s own Content Quality Rubric. The honest low marks (device-verified tap targets, a formal WCAG contrast pass) are flagged as open, not hidden. Real numbers to come.
           </p>
 
-          {/* Pull quote */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", margin: "0 auto", padding: "128px 0 124px", maxWidth: 940 }}>
-            <span style={{ width: 72, height: 0, borderTop: "0.5px solid var(--oxblood)" }} />
-            <p style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(28px,3.4vw,42px)", lineHeight: 1.24, letterSpacing: "0.005em", color: "var(--paper)", margin: "48px 0 0", textWrap: "pretty" }}>
-              The first real laptop a learner touches may be at an interview, with no one there to help. <span style={{ fontStyle: "italic", color: "#E3C8C2" }}>The entire course is built so that moment isn&apos;t the first time.</span>
+        </div>
+
+        {/* Full-bleed oxblood rupture — the closing statement, oversized */}
+        <div className="dl-rupture">
+          <div className="dl-rupture__inner">
+            <span className="mark" />
+            <p className="lead">The first real laptop a learner touches may be at an interview, with no one there to help.</p>
+            <p className="big">
+              The whole course is built so that moment <em>isn’t the first time.</em>
             </p>
           </div>
+        </div>
 
-          {/* Full process documentation */}
-          <div style={{ paddingBottom: 20 }}>
-            <ProcessDocs base="/case-studies/digital-literacy" docs={DOCS} />
-          </div>
-
+        {/* Full process documentation */}
+        <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "clamp(72px,10vw,110px) 48px 0" }}>
+          <ProcessDocs base="/case-studies/digital-literacy" docs={DOCS} />
         </div>
       </div>
     </main>

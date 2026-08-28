@@ -1,5 +1,5 @@
-/* /work index — editorial case-study grid on cream.
-   Hairlines, zero radius, oxblood accents — per the design system. */
+/* /work — structured, scannable: hero → work cards → AI module → CTA.
+   Hairlines, oxblood accents, B&W covers — per the design system. */
 
 .work-page {
   min-height: 100vh;
@@ -7,15 +7,19 @@
   color: var(--ink);
 }
 
-/* One centered reading column for the whole page, so text fills its measure
-   instead of hugging the left of a wide container (which read as a 2nd column). */
-.work-head {
-  max-width: 720px;
+/* Shared centered column, wide enough for a real card grid */
+.wk-hero,
+.wk-block,
+.wk-closer {
+  max-width: 1080px;
   margin: 0 auto;
-  padding: clamp(72px, 10vw, 120px) clamp(24px, 5vw, 48px) 0;
+  padding-left: clamp(24px, 5vw, 48px);
+  padding-right: clamp(24px, 5vw, 48px);
 }
 
-.work-eyebrow {
+/* ── Hero ── */
+.wk-hero { padding-top: clamp(64px, 9vw, 116px); }
+.wk-eyebrow {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -26,66 +30,54 @@
   text-transform: uppercase;
   color: var(--ink-mid);
 }
-.work-eyebrow::after {
-  content: "";
-  flex: 1;
-  height: 0;
-  border-top: 0.5px solid var(--ink-dim);
-}
+.wk-eyebrow::after { content: ""; flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
 
-/* A full-sentence serif statement reads best in sentence case (per the brand
-   casing rule), sized down from the short all-caps page titles elsewhere. */
-.work-title {
-  margin-top: 28px;
-  max-width: 22ch;
+.wk-thesis {
+  margin-top: 26px;
+  max-width: 20ch;
   font-family: var(--font-serif), serif;
   font-weight: 400;
-  font-size: clamp(31px, 4.4vw, 56px);
-  line-height: 1.1;
+  font-size: clamp(34px, 5.2vw, 66px);
+  line-height: 1.05;
   letter-spacing: 0.005em;
   color: var(--ink);
-  text-wrap: pretty;
+  text-wrap: balance;
 }
+.wk-thesis em { font-style: italic; color: var(--ox-accent); }
 
-.work-lede {
-  margin-top: 24px;
-  font-family: var(--font-serif), serif;
-  font-style: italic;
-  font-size: clamp(19px, 2vw, 24px);
-  line-height: 1.35;
-  color: var(--ox-accent);
-}
-
-.work-body {
-  margin-top: 30px;
-  max-width: 64ch;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.work-body p {
+.wk-sub {
+  margin-top: 22px;
+  max-width: 52ch;
   font-family: var(--font-sans), sans-serif;
-  font-size: 16px;
-  line-height: 1.72;
-  color: var(--ink-mid);
-  text-wrap: pretty;
-}
-
-.work-closer {
-  margin-top: 34px;
-  max-width: 28ch;
-  font-family: var(--font-serif), serif;
-  font-size: clamp(20px, 2.4vw, 28px);
-  line-height: 1.2;
+  font-size: clamp(16px, 1.7vw, 18px);
+  line-height: 1.6;
   color: var(--ink);
   text-wrap: pretty;
 }
 
-/* Section label introducing the case-study grid */
-.work-section-label {
-  max-width: 720px;
-  margin: clamp(56px, 8vw, 88px) auto 0;
-  padding: 0 clamp(24px, 5vw, 48px);
+.wk-constraints {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.wk-constraints li {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  padding: 8px 14px;
+  border: 0.5px solid var(--ink-dim);
+  border-radius: 999px;
+}
+
+/* ── Section blocks ── */
+.wk-block { margin-top: clamp(56px, 8vw, 96px); }
+.wk-label {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -96,32 +88,114 @@
   text-transform: uppercase;
   color: var(--ink-mid);
 }
-.work-section-label::after {
-  content: "";
-  flex: 1;
-  height: 0;
-  border-top: 0.5px solid var(--ink-dim);
-}
+.wk-label::after { content: ""; flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
 
-.work-grid {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: clamp(28px, 4vw, 44px) clamp(24px, 5vw, 48px) 48px;
+/* Work cards — two up on desktop */
+.wk-cards {
+  margin-top: clamp(26px, 3.5vw, 40px);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 4px 40px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: clamp(32px, 4vw, 56px);
 }
 
-/* Card — full-bleed cover, then indexed text block. The whole card links. */
+/* ── Working with AI: compact cards ── */
+.wk-lead {
+  margin-top: 18px;
+  max-width: 60ch;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.34;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.wk-ai-grid {
+  margin-top: clamp(24px, 3vw, 34px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+  gap: 1px;
+  background: var(--ink-dim);
+  border: 0.5px solid var(--ink-dim);
+}
+.wk-ai-card {
+  background: var(--paper);
+  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+}
+.wk-ai-n {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--ox-accent);
+}
+.wk-ai-card h3 {
+  margin: 12px 0 8px;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.14;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.wk-ai-card p {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  text-wrap: pretty;
+}
+
+/* ── Closer + CTA ── */
+.wk-closer {
+  margin-top: clamp(64px, 9vw, 104px);
+  padding-bottom: 120px;
+  border-top: 0.5px solid var(--ink-dim);
+  padding-top: clamp(40px, 5vw, 64px);
+}
+.wk-closer-line {
+  max-width: 24ch;
+  font-family: var(--font-serif), serif;
+  font-size: clamp(24px, 3.4vw, 40px);
+  line-height: 1.1;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.wk-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: linear-gradient(160deg, #7a1c18, #5d0f0e);
+  color: #f3ede1;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 14px 30px -14px rgba(93, 15, 14, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.wk-cta:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 18px 36px -14px rgba(93,15,14,0.72); }
+.wk-cta span { color: rgba(243, 237, 225, 0.82); }
+.wk-note {
+  margin-top: 40px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+/* ══════════ CASE-STUDY CARD INTERNALS (preserved) ══════════ */
 .work-card {
   display: flex;
   flex-direction: column;
-  padding: 28px 0 32px;
-  border-top: 0.5px solid var(--ink-dim);
   color: var(--ink);
   text-decoration: none;
 }
-
 .work-card__cover {
   position: relative;
   width: 100%;
@@ -129,157 +203,51 @@
   background: var(--paper-sink, #e7e2d6);
   overflow: hidden;
 }
-/* Live component cover (e.g. a glam tablet) on a dark backdrop, in full color */
 .work-card__cover.is-live {
   aspect-ratio: 16 / 10;
   background: radial-gradient(120% 130% at 50% -10%, #2a1c12 0%, #170f0a 62%, #0e0906 100%);
-  overflow: hidden;
   display: grid;
   place-items: center;
   padding: clamp(20px, 4vw, 40px);
 }
-.work-card__cover.is-live .tbl {
-  width: 100%;
-  max-width: 520px;
-  transition: transform 500ms ease;
-}
-.work-card:hover .work-card__cover.is-live .tbl {
-  transform: translateY(-4px);
-}
+.work-card__cover.is-live .tbl { width: 100%; max-width: 520px; transition: transform 500ms ease; }
+.work-card:hover .work-card__cover.is-live .tbl { transform: translateY(-4px); }
 .work-card__cover img {
   object-fit: cover;
-  /* B&W imagery keeps oxblood the only color — a design-system rule */
   filter: grayscale(1) contrast(1.02);
   transition: transform 500ms ease, filter 500ms ease;
 }
 .work-card:hover .work-card__cover img,
-.work-card:focus-visible .work-card__cover img {
-  transform: scale(1.03);
-  filter: grayscale(0.15) contrast(1.02);
-}
+.work-card:focus-visible .work-card__cover img { transform: scale(1.03); filter: grayscale(0.15) contrast(1.02); }
 
 .work-card__label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 24px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ox-accent);
+  display: flex; align-items: center; gap: 10px; margin-top: 22px;
+  font-family: var(--font-sans), sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--ox-accent);
 }
-.work-card__label span.divider {
-  width: 4px;
-  height: 4px;
-  background: var(--ink-dim);
-  border-radius: 50%;
-}
-.work-card__label .disc {
-  color: var(--ink-mid);
-}
+.work-card__label span.divider { width: 4px; height: 4px; background: var(--ink-dim); border-radius: 50%; }
+.work-card__label .disc { color: var(--ink-mid); }
 
 .work-card__title {
-  margin-top: 14px;
-  font-family: var(--font-serif), serif;
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 34px);
-  line-height: 1.1;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-wrap: pretty;
+  margin-top: 13px;
+  font-family: var(--font-serif), serif; font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 31px); line-height: 1.1; letter-spacing: 0.015em;
+  text-transform: uppercase; color: var(--ink); text-wrap: pretty;
 }
-
 .work-card__summary {
-  margin-top: 14px;
-  max-width: 52ch;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--ink-mid);
-  text-wrap: pretty;
+  margin-top: 13px; max-width: 52ch;
+  font-family: var(--font-sans), sans-serif; font-size: 14.5px; line-height: 1.62;
+  color: var(--ink-mid); text-wrap: pretty;
 }
-
 .work-card__meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 22px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mid);
+  display: flex; align-items: center; gap: 12px; margin-top: 20px;
+  font-family: var(--font-sans), sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mid);
 }
-.work-card__meta .spacer {
-  flex: 1;
-  height: 0;
-  border-top: 0.5px solid var(--ink-dim);
-}
-.work-card__arrow {
-  color: var(--ox-accent);
-  font-size: 14px;
-  transition: transform 160ms ease;
-}
-.work-card:hover .work-card__arrow,
-.work-card:focus-visible .work-card__arrow {
-  transform: translateX(4px);
-}
-
-.work-more {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 clamp(24px, 5vw, 48px) 128px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-mid);
-  border-top: 0.5px solid var(--ink-dim);
-  padding-top: 26px;
-}
+.work-card__meta .spacer { flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
+.work-card__arrow { color: var(--ox-accent); font-size: 14px; transition: transform 160ms ease; }
+.work-card:hover .work-card__arrow, .work-card:focus-visible .work-card__arrow { transform: translateX(4px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .work-card *,
-  .work-card__arrow {
-    transition: none !important;
-  }
+  .work-card *, .work-card__arrow, .wk-cta { transition: none !important; }
 }
-
-/* "Working with AI" section — methodology, before the case studies */
-.work-ai {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 clamp(24px, 5vw, 48px);
-}
-.work-ai .work-body { margin-top: clamp(22px, 3.5vw, 34px); }
-.work-ai-list {
-  list-style: none;
-  margin: 30px 0 0;
-  padding: 0;
-}
-.work-ai-list li {
-  position: relative;
-  padding: 15px 0 15px 26px;
-  border-top: 0.5px solid var(--ink-dim);
-  font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--ink);
-  text-wrap: pretty;
-}
-.work-ai-list li:last-child { border-bottom: 0.5px solid var(--ink-dim); }
-.work-ai-list li::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: 21px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ox-accent);
-}
-.work-ai-list li b { font-weight: 600; }

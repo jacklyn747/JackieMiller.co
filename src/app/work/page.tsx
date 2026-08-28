@@ -12,97 +12,107 @@ export const metadata: Metadata = {
     "Instructional design for correctional education — building learning experiences around the realities of incarceration, not despite them.",
 };
 
+const CONSTRAINTS = ["No open internet", "Shared, locked-down devices", "Variable literacy", "No IT support"];
+
+const AI_WORK = [
+  {
+    t: "Trained LLMs, from the inside",
+    d: "At Character.AI I wrote and evaluated thousands of dialogue examples alongside ML engineers — I know these models as materials, not magic.",
+  },
+  {
+    t: "Built my own AI tools",
+    d: "A RAG instructional-design assistant (LangChain, ChromaDB) that answers design questions against my own source library, with citations.",
+  },
+  {
+    t: "Built this course with AI",
+    d: "The Digital Literacy course and its live simulation — I directed the design; AI accelerated the build from storyboard to prototype.",
+  },
+  {
+    t: "AI-native production",
+    d: "Prompt-chained drafting, structuring, and quality-checking — more output, the same judgment over what's accurate and worth teaching.",
+  },
+];
+
 export default function WorkPage() {
   return (
     <>
       <SiteNav />
       <main className="work-page">
-        <div className="work-head">
-          <div className="work-eyebrow">Instructional Design</div>
-          <h1 className="work-title">
-            Designing for learners is one thing. Designing for learners inside is another.
+        {/* ── Hero: thesis + one line + scannable constraints ── */}
+        <section className="wk-hero">
+          <div className="wk-eyebrow">
+            <span>Instructional Design · Correctional Education</span>
+          </div>
+          <h1 className="wk-thesis">
+            Designing for learners is one thing. Designing for learners <em>inside</em> is another.
           </h1>
-          <p className="work-lede">Instructional design doesn’t happen in a vacuum.</p>
-          <div className="work-body">
-            <p>
-              When your learners are incarcerated, the usual assumptions behind course design can
-              disappear: reliable internet, personal devices, unrestricted access to information,
-              familiar technology, flexible learning environments, and even the ability to choose
-              when and how you learn.
-            </p>
-            <p>Far from being an afterthought, constraints directly shape the design process.</p>
-            <p>
-              I create learning experiences and instructional materials around the realities of
-              correctional education rather than adapting conventional courses as an afterthought.
-            </p>
-            <p>
-              That means thinking differently about access, motivation, technology, literacy,
-              cognitive load, autonomy, engagement, assessment, and the physical and institutional
-              environment in which learning takes place.
-            </p>
-            <p>
-              My approach combines instructional design, learning science, storytelling, and
-              firsthand knowledge of incarceration to create education that works within those
-              constraints without allowing those constraints to define what learners are capable of.
-            </p>
-          </div>
-          <p className="work-closer">Different environment. Different problems. Different design.</p>
-        </div>
-
-        <div className="work-section-label">Working with AI</div>
-        <div className="work-ai">
-          <div className="work-body">
-            <p>
-              AI is how I work now, not something I bolt on. I use it as a force-multiplier across the whole
-              instructional-design process — needs analysis, structuring content, and building working prototypes —
-              while the judgment about what&apos;s accurate, accessible, and actually worth teaching stays mine.
-            </p>
-            <p>
-              Practically, that means I can move from a design decision to something a learner can click in hours, not
-              weeks — and spend the time I save on the harder question: how to make the next ten courses better, more
-              consistent, and more accessible, not just this one.
-            </p>
-          </div>
-          <ul className="work-ai-list">
-            <li><b>Trained LLMs from the inside.</b> At Character.AI I wrote and evaluated thousands of dialogue examples and worked directly with ML engineers — I understand these models as materials, not magic.</li>
-            <li><b>Built my own AI tools.</b> A RAG-powered instructional-design assistant (LangChain, ChromaDB, embeddings) that answers design questions against my own source library, with citations.</li>
-            <li><b>Built this course with AI.</b> The Digital Literacy course and its live laptop simulation were designed and produced with AI as a build partner — I directed the instructional design; AI accelerated everything from storyboard to a working, accessible prototype.</li>
-            <li><b>AI-native production.</b> Prompt-chained drafting, structuring, and quality-checking workflows that raise output without giving up control over quality.</li>
+          <p className="wk-sub">
+            I build learning for incarcerated and reentry-bound adults — designed around the realities of the
+            environment, not despite them.
+          </p>
+          <ul className="wk-constraints" aria-label="The realities I design around">
+            {CONSTRAINTS.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
           </ul>
-        </div>
+        </section>
 
-        <div className="work-section-label">Case Studies</div>
-
-        <div className="work-grid">
-          {caseStudies.map((cs) => (
-            <Link key={cs.slug} href={`/work/${cs.slug}`} className="work-card">
-              {cs.live ? (
-                <div className="work-card__cover is-live" aria-label={cs.coverAlt}>
-                  <TabletMock lesson={2} />
+        {/* ── Selected Work: cards, high on the page ── */}
+        <section className="wk-block">
+          <div className="wk-label"><span>Selected Work</span></div>
+          <div className="wk-cards">
+            {caseStudies.map((cs) => (
+              <Link key={cs.slug} href={`/work/${cs.slug}`} className="work-card">
+                {cs.live ? (
+                  <div className="work-card__cover is-live" aria-label={cs.coverAlt}>
+                    <TabletMock lesson={2} />
+                  </div>
+                ) : (
+                  <div className="work-card__cover">
+                    <Image src={cs.cover} alt={cs.coverAlt} fill sizes="(max-width: 900px) 100vw, 520px" />
+                  </div>
+                )}
+                <div className="work-card__label">
+                  <span>{cs.category}</span>
+                  <span className="divider" />
+                  <span className="disc">{cs.discipline}</span>
                 </div>
-              ) : (
-                <div className="work-card__cover">
-                  <Image src={cs.cover} alt={cs.coverAlt} fill sizes="(max-width: 720px) 100vw, 560px" />
+                <h2 className="work-card__title">{cs.title}</h2>
+                <p className="work-card__summary">{cs.summary}</p>
+                <div className="work-card__meta">
+                  <span>{cs.role}</span>
+                  <span className="spacer" />
+                  <span>Read the case study</span>
+                  <span className="work-card__arrow">→</span>
                 </div>
-              )}
-              <div className="work-card__label">
-                <span>{cs.category}</span>
-                <span className="divider" />
-                <span className="disc">{cs.discipline}</span>
-              </div>
-              <h2 className="work-card__title">{cs.title}</h2>
-              <p className="work-card__summary">{cs.summary}</p>
-              <div className="work-card__meta">
-                <span>{cs.role}</span>
-                <span className="spacer" />
-                <span>Read the case study</span>
-                <span className="work-card__arrow">→</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-        <p className="work-more">More case studies in progress.</p>
+        {/* ── Working with AI: compact module, not an essay ── */}
+        <section className="wk-block">
+          <div className="wk-label"><span>Working with AI</span></div>
+          <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
+          <div className="wk-ai-grid">
+            {AI_WORK.map((a, i) => (
+              <div key={a.t} className="wk-ai-card">
+                <span className="wk-ai-n">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{a.t}</h3>
+                <p>{a.d}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Closer + CTA ── */}
+        <section className="wk-closer">
+          <p className="wk-closer-line">Different environment. Different problems. Different design.</p>
+          <Link href="/contact" className="wk-cta">
+            Start a conversation <span aria-hidden="true">→</span>
+          </Link>
+          <p className="wk-note">More case studies in progress.</p>
+        </section>
       </main>
     </>
   );

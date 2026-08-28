@@ -8,6 +8,22 @@ export const metadata: Metadata = {
 
 // Jackie's real inbox for now (she'll swap to a branded address later).
 const CONTACT_EMAIL = "jacklyn747@gmail.com";
+const LINKEDIN_URL = "https://www.linkedin.com/in/jacklyn747";
+const RESUME_PATH = "/Jacklyn-Miller-Resume.pdf";
+
+const secondaryLink: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: 9,
+  fontFamily: "var(--font-sans), sans-serif",
+  fontSize: 13,
+  fontWeight: 500,
+  letterSpacing: "0.06em",
+  color: "var(--ink)",
+  textDecoration: "none",
+  borderBottom: "1px solid var(--ink-dim)",
+  paddingBottom: 3,
+};
 
 export default function ContactPage() {
   return (
@@ -85,6 +101,22 @@ export default function ContactPage() {
             </svg>
             {CONTACT_EMAIL}
           </a>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "16px 30px", marginTop: 44 }}>
+            <a href={RESUME_PATH} download style={secondaryLink} aria-label="Download résumé (PDF)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 3v13M7 12l5 5 5-5M5 21h14" />
+              </svg>
+              Résumé (PDF)
+            </a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" style={secondaryLink}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.26-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z" />
+              </svg>
+              LinkedIn
+              <span aria-hidden="true" style={{ color: "var(--ink-mid)" }}>↗</span>
+            </a>
+          </div>
         </section>
       </main>
     </>

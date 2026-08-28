@@ -6,16 +6,16 @@
 .tbl {
   --paper: #f4eee2;
   --paper-2: #fbf7ee;
-  --ink: #241a12;
-  --ink-soft: #5a4a3a;
-  --ink-mute: rgba(36, 26, 18, 0.5);
-  --ink-15: rgba(36, 26, 18, 0.14);
-  --ink-10: rgba(36, 26, 18, 0.1);
+  --ink: #26262b;                    /* neutral charcoal text (was warm brown #241a12) */
+  --ink-soft: #5a5b62;
+  --ink-mute: rgba(38, 38, 44, 0.52);
+  --ink-15: rgba(38, 38, 44, 0.14);
+  --ink-10: rgba(38, 38, 44, 0.1);
   --oxblood: #5d0f0e;
   --oxblood-lite: #7c1c18;
   --brass: #c6a35f;
   --brass-soft: #a8894e;
-  --choc: #2c1c13;
+  --choc: #1b1e26;
   --cream-on-dark: #f3ede1;
   --font-serif: var(--font-serif), "Instrument Serif", Georgia, serif;
   --font-ui: var(--font-sans), "Archivo", sans-serif;
@@ -69,7 +69,7 @@
   align-items: center;
   gap: 12px;
   padding: 0 20px;
-  background: linear-gradient(#2c1c13, #20140d);
+  background: linear-gradient(#20222b, #16181e);
   color: var(--cream-on-dark);
   position: relative;
   z-index: 2;
@@ -139,7 +139,7 @@
 .tbl-win .wc { padding: 12px 14px 13px; display: flex; flex-direction: column; gap: 8px; }
 .tbl-win .wc span { height: 7px; border-radius: 4px; background: #e4dbc9; }
 .tbl-win .wc span:nth-child(2) { width: 52%; }
-.tbl-mini .bar { margin-top: 10px; height: 36px; border-radius: 10px; background: linear-gradient(#2c1c13, #20140d); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; padding: 0 10px; }
+.tbl-mini .bar { margin-top: 10px; height: 36px; border-radius: 10px; background: linear-gradient(#20222b, #16181e); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; padding: 0 10px; }
 .tbl-mini .bar .ent { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 12px; border-radius: 7px; background: rgba(124, 28, 24, 0.55); border: 1px solid rgba(198, 163, 95, 0.4); color: var(--cream-on-dark); font-size: 11px; box-shadow: 0 0 18px -4px rgba(198, 163, 95, 0.5); }
 .tbl-mini .bar .ent i { width: 11px; height: 11px; border-radius: 3px; background: var(--brass); }
 .tbl-mini .arrow { position: absolute; right: 34px; bottom: 2px; color: var(--oxblood); font-size: 16px; }
@@ -151,6 +151,6 @@
 .tbl-desk .ic .t { width: 50px; height: 50px; border-radius: 13px; display: grid; place-items: center; background: var(--paper-2); border: 1px solid var(--ink-15); box-shadow: 0 10px 22px -14px rgba(36, 26, 18, 0.35); }
 .tbl-desk .ic .t svg { width: 24px; height: 24px; stroke: var(--oxblood); stroke-width: 1.35; fill: none; }
 .tbl-desk .ic .l { font-size: 11px; color: var(--ink-soft); }
-.tbl-desk .taskbar { height: 42px; border-radius: 11px; background: linear-gradient(#2c1c13, #20140d); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 9px; padding: 0 12px; }
+.tbl-desk .taskbar { height: 42px; border-radius: 11px; background: linear-gradient(#20222b, #16181e); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 9px; padding: 0 12px; }
 .tbl-desk .taskbar .tk { width: 26px; height: 26px; border-radius: 7px; background: rgba(243, 237, 225, 0.08); border: 1px solid rgba(198, 163, 95, 0.3); }
 .tbl-desk .taskbar .lab { margin-left: auto; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }

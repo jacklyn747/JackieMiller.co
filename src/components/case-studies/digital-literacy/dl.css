@@ -60,7 +60,7 @@
 .dl-sim-wrap {
   margin-top: 60px;
   padding: clamp(52px, 7vw, 96px) clamp(20px, 5vw, 56px) clamp(56px, 7vw, 100px);
-  background: linear-gradient(180deg, #1b120c 0%, #271a11 46%, #1b120c 100%);
+  background: linear-gradient(180deg, #171a21 0%, #232833 48%, #171a21 100%);
   border-top: 0.5px solid rgba(198, 163, 95, 0.16);
   border-bottom: 0.5px solid rgba(198, 163, 95, 0.16);
 }

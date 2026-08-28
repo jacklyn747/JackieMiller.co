@@ -12,7 +12,7 @@
   --ox-dim:  rgba(93,15,14,0.18);
   --ox-fg:   #F1EEE5;
   --ink-dim: rgba(26,22,20,0.12);
-  --ink-mid: rgba(26,22,20,0.38);
+  --ink-mid: rgba(26,22,20,0.62); /* WCAG 4.5:1 on paper (was 0.38 @ ~3:1) */
   --rule:    rgba(26,22,20,0.07);
   --margin:  rgba(93,15,14,0.22);
   --cover-bg: #0a0a0c;
@@ -30,11 +30,11 @@
   --paper:   #0d0d0f;
   --paper2:  #141417;
   --ox:      #4A1210;
-  --ox-accent: #B04A44; /* dark --ox works as a surface but fails as text on dark paper */
+  --ox-accent: #c65e55; /* lightened to clear WCAG 4.5:1 as text on dark paper (was #B04A44 @ 3.6:1) */
   --ox-dim:  rgba(176,74,68,0.22);
   --ox-fg:   #E7E1D3;
   --ink-dim: rgba(231,225,211,0.12);
-  --ink-mid: rgba(231,225,211,0.42);
+  --ink-mid: rgba(231,225,211,0.58); /* WCAG 4.5:1 on faded-black paper (was 0.42 @ 3.4:1) */
   --rule:    rgba(231,225,211,0.06);
   --margin:  rgba(176,74,68,0.32);
 

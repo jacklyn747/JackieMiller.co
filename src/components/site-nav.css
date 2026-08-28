@@ -49,7 +49,12 @@
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   color: var(--nav-fg);
-  outline: none;
+}
+/* Keyboard focus gets a clear, distinct indicator (not just the hover color) */
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--ox-accent);
+  outline-offset: 5px;
+  border-radius: 2px;
 }
 
 /* Current section: full-strength label with an oxblood tick beneath it */

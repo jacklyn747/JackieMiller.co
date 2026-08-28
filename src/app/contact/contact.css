@@ -1,0 +1,36 @@
+/* Contact — icon buttons for email, résumé, LinkedIn */
+.contact-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+}
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-dim);
+  color: var(--ox-accent);
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.contact-icon:hover {
+  color: var(--ox-fg);
+  background: var(--ox-accent);
+  border-color: var(--ox-accent);
+  transform: translateY(-2px);
+}
+.contact-icon:focus-visible {
+  outline: 2px solid var(--ox-accent);
+  outline-offset: 3px;
+}
+.contact-icon svg {
+  width: 23px;
+  height: 23px;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-icon { transition: none; }
+}

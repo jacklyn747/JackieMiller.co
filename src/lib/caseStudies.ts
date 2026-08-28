@@ -37,7 +37,7 @@ export const caseStudies: CaseStudy[] = [
       "Auditing and revising an existing course for a secure, closed-platform learning environment serving justice-involved learners — treating interaction and aesthetic choices as instructional decisions.",
     role: "Instructional Designer",
     focus: "Content Audit & Revision",
-    cover: "/case-studies/content-review/audit-01.webp",
-    coverAlt: "A person composing a shot with a camera, from the revised course.",
+    cover: "/case-studies/content-review/cover.png",
+    coverAlt: "The Discovering Your Narrative Voice course on a tablet title screen.",
   },
 ];

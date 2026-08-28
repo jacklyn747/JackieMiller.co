@@ -25,9 +25,8 @@ export const caseStudies: CaseStudy[] = [
       "A full six-lesson course teaching first-time users the four input domains of a laptop — with a live, interactive capstone simulation — for learners preparing for reentry.",
     role: "Instructional Designer",
     focus: "Full Course Design",
-    cover: "",
-    coverAlt: "Digital Literacy Fundamentals course on a tablet.",
-    live: true,
+    cover: "/case-studies/digital-literacy/cover.png",
+    coverAlt: "The Digital Literacy Fundamentals course open to its title screen on a tablet.",
   },
   {
     slug: "content-review",

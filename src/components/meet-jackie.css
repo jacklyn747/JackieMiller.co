@@ -3,6 +3,8 @@
    (defined as tokens below) drives every size. Theme-aware; hairlines. */
 
 .about-page {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   background: var(--paper);
   color: var(--ink);
@@ -13,9 +15,45 @@
   --fs-answer: clamp(20px, 1.9vw, 24px);
   --fs-label: 11px;
   --ls-label: 0.2em;
+
+  /* Smoke intensity — dialed down on the light theme so it stays glam, not muddy */
+  --smoke: 1;
+}
+:root:not([data-theme="dark"]) .about-page { --smoke: 0.32; }
+
+/* ── Signature: oxblood smoke pooling at the top, bleeding into black ── */
+.about-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: clamp(520px, 78vh, 900px);
+  z-index: -2;
+  pointer-events: none;
+  opacity: var(--smoke);
+  background:
+    radial-gradient(120% 80% at 44% 12%, rgba(126, 30, 26, 0.62) 0%, rgba(78, 20, 18, 0.36) 34%, rgba(13, 13, 15, 0) 66%),
+    radial-gradient(72% 54% at 12% 6%, rgba(93, 15, 14, 0.44), transparent 56%),
+    radial-gradient(64% 50% at 88% 14%, rgba(107, 20, 18, 0.40), transparent 56%);
+}
+/* Fractal-noise haze breaks the gradient into uneven, smoky density */
+.about-page::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: clamp(520px, 78vh, 900px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: calc(0.5 * var(--smoke));
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  background-size: 680px 680px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
 }
 
 .mj-inner {
+  position: relative;
+  z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
   padding: clamp(56px, 8vw, 104px) clamp(24px, 5vw, 48px) 120px;

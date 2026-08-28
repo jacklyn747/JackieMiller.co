@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import TabletMock from "@/components/case-studies/digital-literacy/TabletMock";
 import { caseStudies } from "@/lib/caseStudies";
 import "./work.css";
 
@@ -53,14 +54,15 @@ export default function WorkPage() {
         <div className="work-grid">
           {caseStudies.map((cs) => (
             <Link key={cs.slug} href={`/work/${cs.slug}`} className="work-card">
-              <div className="work-card__cover">
-                <Image
-                  src={cs.cover}
-                  alt={cs.coverAlt}
-                  fill
-                  sizes="(max-width: 720px) 100vw, 560px"
-                />
-              </div>
+              {cs.live ? (
+                <div className="work-card__cover is-live" aria-label={cs.coverAlt}>
+                  <TabletMock lesson={2} />
+                </div>
+              ) : (
+                <div className="work-card__cover">
+                  <Image src={cs.cover} alt={cs.coverAlt} fill sizes="(max-width: 720px) 100vw, 560px" />
+                </div>
+              )}
               <div className="work-card__label">
                 <span>{cs.category}</span>
                 <span className="divider" />

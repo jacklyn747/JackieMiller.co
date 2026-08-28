@@ -129,6 +129,23 @@
   background: var(--paper-sink, #e7e2d6);
   overflow: hidden;
 }
+/* Live component cover (e.g. a glam tablet) on a dark backdrop, in full color */
+.work-card__cover.is-live {
+  aspect-ratio: 16 / 10;
+  background: radial-gradient(120% 130% at 50% -10%, #2a1c12 0%, #170f0a 62%, #0e0906 100%);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 4vw, 40px);
+}
+.work-card__cover.is-live .tbl {
+  width: 100%;
+  max-width: 520px;
+  transition: transform 500ms ease;
+}
+.work-card:hover .work-card__cover.is-live .tbl {
+  transform: translateY(-4px);
+}
 .work-card__cover img {
   object-fit: cover;
   /* B&W imagery keeps oxblood the only color — a design-system rule */

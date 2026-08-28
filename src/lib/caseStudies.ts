@@ -12,9 +12,23 @@ export type CaseStudy = {
   focus: string;
   cover: string;
   coverAlt: string;
+  live?: boolean; // render a live component cover (see /work page) instead of an image
 };
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "digital-literacy",
+    category: "Course Design",
+    discipline: "Instructional Design",
+    title: "Digital Literacy Fundamentals",
+    summary:
+      "A full six-lesson course teaching first-time users the four input domains of a laptop — with a live, interactive capstone simulation — for learners preparing for reentry.",
+    role: "Instructional Designer",
+    focus: "Full Course Design",
+    cover: "",
+    coverAlt: "Digital Literacy Fundamentals course on a tablet.",
+    live: true,
+  },
   {
     slug: "content-review",
     category: "Content Review",

@@ -1,0 +1,88 @@
+/* Digital Literacy case-study specifics — used inside .cr-root (dark editorial),
+   so var(--paper) / --oxblood etc. resolve from the case-study chrome. */
+
+/* Lesson showcase — larger tablets in an editorial alternating rhythm */
+.dl-lessons {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 8vw, 112px);
+}
+.dl-lesson {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(32px, 5vw, 60px);
+  align-items: center;
+}
+.dl-lesson:nth-child(even) {
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+}
+.dl-lesson:nth-child(even) .tbl { grid-column: 2; grid-row: 1; }
+.dl-lesson:nth-child(even) .dl-lesson__cap { grid-column: 1; grid-row: 1; }
+
+.dl-lesson__unit {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-grotesk);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper);
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid rgba(241, 238, 229, 0.18);
+}
+.dl-lesson__unit span {
+  color: #e3c8c2;
+  letter-spacing: 0.14em;
+}
+.dl-lesson__cap h3 {
+  margin: 18px 0 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--paper);
+  text-wrap: pretty;
+}
+.dl-lesson__cap p {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(241, 238, 229, 0.72);
+  max-width: 42ch;
+  text-wrap: pretty;
+}
+
+/* Full-bleed marquee for the live simulation */
+.dl-sim-wrap {
+  margin-top: 44px;
+  padding: 8px clamp(20px, 5vw, 56px) 20px;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(93, 15, 14, 0.12), transparent 62%);
+}
+.dl-sim {
+  max-width: 1060px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 50px 110px -34px rgba(0, 0, 0, 0.75);
+}
+.dl-sim-note {
+  max-width: 1060px;
+  margin: 14px auto 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(241, 238, 229, 0.45);
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  .dl-lesson,
+  .dl-lesson:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .dl-lesson:nth-child(even) .tbl { grid-column: 1; grid-row: 1; }
+  .dl-lesson:nth-child(even) .dl-lesson__cap { grid-column: 1; grid-row: 2; }
+}

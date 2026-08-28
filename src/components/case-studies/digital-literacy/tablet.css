@@ -1,0 +1,156 @@
+/* Glam tablet mockups — realistic iPad frame, warm CREAM course UI with a
+   dark chocolate header band. Cream body pops against the dark case-study
+   page (variation); ink type + oxblood accents keep it premium, not childish.
+   Brass is retained in the dark header. */
+
+.tbl {
+  --paper: #f4eee2;
+  --paper-2: #fbf7ee;
+  --ink: #241a12;
+  --ink-soft: #5a4a3a;
+  --ink-mute: rgba(36, 26, 18, 0.5);
+  --ink-15: rgba(36, 26, 18, 0.14);
+  --ink-10: rgba(36, 26, 18, 0.1);
+  --oxblood: #5d0f0e;
+  --oxblood-lite: #7c1c18;
+  --brass: #c6a35f;
+  --brass-soft: #a8894e;
+  --choc: #2c1c13;
+  --cream-on-dark: #f3ede1;
+  --font-serif: var(--font-serif), "Instrument Serif", Georgia, serif;
+  --font-ui: var(--font-sans), "Archivo", sans-serif;
+}
+
+/* ── Realistic iPad ── */
+.tbl-device {
+  position: relative;
+  border-radius: 34px;
+  padding: 13px;
+  background: linear-gradient(148deg, #43434a 0%, #202024 34%, #101013 72%, #050506 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.7),
+    0 1.5px 2px rgba(255, 255, 255, 0.14) inset,
+    0 60px 100px -34px rgba(0, 0, 0, 0.82),
+    0 16px 34px -14px rgba(0, 0, 0, 0.7);
+}
+.tbl-device::before {
+  content: "";
+  position: absolute;
+  top: 6.5px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a3648, #05060a 70%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.tbl-screen {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+  background: radial-gradient(130% 120% at 24% -8%, #fcf8ef 0%, #f3ecdd 54%, #e9e0cf 100%);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55);
+}
+.tbl-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(122deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0) 82%, rgba(0, 0, 0, 0.03) 100%);
+}
+
+/* ── Header (dark band) ── */
+.tbl-head {
+  flex: 0 0 auto;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  background: linear-gradient(#2c1c13, #20140d);
+  color: var(--cream-on-dark);
+  position: relative;
+  z-index: 2;
+}
+.tbl-head .mk { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(150deg, #e3d3ac, #9c7b46); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+.tbl-head .nm { font-family: var(--font-serif); font-size: 16px; letter-spacing: 0.01em; color: var(--cream-on-dark); }
+.tbl-head .prog { margin-left: auto; display: flex; align-items: center; gap: 11px; }
+.tbl-head .track { width: 74px; height: 3px; border-radius: 3px; background: rgba(243, 237, 225, 0.16); overflow: hidden; }
+.tbl-head .fill { height: 100%; background: linear-gradient(90deg, var(--brass-soft), var(--brass)); }
+.tbl-head .pct { font-size: 10px; letter-spacing: 0.18em; color: rgba(243, 237, 225, 0.6); font-variant-numeric: tabular-nums; }
+.tbl-head .q { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(198, 163, 95, 0.5); font-family: var(--font-serif); font-size: 13px; color: var(--brass); }
+
+/* ── Body ── */
+.tbl-body { flex: 1; display: flex; flex-direction: column; padding: 20px 30px 0; min-height: 0; position: relative; z-index: 1; }
+.tbl-eyebrow { display: flex; align-items: center; gap: 9px; font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 13px; }
+.tbl-eyebrow .n { color: var(--oxblood); }
+.tbl-eyebrow .n::after { content: ""; display: inline-block; width: 16px; height: 0; border-top: 0.5px solid var(--ink-15); margin: 0 2px 3px 8px; }
+.tbl-title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(25px, 3.3vw, 37px); line-height: 1.02; letter-spacing: 0.01em; color: var(--ink); text-wrap: pretty; }
+.tbl-lead { margin-top: 12px; font-size: 14px; line-height: 1.55; color: var(--ink-soft); max-width: 44ch; text-wrap: pretty; }
+.tbl-stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 6px 0 2px; min-height: 0; overflow: hidden; }
+
+/* ── Footer ── */
+.tbl-foot { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 30px 22px; }
+.tbl-note { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+.tbl-cta { display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 999px; background: linear-gradient(160deg, #7a1c18, #5d0f0e); color: var(--cream-on-dark); font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 10px 22px -10px rgba(93, 15, 14, 0.55); }
+.tbl-cta .a { color: rgba(243, 237, 225, 0.78); }
+
+/* ── Refined stage pieces ── */
+
+/* Lesson index (orientation) */
+.tbl-index { width: 100%; max-width: 340px; display: flex; flex-direction: column; }
+.tbl-index .row { display: flex; align-items: center; gap: 14px; padding: 7px 4px; border-top: 0.5px solid var(--ink-10); }
+.tbl-index .row:first-child { border-top: none; }
+.tbl-index .row .rn { font-size: 10px; letter-spacing: 0.14em; color: var(--oxblood); width: 18px; }
+.tbl-index .row .rt { font-size: 13px; color: var(--ink-soft); }
+.tbl-index .row.on .rt { color: var(--ink); }
+.tbl-index .row.on { border-left: 2px solid var(--oxblood); margin-left: -12px; padding-left: 14px; }
+.tbl-index .row .dot { margin-left: auto; width: 5px; height: 5px; border-radius: 50%; background: rgba(36, 26, 18, 0.18); }
+.tbl-index .row.on .dot { background: var(--oxblood); }
+
+/* Choice panels (mouse) — a touch smaller */
+.tbl-choices { display: flex; gap: 14px; width: 100%; max-width: 350px; }
+.tbl-choice { flex: 1; border-radius: 13px; padding: 14px 13px; background: var(--paper-2); border: 1px solid var(--ink-15); box-shadow: 0 10px 22px -14px rgba(36, 26, 18, 0.4); }
+.tbl-choice.pick { border-color: var(--oxblood); box-shadow: 0 0 0 1px var(--oxblood), 0 10px 22px -14px rgba(93, 15, 14, 0.4); }
+.tbl-choice .glyph { width: 26px; height: 26px; display: grid; place-items: center; margin-bottom: 10px; }
+.tbl-choice .glyph svg { width: 20px; height: 20px; stroke: var(--oxblood); stroke-width: 1.35; fill: none; }
+.tbl-choice .ct { font-family: var(--font-serif); font-size: 17px; color: var(--ink); line-height: 1.1; }
+.tbl-choice .cs { font-size: 10.5px; color: var(--ink-mute); margin-top: 5px; letter-spacing: 0.02em; }
+.tbl-choice .tag { display: inline-block; margin-top: 10px; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--oxblood); }
+
+/* Text field (keyboard) */
+.tbl-fieldwrap { width: 100%; max-width: 360px; display: flex; flex-direction: column; align-items: center; }
+.tbl-field { display: flex; align-items: center; gap: 1px; width: 100%; height: 56px; padding: 0 20px; border-radius: 12px; background: var(--paper-2); border: 1.5px solid var(--ink-15); font-family: var(--font-serif); font-size: 28px; color: var(--ink); box-shadow: inset 0 1px 2px rgba(36, 26, 18, 0.05); }
+.tbl-field .typo { color: var(--oxblood); position: relative; }
+.tbl-field .typo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 3px; border-top: 1.5px solid rgba(93, 15, 14, 0.4); }
+.tbl-field .car { width: 2px; height: 32px; background: var(--oxblood); animation: tblblink 1.15s step-end infinite; }
+@keyframes tblblink { 50% { opacity: 0; } }
+.tbl-key { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-soft); }
+.tbl-key .cap { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 8px; background: linear-gradient(#f3ecdb, #e7ddc9); border: 1px solid var(--ink-15); box-shadow: 0 2px 0 rgba(36, 26, 18, 0.12); font-family: var(--font-ui); font-size: 11px; font-weight: 600; color: var(--ink); letter-spacing: 0.03em; }
+
+/* Mini window + taskbar (windows) */
+.tbl-mini { position: relative; width: 100%; max-width: 350px; }
+.tbl-win { border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--ink-15); box-shadow: 0 18px 38px -18px rgba(36, 26, 18, 0.4); }
+.tbl-win .wb { height: 30px; display: flex; align-items: center; gap: 7px; padding: 0 12px; background: #efe7d7; border-bottom: 0.5px solid var(--ink-10); }
+.tbl-win .wb i { width: 9px; height: 9px; border-radius: 50%; }
+.tbl-win .wb .r { background: #c0392b; } .tbl-win .wb .y { background: #d8a03a; } .tbl-win .wb .g { background: var(--brass-soft); }
+.tbl-win .wc { padding: 12px 14px 13px; display: flex; flex-direction: column; gap: 8px; }
+.tbl-win .wc span { height: 7px; border-radius: 4px; background: #e4dbc9; }
+.tbl-win .wc span:nth-child(2) { width: 52%; }
+.tbl-mini .bar { margin-top: 10px; height: 36px; border-radius: 10px; background: linear-gradient(#2c1c13, #20140d); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; padding: 0 10px; }
+.tbl-mini .bar .ent { display: flex; align-items: center; gap: 8px; height: 26px; padding: 0 12px; border-radius: 7px; background: rgba(124, 28, 24, 0.55); border: 1px solid rgba(198, 163, 95, 0.4); color: var(--cream-on-dark); font-size: 11px; box-shadow: 0 0 18px -4px rgba(198, 163, 95, 0.5); }
+.tbl-mini .bar .ent i { width: 11px; height: 11px; border-radius: 3px; background: var(--brass); }
+.tbl-mini .arrow { position: absolute; right: 34px; bottom: 2px; color: var(--oxblood); font-size: 16px; }
+
+/* Desktop icons + taskbar (desktop) */
+.tbl-desk { width: 100%; max-width: 400px; }
+.tbl-desk .icons { display: flex; gap: 30px; justify-content: center; margin-bottom: 18px; }
+.tbl-desk .ic { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.tbl-desk .ic .t { width: 50px; height: 50px; border-radius: 13px; display: grid; place-items: center; background: var(--paper-2); border: 1px solid var(--ink-15); box-shadow: 0 10px 22px -14px rgba(36, 26, 18, 0.35); }
+.tbl-desk .ic .t svg { width: 24px; height: 24px; stroke: var(--oxblood); stroke-width: 1.35; fill: none; }
+.tbl-desk .ic .l { font-size: 11px; color: var(--ink-soft); }
+.tbl-desk .taskbar { height: 42px; border-radius: 11px; background: linear-gradient(#2c1c13, #20140d); border: 1px solid rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 9px; padding: 0 12px; }
+.tbl-desk .taskbar .tk { width: 26px; height: 26px; border-radius: 7px; background: rgba(243, 237, 225, 0.08); border: 1px solid rgba(198, 163, 95, 0.3); }
+.tbl-desk .taskbar .lab { margin-left: auto; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }

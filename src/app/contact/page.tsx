@@ -6,10 +6,8 @@ export const metadata: Metadata = {
   description: "Get in touch about instructional design, content systems, and consulting work.",
 };
 
-// STARTER PAGE. The email below is a placeholder on Jackie's own domain —
-// CONFIRM the address routes (or swap in her preferred email / LinkedIn / form)
-// before this goes live. Do not ship a bouncing mailbox.
-const CONTACT_EMAIL = "hello@jackiemiller.co";
+// Jackie's real inbox for now (she'll swap to a branded address later).
+const CONTACT_EMAIL = "jacklyn747@gmail.com";
 
 export default function ContactPage() {
   return (
@@ -57,10 +55,11 @@ export default function ContactPage() {
 
           <a
             href={`mailto:${CONTACT_EMAIL}`}
+            aria-label={`Email ${CONTACT_EMAIL}`}
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 14,
+              gap: 16,
               marginTop: 40,
               fontFamily: "var(--font-serif), serif",
               fontSize: "clamp(24px,3.4vw,34px)",
@@ -69,8 +68,22 @@ export default function ContactPage() {
               textDecoration: "none",
             }}
           >
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ flex: "0 0 auto" }}
+              aria-hidden="true"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3.5 6.5 12 13l8.5-6.5" />
+            </svg>
             {CONTACT_EMAIL}
-            <span style={{ fontSize: 20 }}>→</span>
           </a>
         </section>
       </main>

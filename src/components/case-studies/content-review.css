@@ -11,7 +11,7 @@
    ───────────────────────────────────────────────────────────── */
 
 .cr-root {
-  --ink: #131211;        /* near-charcoal black base (was warm brown #1a1614) */
+  --ink: #17181c;        /* cool-neutral charcoal black (blue slightly > red, so it never reads brown) */
   --brown: #2c1c13;      /* deep chocolate — now an accent, not the whole page */
   --brown-2: #20140d;
   --paper: #f1eee5;

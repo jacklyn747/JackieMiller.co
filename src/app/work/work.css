@@ -7,8 +7,10 @@
   color: var(--ink);
 }
 
+/* One centered reading column for the whole page, so text fills its measure
+   instead of hugging the left of a wide container (which read as a 2nd column). */
 .work-head {
-  max-width: 1160px;
+  max-width: 720px;
   margin: 0 auto;
   padding: clamp(72px, 10vw, 120px) clamp(24px, 5vw, 48px) 0;
 }
@@ -81,7 +83,7 @@
 
 /* Section label introducing the case-study grid */
 .work-section-label {
-  max-width: 1160px;
+  max-width: 720px;
   margin: clamp(56px, 8vw, 88px) auto 0;
   padding: 0 clamp(24px, 5vw, 48px);
   display: flex;
@@ -102,7 +104,7 @@
 }
 
 .work-grid {
-  max-width: 1160px;
+  max-width: 720px;
   margin: 0 auto;
   padding: clamp(28px, 4vw, 44px) clamp(24px, 5vw, 48px) 48px;
   display: grid;
@@ -211,7 +213,7 @@
 }
 
 .work-more {
-  max-width: 1160px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 0 clamp(24px, 5vw, 48px) 128px;
   font-family: var(--font-sans), sans-serif;

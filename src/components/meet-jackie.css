@@ -30,10 +30,17 @@
   z-index: -2;
   pointer-events: none;
   opacity: var(--smoke);
+  /* Oxblood light over Jackie's dark mood image, dissolving into black */
   background:
-    radial-gradient(120% 80% at 44% 12%, rgba(126, 30, 26, 0.62) 0%, rgba(78, 20, 18, 0.36) 34%, rgba(13, 13, 15, 0) 66%),
-    radial-gradient(72% 54% at 12% 6%, rgba(93, 15, 14, 0.44), transparent 56%),
-    radial-gradient(64% 50% at 88% 14%, rgba(107, 20, 18, 0.40), transparent 56%);
+    radial-gradient(120% 80% at 44% 12%, rgba(126, 30, 26, 0.58) 0%, rgba(78, 20, 18, 0.34) 34%, rgba(13, 13, 15, 0) 66%),
+    radial-gradient(72% 54% at 12% 6%, rgba(93, 15, 14, 0.42), transparent 56%),
+    radial-gradient(64% 50% at 88% 14%, rgba(107, 20, 18, 0.38), transparent 56%),
+    url("/about/hero-sky.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
 }
 /* Fractal-noise haze breaks the gradient into uneven, smoky density */
 .about-page::after {

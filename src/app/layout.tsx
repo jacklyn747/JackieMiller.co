@@ -23,8 +23,28 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Jackie Miller",
-  description: "Systems Design · Houston, TX",
+  metadataBase: new URL("https://jackiemiller.co"),
+  title: {
+    default: "Jackie Miller — Instructional Designer",
+    template: "%s",
+  },
+  description:
+    "Instructional designer for justice-involved and underserved adult learners — trauma-informed, accessible, AI-augmented learning.",
+  openGraph: {
+    title: "Jackie Miller — Instructional Designer",
+    description: "Learning design for the people the system leaves out.",
+    url: "https://jackiemiller.co",
+    siteName: "Jackie Miller",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Jackie Miller — Instructional Designer" }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jackie Miller — Instructional Designer",
+    description: "Learning design for the people the system leaves out.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

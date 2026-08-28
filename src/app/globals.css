@@ -15,10 +15,10 @@
   --ink-mid: rgba(26,22,20,0.38);
   --rule:    rgba(26,22,20,0.07);
   --margin:  rgba(93,15,14,0.22);
-  --cover-bg: #110e0d;
+  --cover-bg: #0a0a0c;
 
   /* Nav reads as the journal's dark spine in both themes */
-  --nav-bg: #1A1614;
+  --nav-bg: #121316;
   --nav-fg: #F1EEE5;
 }
 
@@ -27,8 +27,8 @@
   color-scheme: dark;
 
   --ink:     #E7E1D3;
-  --paper:   #171310;
-  --paper2:  #1C1714;
+  --paper:   #0d0d0f;
+  --paper2:  #141417;
   --ox:      #4A1210;
   --ox-accent: #B04A44; /* dark --ox works as a surface but fails as text on dark paper */
   --ox-dim:  rgba(176,74,68,0.22);
@@ -38,7 +38,7 @@
   --rule:    rgba(231,225,211,0.06);
   --margin:  rgba(176,74,68,0.32);
 
-  --nav-bg: #0F0C0B;
+  --nav-bg: #0b0b0e;
   --nav-fg: #E7E1D3;
 }
 

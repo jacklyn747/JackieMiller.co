@@ -11,7 +11,7 @@
    ───────────────────────────────────────────────────────────── */
 
 .cr-root {
-  --ink: #101012;        /* faded black — very dark near-black, neutral (not brown, not grey, not harsh #000) */
+  --ink: #0d0d0f;        /* faded black — very dark near-black, neutral (darker; not brown, not grey, not harsh #000) */
   --brown: #2c1c13;      /* deep chocolate — now an accent, not the whole page */
   --brown-2: #20140d;
   --paper: #f1eee5;

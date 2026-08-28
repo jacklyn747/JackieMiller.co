@@ -49,6 +49,28 @@ export default function WorkPage() {
           <p className="work-closer">Different environment. Different problems. Different design.</p>
         </div>
 
+        <div className="work-section-label">Working with AI</div>
+        <div className="work-ai">
+          <div className="work-body">
+            <p>
+              AI is how I work now, not something I bolt on. I use it as a force-multiplier across the whole
+              instructional-design process — needs analysis, structuring content, and building working prototypes —
+              while the judgment about what&apos;s accurate, accessible, and actually worth teaching stays mine.
+            </p>
+            <p>
+              Practically, that means I can move from a design decision to something a learner can click in hours, not
+              weeks — and spend the time I save on the harder question: how to make the next ten courses better, more
+              consistent, and more accessible, not just this one.
+            </p>
+          </div>
+          <ul className="work-ai-list">
+            <li><b>Trained LLMs from the inside.</b> At Character.AI I wrote and evaluated thousands of dialogue examples and worked directly with ML engineers — I understand these models as materials, not magic.</li>
+            <li><b>Built my own AI tools.</b> A RAG-powered instructional-design assistant (LangChain, ChromaDB, embeddings) that answers design questions against my own source library, with citations.</li>
+            <li><b>Built this course with AI.</b> The Digital Literacy course and its live laptop simulation were designed and produced with AI as a build partner — I directed the instructional design; AI accelerated everything from storyboard to a working, accessible prototype.</li>
+            <li><b>AI-native production.</b> Prompt-chained drafting, structuring, and quality-checking workflows that raise output without giving up control over quality.</li>
+          </ul>
+        </div>
+
         <div className="work-section-label">Case Studies</div>
 
         <div className="work-grid">

@@ -15,48 +15,43 @@
   --fs-answer: clamp(20px, 1.9vw, 24px);
   --fs-label: 11px;
   --ls-label: 0.2em;
-
-  /* Smoke intensity — dialed down on the light theme so it stays glam, not muddy */
-  --smoke: 1;
 }
-:root:not([data-theme="dark"]) .about-page { --smoke: 0.32; }
 
-/* ── Signature: oxblood smoke pooling at the top, bleeding into black ── */
+/* ── Hero backdrop: oxblood/purple (top) → near-charcoal (bottom),
+   with a subtle seamless grain texture layered over it ── */
 .about-page::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: clamp(520px, 78vh, 900px);
+  inset: 0;
   z-index: -2;
   pointer-events: none;
-  opacity: var(--smoke);
-  /* Oxblood light over Jackie's dark mood image, dissolving into black */
-  background:
-    radial-gradient(120% 80% at 44% 12%, rgba(126, 30, 26, 0.58) 0%, rgba(78, 20, 18, 0.34) 34%, rgba(13, 13, 15, 0) 66%),
-    radial-gradient(72% 54% at 12% 6%, rgba(93, 15, 14, 0.42), transparent 56%),
-    radial-gradient(64% 50% at 88% 14%, rgba(107, 20, 18, 0.38), transparent 56%),
-    url("/about/hero-sky.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+  background: linear-gradient(to bottom,
+    #4d1436 0,
+    #371129 22vh,
+    #241120 46vh,
+    #1a191f 78vh,
+    #16161b 100vh);
 }
-/* Fractal-noise haze breaks the gradient into uneven, smoky density */
+/* Light theme: only a faint oxblood wash up top so it isn't muddy */
+:root:not([data-theme="dark"]) .about-page::before {
+  background: linear-gradient(to bottom,
+    rgba(93, 15, 14, 0.16) 0,
+    rgba(93, 15, 14, 0.05) 26vh,
+    transparent 60vh);
+}
+/* Seamless fractal-noise grain over the gradient */
 .about-page::after {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: clamp(520px, 78vh, 900px);
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: calc(0.5 * var(--smoke));
+  opacity: 0.08;
   mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
-  background-size: 680px 680px;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
 }
+:root:not([data-theme="dark"]) .about-page::after { opacity: 0.04; }
 
 .mj-inner {
   position: relative;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MacSim from "./MacSim";
 import TabletMock from "./TabletMock";
 import ProcessDocs from "./ProcessDocs";
@@ -71,6 +72,15 @@ export default function DigitalLiteracy() {
               {[["Role", "Instructional Designer"], ["Focus", "Full Course Design · ADDIE"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
                 <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
               ))}
+            </div>
+            <div style={{ marginTop: 40, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
+              <Link href="/work/digital-literacy/course" className="dl-launch">
+                <span className="dl-launch__dot" />Launch the course
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </Link>
+              <span style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
+                All six lessons · playable · ~30 min
+              </span>
             </div>
           </div>
 
@@ -158,6 +168,12 @@ export default function DigitalLiteracy() {
         <div className="dl-sim-wrap">
           <div className="dl-sim"><MacSim /></div>
           <div className="dl-sim-note">A working prototype of the capstone environment · best explored on a computer</div>
+          <div style={{ maxWidth: 1060, margin: "26px auto 0", textAlign: "center" }}>
+            <Link href="/work/digital-literacy/course" className="dl-launch">
+              <span className="dl-launch__dot" />Play the full course, lesson one to capstone
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </Link>
+          </div>
         </div>
 
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "0 48px" }}>

@@ -15,6 +15,13 @@ type Kind = "finder" | "notes" | "calendar" | "trash" | "txt" | "pdf";
 type FileItem = { id: string; name: string; kind: "txt" | "pdf"; x: number; y: number; body?: string };
 type Win = { id: string; kind: Kind; fileId?: string; title: string; x: number; y: number; w: number; h: number; z: number; min: boolean };
 
+/* Events the capstone task-rail listens to. Only emitted when a consumer
+   passes onEvent; the case-study showpiece passes neither prop, so its
+   behavior is unchanged. */
+export type SimEvent =
+  | { type: "open" | "focus" | "close" | "minimize" | "restore"; kind: Kind; fileId?: string; title?: string }
+  | { type: "type" | "enter"; value: string };
+
 const INITIAL_FILES: FileItem[] = [
   { id: "readme", name: "Read Me First.txt", kind: "txt", x: 0, y: 0, body: "welcome" },
   { id: "resume", name: "My Résumé.pdf", kind: "pdf", x: 0, y: 0 },
@@ -84,10 +91,15 @@ function DockGlyph({ app }: { app: Kind }) {
   );
 }
 
-export default function MacSim() {
+export default function MacSim({ courseMode = false, onEvent }: { courseMode?: boolean; onEvent?: (e: SimEvent) => void } = {}) {
   const simRef = useRef<HTMLDivElement>(null);
   const trashRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ mode: "win" | "file"; id: string; offX: number; offY: number; moved: boolean } | null>(null);
+  // Keep the latest callback without churning memoized deps.
+  const evRef = useRef(onEvent);
+  evRef.current = onEvent;
+  const emit = useCallback((e: SimEvent) => evRef.current?.(e), []);
+  const winsRef = useRef<Win[]>([]);
 
   const [files, setFiles] = useState<FileItem[]>(() =>
     INITIAL_FILES.map((f, i) => ({ ...f, x: 999, y: 44 + i * 96 })) // x fixed after mount to right edge
@@ -108,6 +120,10 @@ export default function MacSim() {
     if (r) setFiles((fs) => fs.map((f, i) => ({ ...f, x: r.width - 92, y: 44 + i * 96 })));
   }, []);
 
+  // Mirror windows into a ref so event emission can read current state
+  // without emitting from inside a setState updater (avoids double-fire).
+  useEffect(() => { winsRef.current = windows; }, [windows]);
+
   useEffect(() => {
     const tick = () => setClock(new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }));
     tick();
@@ -125,35 +141,53 @@ export default function MacSim() {
   };
 
   const focus = useCallback((id: string) => {
+    const target = winsRef.current.find((w) => w.id === id);
+    if (target) emit({ type: target.min ? "restore" : "focus", kind: target.kind, fileId: target.fileId, title: target.title });
     setWindows((ws) => {
       const nz = zTop + 1;
       setZTop(nz);
       return ws.map((w) => (w.id === id ? { ...w, z: nz, min: false } : w));
     });
-  }, [zTop]);
+  }, [zTop, emit]);
 
   const openWin = useCallback((kind: Kind, opts?: { fileId?: string; title?: string }) => {
     setHint(false);
+    const already = winsRef.current.find((w) => (opts?.fileId ? w.fileId === opts.fileId : w.kind === kind && !w.fileId));
+    emit({ type: already ? "focus" : "open", kind, fileId: opts?.fileId, title: opts?.title ?? cap(kind) });
     setWindows((ws) => {
       // focus existing app/file window if already open
       const existing = ws.find((w) => (opts?.fileId ? w.fileId === opts.fileId : w.kind === kind && !w.fileId));
       const nz = zTop + 1;
       setZTop(nz);
       if (existing) return ws.map((w) => (w.id === existing.id ? { ...w, z: nz, min: false } : w));
-      const size: Record<string, { w: number; h: number }> = {
+      // Course mode uses smaller, higher windows so content always clears the dock.
+      const size: Record<string, { w: number; h: number }> = courseMode ? {
+        finder: { w: 340, h: 224 }, notes: { w: 300, h: 206 }, calendar: { w: 300, h: 236 },
+        trash: { w: 300, h: 200 }, txt: { w: 300, h: 206 }, pdf: { w: 320, h: 230 },
+      } : {
         finder: { w: 520, h: 340 }, notes: { w: 380, h: 300 }, calendar: { w: 360, h: 320 },
         trash: { w: 440, h: 300 }, txt: { w: 420, h: 300 }, pdf: { w: 480, h: 360 },
       };
-      const s = size[kind] ?? { w: 420, h: 320 };
+      const s = size[kind] ?? { w: courseMode ? 300 : 420, h: courseMode ? 206 : 320 };
       const n = ws.length;
       const id = `${kind}-${opts?.fileId ?? ""}-${Date.now()}`;
-      return [...ws, { id, kind, fileId: opts?.fileId, title: opts?.title ?? cap(kind), x: 120 + n * 26, y: 70 + n * 24, ...s, z: nz, min: false }];
+      const x = courseMode ? 54 + n * 20 : 120 + n * 26;
+      const y = courseMode ? 44 + n * 18 : 70 + n * 24;
+      return [...ws, { id, kind, fileId: opts?.fileId, title: opts?.title ?? cap(kind), x, y, ...s, z: nz, min: false }];
     });
-  }, [zTop]);
+  }, [zTop, emit, courseMode]);
 
   const openFile = (f: FileItem) => openWin(f.kind, { fileId: f.id, title: f.name });
-  const closeWin = (id: string) => setWindows((ws) => ws.filter((w) => w.id !== id));
-  const minWin = (id: string) => setWindows((ws) => ws.map((w) => (w.id === id ? { ...w, min: true } : w)));
+  const closeWin = (id: string) => {
+    const w = winsRef.current.find((x) => x.id === id);
+    if (w) emit({ type: "close", kind: w.kind, fileId: w.fileId, title: w.title });
+    setWindows((ws) => ws.filter((x) => x.id !== id));
+  };
+  const minWin = (id: string) => {
+    const w = winsRef.current.find((x) => x.id === id);
+    if (w) emit({ type: "minimize", kind: w.kind, fileId: w.fileId, title: w.title });
+    setWindows((ws) => ws.map((x) => (x.id === id ? { ...x, min: true } : x)));
+  };
 
   const trashFile = (id: string) => {
     setFiles((fs) => {
@@ -231,7 +265,7 @@ export default function MacSim() {
         </span>
       </div>
 
-      {hint && <div className="mac-hint">This one is live — open a file, drag it to the Trash, move a window.</div>}
+      {hint && !courseMode && <div className="mac-hint">This one is live — open a file, drag it to the Trash, move a window.</div>}
 
       {/* desktop files */}
       {files.map((f) => (
@@ -259,7 +293,7 @@ export default function MacSim() {
             <span className="mac-title">{w.title}</span>
           </div>
           <div className="mac-winbody">
-            <WindowContent win={w} files={files} trashed={trashed} openFile={openFile} emptyTrash={emptyTrash} />
+            <WindowContent win={w} files={files} trashed={trashed} openFile={openFile} emptyTrash={emptyTrash} courseMode={courseMode} emit={emit} />
           </div>
         </div>
       ))}
@@ -284,7 +318,7 @@ export default function MacSim() {
 
 function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-function WindowContent({ win, files, trashed, openFile, emptyTrash }: { win: Win; files: FileItem[]; trashed: FileItem[]; openFile: (f: FileItem) => void; emptyTrash: () => void }) {
+function WindowContent({ win, files, trashed, openFile, emptyTrash, courseMode, emit }: { win: Win; files: FileItem[]; trashed: FileItem[]; openFile: (f: FileItem) => void; emptyTrash: () => void; courseMode?: boolean; emit?: (e: SimEvent) => void }) {
   if (win.kind === "finder")
     return (
       <div className="finder">
@@ -347,7 +381,21 @@ function WindowContent({ win, files, trashed, openFile, emptyTrash }: { win: Win
     return (
       <div className="doc">
         <h3>Notes</h3>
-        <p className="muted">A blank note. On a real laptop this is where you&apos;d jot something down — a phone number, a to-do, a draft of an email.</p>
+        {courseMode ? (
+          <>
+            <p className="muted">Type your first name below, then press Enter.</p>
+            <input
+              className="notes-input"
+              autoFocus
+              placeholder="Type here…"
+              aria-label="Type your first name, then press Enter"
+              onChange={(e) => emit?.({ type: "type", value: e.target.value })}
+              onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); emit?.({ type: "enter", value: (e.target as HTMLInputElement).value }); } }}
+            />
+          </>
+        ) : (
+          <p className="muted">A blank note. On a real laptop this is where you&apos;d jot something down — a phone number, a to-do, a draft of an email.</p>
+        )}
       </div>
     );
   // txt file

@@ -179,9 +179,9 @@ function TypeNameStage({ onReady }: StageProps) {
   const [v, setV] = useState("");
   return (
     <div className="crs-inputwrap">
-      <input className="crs-input" autoFocus placeholder="Type your first name" aria-label="Type your first name"
+      <input className="crs-input" autoFocus placeholder="Type your first name" aria-label="Type your first name" aria-describedby="tn-hint"
         value={v} onChange={(e) => { setV(e.target.value); if (e.target.value.trim().length > 0) onReady(); }} />
-      <div className="crs-hint">{v.trim() ? "That's it — those are your keystrokes appearing on screen." : "Tap the box and use the keyboard to type your name."}</div>
+      <div className="crs-hint" id="tn-hint" aria-live="polite">{v.trim() ? "That's it — those are your keystrokes appearing on screen." : "Tap the box and use the keyboard to type your name."}</div>
     </div>
   );
 }
@@ -194,8 +194,8 @@ function FixTypoStage({ onReady }: StageProps) {
   useEffect(() => { if (good) onReady(); }, [good, onReady]);
   return (
     <div className="crs-inputwrap">
-      <input className={`crs-input${good ? " good" : ""}`} aria-label="Fix the spelling to Jackie" value={v} onChange={(e) => setV(e.target.value)} />
-      <div className="crs-hint">
+      <input className={`crs-input${good ? " good" : ""}`} aria-label="Fix the spelling to Jackie" aria-describedby="ft-hint" value={v} onChange={(e) => setV(e.target.value)} />
+      <div className="crs-hint" id="ft-hint" aria-live="polite">
         {good ? "Fixed. Making a mistake and correcting it is a normal part of typing."
           : <>This word has extra letters. Use <span className="k">⌫ Backspace</span> to remove them until it reads <b>Jackie</b>.</>}
       </div>
@@ -209,11 +209,11 @@ function PressEnterStage({ onReady }: StageProps) {
   const [entered, setEntered] = useState(false);
   return (
     <div className="crs-inputwrap">
-      <input className={`crs-input${entered ? " good" : ""}`} autoFocus placeholder="Type anything, then press Enter" aria-label="Type anything then press Enter"
+      <input className={`crs-input${entered ? " good" : ""}`} autoFocus placeholder="Type anything, then press Enter" aria-label="Type anything then press Enter" aria-describedby="pe-hint"
         value={v} onChange={(e) => setV(e.target.value)}
         onKeyDown={(e) => { if (e.key === "Enter" && v.trim()) { setEntered(true); onReady(); } }} />
-      <div className="crs-hint">Type a word, then press <span className="k">Enter ↵</span> to confirm it.</div>
-      <div className={`crs-entered${entered ? " show" : ""}`}>Entered! On a real laptop, Enter is how you submit or confirm.</div>
+      <div className="crs-hint" id="pe-hint">Type a word, then press <span className="k">Enter ↵</span> to confirm it.</div>
+      <div className={`crs-entered${entered ? " show" : ""}`} role="status">{entered ? "Entered! On a real laptop, Enter is how you submit or confirm." : ""}</div>
     </div>
   );
 }
@@ -226,9 +226,9 @@ function CapitalStage({ onReady }: StageProps) {
   useEffect(() => { if (ok) onReady(); }, [ok, onReady]);
   return (
     <div className="crs-inputwrap">
-      <input className={`crs-input${ok ? " good" : ""}`} autoFocus placeholder="Type a name with a capital letter" aria-label="Type a word starting with a capital letter"
+      <input className={`crs-input${ok ? " good" : ""}`} autoFocus placeholder="Type a name with a capital letter" aria-label="Type a word starting with a capital letter" aria-describedby="cap-hint"
         value={v} onChange={(e) => setV(e.target.value)} />
-      <div className="crs-hint">
+      <div className="crs-hint" id="cap-hint" aria-live="polite">
         {ok ? "That's a capital letter to start — exactly right."
           : tried ? <>Almost — try holding <span className="k">⇧ Shift</span> while pressing the first letter.</>
           : <>Type any name. Hold <span className="k">⇧ Shift</span> and a letter to make it a capital.</>}

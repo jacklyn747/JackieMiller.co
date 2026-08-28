@@ -161,6 +161,8 @@
   color: var(--brass); background: none; cursor: pointer;
 }
 .crs-head .q:hover { background: rgba(198,163,95,0.12); }
+.crs-head .q { position: relative; }
+.crs-head .q::after { content: ""; position: absolute; inset: -11px; }  /* 24px dot → ~46px tap area */
 
 /* ── Body / footer ── */
 .crs-body {
@@ -395,6 +397,12 @@
 .crs-win .lg svg { width: 7px; height: 7px; stroke: rgba(0,0,0,0.5); stroke-width: 1.6; fill: none; opacity: 0; }
 .crs-win button.lg.act svg { opacity: 1; }              /* live control shows its glyph so learners see where to tap */
 .crs-win .lights:hover .lg svg { opacity: 1; }
+/* Keep the 12px macOS look, but give the LIVE control a ~44px tap area for
+   a first-time, low-dexterity, tablet audience (iOS 44pt guidance). Only one
+   light is interactive per lesson window, so the padded areas don't overlap
+   into mis-taps. */
+.crs-win button.lg { position: relative; }
+.crs-win button.lg.act::after { content: ""; position: absolute; inset: -16px; border-radius: 50%; }
 .crs-win .wt { flex: 1; text-align: center; font-size: 13px; font-weight: 600; color: #6b6b70; margin-right: 44px; }
 .crs-win .wbody { padding: 16px 16px 20px; color: #2a2a30; }
 .crs-win .wbody h4 { font-family: var(--font-serif); font-weight: 400; font-size: 16px; margin: 0 0 10px; color: #26262b; }

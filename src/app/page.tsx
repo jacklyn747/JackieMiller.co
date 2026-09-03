@@ -49,8 +49,8 @@ const HOW: HowCard[] = [
     icon: "/home/icon-star.png", iw: 2360, ih: 1640, alt: "Shooting star",
   },
   {
-    t: "Built like a story",
-    d: "A creative-writing degree means every course is shaped as a narrative — tension, momentum, a reason to keep going — not a list of objectives.",
+    t: "Humans are wired for story",
+    d: "We're built to remember narrative, not bullet points — so I design learning as story. That's what the creative-writing degree was really for.",
     icon: "/home/icon-pen.png", iw: 1640, ih: 2360, alt: "Fountain pen writing",
   },
 ];

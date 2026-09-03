@@ -49,8 +49,8 @@ const HOW: HowCard[] = [
     icon: "/home/icon-star.png", iw: 2360, ih: 1640, alt: "Shooting star",
   },
   {
-    t: "A writer's ear",
-    d: "A creative-writing degree behind every screen. Clear, human words are the real interface.",
+    t: "Built like a story",
+    d: "A creative-writing degree means every course is shaped as a narrative — tension, momentum, a reason to keep going — not a list of objectives.",
     icon: "/home/icon-pen.png", iw: 1640, ih: 2360, alt: "Fountain pen writing",
   },
 ];
@@ -156,9 +156,9 @@ export default function Home() {
               <h2 className="hm-sec__title">Education is in my blood.</h2>
               <p className="hm-sec__intro">
                 A superintendent grandfather, a librarian grandmother, two lifelong-teacher aunts — and a
-                creative-writing degree that taught me the most valuable skill there is. I came up through
-                art, photography, and words, and instructional design is the one field that lets me use all
-                of it at once.
+                creative-writing degree that taught me to build a story people actually want to finish. I
+                came up through art, photography, and words, and instructional design is the one field that
+                lets me use all of it at once.
               </p>
               <div className="hm-cta-inline">
                 <Link href="/about" className="btn btn--ghost">

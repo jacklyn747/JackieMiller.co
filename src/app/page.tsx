@@ -188,7 +188,8 @@ export default function Home() {
             {HOW.map((c, i) => (
               <div key={c.t} className="hm-card">
                 {c.icon ? (
-                  <Image src={c.icon} alt={c.alt ?? ""} width={c.iw!} height={c.ih!} className="hm-card__icon" />
+                  // decorative — the card title carries the meaning, so the icon is aria-hidden
+                  <Image src={c.icon} alt="" width={c.iw!} height={c.ih!} className="hm-card__icon" />
                 ) : (
                   <span className="hm-card__n">{String(i + 1).padStart(2, "0")}</span>
                 )}

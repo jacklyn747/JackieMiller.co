@@ -51,6 +51,21 @@ export default function ContactPage() {
             Let&apos;s Talk
           </h1>
 
+          <p
+            style={{
+              marginTop: 22,
+              maxWidth: "48ch",
+              fontFamily: "var(--font-sans), sans-serif",
+              fontSize: "clamp(16px,1.8vw,18px)",
+              lineHeight: 1.6,
+              color: "var(--ink-mid)",
+            }}
+          >
+            I design learning for the people most systems overlook — and I&apos;m always up for a
+            conversation about making something people actually want to learn from. If you&apos;re hiring,
+            building, or just curious, reach out.
+          </p>
+
           <div className="contact-icons">
             <a className="contact-icon" href={`mailto:${CONTACT_EMAIL}`} aria-label={`Email ${CONTACT_EMAIL}`} title="Email">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

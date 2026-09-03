@@ -229,6 +229,15 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   color: var(--ox-accent);
+  display: flex;
+  align-items: flex-end;
+  min-height: 72px;
+}
+.hm-card__icon {
+  height: 72px;
+  width: auto;
+  margin-bottom: 4px;
+  object-fit: contain;
 }
 .hm-card h3 {
   margin: 12px 0 9px;

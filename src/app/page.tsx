@@ -31,22 +31,27 @@ const PROOF = [
   <>Built a <b>live, playable course</b></>,
 ];
 
-const HOW = [
+type HowCard = { t: string; d: string; icon?: string; iw?: number; ih?: number; alt?: string };
+const HOW: HowCard[] = [
   {
     t: "Boring is the enemy",
     d: "I treat visual craft as instructional craft. If a course looks like a chore, it teaches like one — so mine don't.",
+    icon: "/home/icon-lightning.png", iw: 1640, ih: 2360, alt: "Lightning bolt",
   },
   {
     t: "Designed for the real world",
     d: "Locked-down devices, variable literacy, no IT support. I design around real constraints, not despite them.",
+    icon: "/home/icon-anchor.png", iw: 1640, ih: 2360, alt: "Anchor",
   },
   {
     t: "AI is my force-multiplier",
     d: "I direct the instructional design; AI accelerates the build — storyboard to working prototype, faster.",
+    icon: "/home/icon-star.png", iw: 2360, ih: 1640, alt: "Shooting star",
   },
   {
     t: "A writer's ear",
     d: "A creative-writing degree behind every screen. Clear, human words are the real interface.",
+    icon: "/home/icon-pen.png", iw: 1640, ih: 2360, alt: "Fountain pen writing",
   },
 ];
 
@@ -182,7 +187,11 @@ export default function Home() {
           <div className="hm-how__grid">
             {HOW.map((c, i) => (
               <div key={c.t} className="hm-card">
-                <span className="hm-card__n">{String(i + 1).padStart(2, "0")}</span>
+                {c.icon ? (
+                  <Image src={c.icon} alt={c.alt ?? ""} width={c.iw!} height={c.ih!} className="hm-card__icon" />
+                ) : (
+                  <span className="hm-card__n">{String(i + 1).padStart(2, "0")}</span>
+                )}
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </div>

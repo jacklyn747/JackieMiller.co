@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Archivo, Caveat } from "next/font/google";
 import "./globals.css";
+import "./system.css";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-serif",

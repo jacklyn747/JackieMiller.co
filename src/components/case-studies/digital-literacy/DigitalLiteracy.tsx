@@ -3,6 +3,7 @@ import MacSim from "./MacSim";
 import TabletMock from "./TabletMock";
 import ProcessDocs from "./ProcessDocs";
 import CaseNav from "../CaseNav";
+import GroundedIn from "../GroundedIn";
 import "../content-review.css"; // reuse the dark-editorial case-study chrome (.cr-root, .cr-wrap, grids)
 import "./dl.css";
 
@@ -70,10 +71,11 @@ export default function DigitalLiteracy() {
               </p>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px 26px", marginTop: 44, paddingTop: 22, borderTop: "0.5px solid rgba(241,238,229,0.18)", fontSize: 11, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase" }}>
-              {[["Role", "Instructional Designer"], ["Focus", "Full Course Design · ADDIE"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
+              {[["Role", "Instructional Designer"], ["Focus", "Full Course Design · Prototype-first"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
                 <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
               ))}
             </div>
+            <GroundedIn items={["Andragogy", "Merrill's First Principles", "SAM", "Backward Design", "Cognitive Load", "Constructivism", "Scaffolding", "Multimodal", "Trauma-Informed", "UDL"]} />
             <div style={{ marginTop: 40, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
               <Link href="/work/digital-literacy/course" className="dl-launch">
                 <span className="dl-launch__dot" />Launch the course

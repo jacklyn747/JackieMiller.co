@@ -1,0 +1,115 @@
+/* ─────────────────────────────────────────────────────────────
+   DESIGN SYSTEM — canonical components (.ds-*)
+   The one grammar the whole site is built from. Pages compose these
+   instead of re-inventing primitives, so the site reads as one system.
+   Tokens live in globals.css; components here reference them.
+
+   Components by purpose:
+     · Label      .ds-eyebrow      (section kicker + hairline)
+     · Action     .ds-btn          (--solid / --ghost)
+     · Selection  .ds-chip         (tag / framework label; --dark for dark grounds)
+     · Presentation .ds-index      (editorial statement list w/ progressive disclosure)
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Label ── */
+.ds-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.ds-eyebrow::after { content: ""; flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
+
+/* ── Action ── */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.ds-btn--solid {
+  background: linear-gradient(160deg, #7a1c18, #5d0f0e);
+  color: #f3ede1;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 14px 30px -14px rgba(93, 15, 14, 0.6);
+}
+.ds-btn--solid:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 18px 36px -14px rgba(93,15,14,0.72); }
+.ds-btn--ghost { border: 1.5px solid var(--ink-dim); color: var(--ink); }
+.ds-btn--ghost:hover { border-color: var(--ox-accent); color: var(--ox-accent); }
+
+/* ── Selection: chip / tag ── */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  padding: 7px 14px;
+  border: 0.5px solid var(--ink-dim);
+  border-radius: 999px;
+}
+/* dark ground (immersive case-study "night mode") */
+.ds-chip--dark { color: rgba(241, 238, 229, 0.85); border-color: rgba(241, 238, 229, 0.22); }
+
+/* ── Presentation: editorial statement index (progressive disclosure) ──
+   A list of big statements; each reveals its rationale on hover / focus /
+   tap. Reads complete at rest — the detail is a bonus, never a wall. */
+.ds-index { border-top: 0.5px solid var(--ink-dim); }
+.ds-index__row {
+  padding: clamp(22px, 3vw, 36px) 0;
+  border-bottom: 0.5px solid var(--ink-dim);
+  outline: none;
+}
+.ds-index__t {
+  margin: 0;
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
+  font-size: clamp(26px, 3.8vw, 48px);
+  line-height: 1.02;
+  letter-spacing: 0.015em;
+  color: var(--ink);
+  text-wrap: balance;
+  transition: color 0.18s ease;
+}
+.ds-index__row:hover .ds-index__t,
+.ds-index__row:focus-visible .ds-index__t { color: var(--ox-accent); }
+.ds-index__d {
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  max-width: 62ch;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-mid);
+  text-wrap: pretty;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+}
+.ds-index__row:hover .ds-index__d,
+.ds-index__row:focus-within .ds-index__d {
+  max-height: 160px;
+  opacity: 1;
+  margin-top: 14px;
+}
+/* touch devices have no hover — never hide the detail there */
+@media (hover: none) {
+  .ds-index__d { max-height: 220px; opacity: 1; margin-top: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-index__t, .ds-index__d { transition: opacity 0.2s ease !important; }
+}

@@ -20,6 +20,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import CaseNav from "./CaseNav";
+import GroundedIn from "./GroundedIn";
 import "./content-review.css";
 
 const IMG_BASE = "/case-studies/content-review";
@@ -298,6 +299,7 @@ export default function ContentReview() {
                 </span>
               ))}
             </div>
+            <GroundedIn items={["ADDIE", "Trauma-Informed", "UDL", "Cognitive Load", "Learner Autonomy", "Constructivism", "Kirkpatrick", "Accessibility (WCAG)"]} />
           </div>
 
           {/* The Challenge */}

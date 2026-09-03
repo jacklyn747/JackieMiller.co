@@ -2,6 +2,7 @@ import Link from "next/link";
 import MacSim from "./MacSim";
 import TabletMock from "./TabletMock";
 import ProcessDocs from "./ProcessDocs";
+import CaseNav from "../CaseNav";
 import "../content-review.css"; // reuse the dark-editorial case-study chrome (.cr-root, .cr-wrap, grids)
 import "./dl.css";
 
@@ -185,7 +186,10 @@ export default function DigitalLiteracy() {
               {[1, 2, 3, 4].map((n) => <span key={n} style={{ width: 22, height: 8, background: FILL[n], border: "0.5px solid rgba(241,238,229,0.30)" }} />)}
               <span>Strong</span>
             </div>
-          }>Content Quality</SectionLabel>
+          }>Evaluation</SectionLabel>
+          <p style={{ maxWidth: "66ch", fontSize: 17, lineHeight: 1.72, color: "rgba(241,238,229,0.90)", margin: "26px 0 0", textWrap: "pretty" }}>
+            Digital Literacy Fundamentals is fully built and playable — it just hasn&apos;t run with a cohort yet. So it&apos;s evaluated the way any responsible course is before launch: scored against its own Content Quality Rubric, with the honest low marks left visible, and a measurement plan ready for the first real cohort.
+          </p>
           <div style={{ marginTop: 36 }}>
             {RUBRIC.map((r) => (
               <div key={r.label} className="cr-rubric-row" style={{ display: "grid", gridTemplateColumns: "minmax(240px,40%) 1fr 44px", gap: 24, alignItems: "center", borderTop: "0.5px solid rgba(241,238,229,0.18)", padding: "18px 0" }}>
@@ -198,8 +202,8 @@ export default function DigitalLiteracy() {
             ))}
             <div style={{ borderTop: "0.5px solid rgba(241,238,229,0.18)" }} />
           </div>
-          <p style={{ maxWidth: "80ch", fontSize: 14, lineHeight: 1.7, color: "rgba(241,238,229,0.6)", margin: "22px 0 0", textWrap: "pretty" }}>
-            <span style={{ color: "#E3C8C2", letterSpacing: "0.16em", textTransform: "uppercase", fontSize: 11 }}>Placeholder data</span> — scored against the course&apos;s own Content Quality Rubric. The honest low marks (device-verified tap targets, a formal WCAG contrast pass) are flagged as open, not hidden. Real numbers to come.
+          <p style={{ maxWidth: "82ch", fontSize: 14, lineHeight: 1.7, color: "rgba(241,238,229,0.72)", margin: "22px 0 0", textWrap: "pretty" }}>
+            The low marks — device-verified tap targets, a formal WCAG contrast pass — are left visible on purpose: a rubric that only ever returns fours isn&apos;t a rubric. In the field, three things get measured first: <span style={{ color: "#E3C8C2" }}>completion by input domain</span> (where does a first-time user stall — the mouse, the keyboard, or windows?), <span style={{ color: "#E3C8C2" }}>capstone task success unaided</span>, and <span style={{ color: "#E3C8C2" }}>self-reported confidence before versus after.</span>
           </p>
 
         </div>
@@ -218,6 +222,10 @@ export default function DigitalLiteracy() {
         {/* Full process documentation */}
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "clamp(72px,10vw,110px) 48px 0" }}>
           <ProcessDocs base="/case-studies/digital-literacy" docs={DOCS} />
+        </div>
+
+        <div style={{ marginTop: "clamp(64px,9vw,104px)" }}>
+          <CaseNav nextHref="/work/content-review" nextKicker="Content Review" nextTitle="Discovering Your Narrative Voice" />
         </div>
       </div>
     </main>

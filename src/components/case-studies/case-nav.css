@@ -1,0 +1,14 @@
+/* Next-project hand-off + footer for case studies (dark-editorial). */
+.cs-next { transition: opacity 0.15s ease; }
+.cs-next:hover { opacity: 0.85; }
+.cs-next__arrow { display: inline-block; transition: transform 0.18s ease; }
+.cs-next:hover .cs-next__arrow { transform: translateX(7px); }
+.cs-foot-link { transition: color 0.15s ease; }
+.cs-foot-link:hover { color: #E3C8C2 !important; }
+
+@media (max-width: 640px) {
+  .cs-next { flex-direction: column; align-items: flex-start !important; gap: 22px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-next, .cs-next__arrow { transition: none !important; }
+}

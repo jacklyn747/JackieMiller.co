@@ -19,6 +19,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import CaseNav from "./CaseNav";
 import "./content-review.css";
 
 const IMG_BASE = "/case-studies/content-review";
@@ -612,6 +613,7 @@ export default function ContentReview() {
             )}
           </div>
         </div>
+        <CaseNav nextHref="/work/digital-literacy" nextKicker="Course Design" nextTitle="Digital Literacy Fundamentals" />
       </div>
     </main>
   );

@@ -58,21 +58,21 @@ export default function MeetJackie({ portrait }: { portrait: string | null }) {
             </div>
           )}
           <div className="mj-hero__intro">
-            <div className="about-eyebrow">Instructional Designer · Houston, Texas</div>
+            <div className="ds-eyebrow ds-eyebrow--solo">Instructional Designer · Houston, Texas</div>
             <h1 className="mj-hero__title">
               Learning design for the people the system leaves out.
             </h1>
             <p className="mj-hero__sub">I’ve been on both sides of the locked door.</p>
             <div className="mj-hero__cta">
-              <Link href="/work" className="mj-btn mj-btn--primary">See the work <span aria-hidden="true">→</span></Link>
-              <Link href="/contact" className="mj-btn mj-btn--ghost">Get in touch</Link>
+              <Link href="/work" className="ds-btn ds-btn--solid">See the work <span aria-hidden="true">→</span></Link>
+              <Link href="/contact" className="ds-btn ds-btn--ghost">Get in touch</Link>
             </div>
           </div>
         </header>
 
         {/* ── Curated interview ── */}
         <section className="mj-voice" aria-label="In her words">
-          <div className="mj-voice__label"><span>In her words</span></div>
+          <div className="ds-eyebrow mj-voice__label"><span>In her words</span></div>
           <ol className="qa">
             {CURATED.map((item, i) => (
               <li className="qa-row" key={i}>
@@ -89,7 +89,7 @@ export default function MeetJackie({ portrait }: { portrait: string | null }) {
         {/* ── Closer ── */}
         <section className="mj-close">
           <p className="mj-close__line">There’s something on the other side of a person’s past. I design the way through.</p>
-          <Link href="/contact" className="mj-btn mj-btn--primary">Start a conversation <span aria-hidden="true">→</span></Link>
+          <Link href="/contact" className="ds-btn ds-btn--solid">Start a conversation <span aria-hidden="true">→</span></Link>
         </section>
       </div>
     </main>

@@ -56,17 +56,7 @@
   padding: clamp(52px, 8vw, 100px) clamp(24px, 5vw, 48px) 0;
 }
 
-.about-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--ink-mid);
-}
+/* Eyebrows use the shared .ds-eyebrow (+ --solo for no hairline). */
 
 /* ── Hero ── */
 .mj-hero {
@@ -114,48 +104,15 @@
 }
 .mj-hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
 
-/* ── Buttons ── */
-.mj-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 13px 24px;
-  border-radius: 999px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s, color 0.2s, border-color 0.2s;
-}
-.mj-btn--primary {
-  background: linear-gradient(160deg, #7a1c18, #5d0f0e);
-  color: #f3ede1;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 14px 30px -14px rgba(93, 15, 14, 0.6);
-}
-.mj-btn--primary:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 18px 36px -14px rgba(93,15,14,0.72); }
-.mj-btn--primary span { color: rgba(243, 237, 225, 0.82); }
-.mj-btn--ghost { border: 1px solid var(--ink-mid); color: var(--ink); background: rgba(231, 225, 211, 0.04); }
-.mj-btn--ghost:hover { border-color: var(--ox-accent); color: var(--ox-accent); background: color-mix(in srgb, var(--ox-accent) 8%, transparent); }
+/* Buttons use the shared .ds-btn / .ds-btn--solid / .ds-btn--ghost (system.css). */
 
 /* ── Curated interview ── */
 .mj-voice {
   max-width: 760px;
   margin: clamp(60px, 9vw, 108px) auto 0;
 }
-.mj-voice__label {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 4px;
-  font-family: var(--font-sans), sans-serif;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--ink-mid);
-}
-.mj-voice__label::after { content: ""; flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
+/* .ds-eyebrow provides the styling; only the spacing below it is local */
+.mj-voice__label { margin-bottom: 4px; }
 
 .qa { list-style: none; margin: 0; padding: 0; border-top: 0.5px solid var(--ink-dim); }
 .qa-row {
@@ -209,7 +166,7 @@
   color: var(--ink);
   text-wrap: balance;
 }
-.mj-close .mj-btn { margin-top: 30px; }
+.mj-close .ds-btn { margin-top: 30px; }
 
 /* ── Responsive ── */
 @media (max-width: 860px) {
@@ -221,6 +178,4 @@
   .qa-n { padding-top: 5px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mj-btn { transition: none !important; }
-}
+/* .ds-btn carries its own reduced-motion rule (system.css). */

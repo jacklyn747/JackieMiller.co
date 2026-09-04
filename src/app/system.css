@@ -24,6 +24,8 @@
   color: var(--ink-mid);
 }
 .ds-eyebrow::after { content: ""; flex: 1; height: 0; border-top: 0.5px solid var(--ink-dim); }
+/* solo: a label with no trailing hairline */
+.ds-eyebrow--solo::after { display: none; }
 
 /* ── Action ── */
 .ds-btn {

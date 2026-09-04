@@ -75,8 +75,7 @@ export default function DigitalLiteracy() {
                 <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
               ))}
             </div>
-            <GroundedIn items={["Andragogy", "Merrill's First Principles", "SAM", "Backward Design", "Cognitive Load", "Constructivism", "Scaffolding", "Multimodal", "Trauma-Informed", "UDL"]} />
-            <div style={{ marginTop: 40, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
+            <div style={{ marginTop: 44, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
               <Link href="/work/digital-literacy/course" className="dl-launch">
                 <span className="dl-launch__dot" />Launch the course
                 <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
@@ -105,6 +104,23 @@ export default function DigitalLiteracy() {
               </div>
             ))}
           </div>
+
+          {/* The Learner — persona research (Marcus) */}
+          <SectionLabel margin="96px 0 30px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>Persona research</span>}>The Learner</SectionLabel>
+          <p style={{ maxWidth: "64ch", fontSize: 17, lineHeight: 1.72, color: "rgba(241,238,229,0.90)", margin: 0, textWrap: "pretty" }}>
+            This course isn&apos;t designed for an abstract &ldquo;beginner.&rdquo; It&apos;s designed for Marcus — a composite learner built from real interviews with justice-involved adults. Incarcerated 27 years, he&apos;ll sit down at a real laptop for the first time at a job center, unsupervised. He learns on a tablet, with no desk, in a room he can&apos;t make quiet, and he gets pulled away without warning.
+          </p>
+          <blockquote style={{ margin: "34px 0 0", paddingLeft: 22, borderLeft: "2px solid #E3C8C2", maxWidth: "60ch" }}>
+            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(21px,2.4vw,30px)", lineHeight: 1.3, color: "#E3C8C2", margin: 0, textWrap: "pretty" }}>
+              &ldquo;You can&apos;t learn something you&apos;ve never touched just by watching it.&rdquo;
+            </p>
+            <cite style={{ display: "block", marginTop: 16, fontStyle: "normal", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
+              Marcus · based on real interviews with Edovo users
+            </cite>
+          </blockquote>
+          <p style={{ maxWidth: "64ch", fontSize: 15, lineHeight: 1.72, color: "rgba(241,238,229,0.72)", margin: "30px 0 0", textWrap: "pretty" }}>
+            Every structural choice answers something Marcus named. The course is <span style={{ color: "#E3C8C2" }}>tablet-first</span> because that&apos;s the device he holds. Lessons are <span style={{ color: "#E3C8C2" }}>short and resumable</span> because he gets interrupted. Pacing is <span style={{ color: "#E3C8C2" }}>learner-controlled and non-punitive</span> — no forced rewatch — because that&apos;s what defeated him elsewhere. And the whole thing builds to a <span style={{ color: "#E3C8C2" }}>live, hands-on capstone</span>, because you learn a laptop by touching one, not by watching a video about it.
+          </p>
 
           {/* The Course — 6-lesson architecture */}
           <SectionLabel margin="96px 0 44px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>Six lessons</span>}>The Course</SectionLabel>
@@ -180,6 +196,39 @@ export default function DigitalLiteracy() {
         </div>
 
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "0 48px" }}>
+
+          {/* ── TAIL: the technical proof, for the recruiters who dig ── */}
+
+          {/* Grounded in — the frameworks this course applies (moved down from the hero) */}
+          <div style={{ paddingTop: "clamp(40px,6vw,72px)" }}>
+            <GroundedIn items={["Andragogy", "Merrill's First Principles", "SAM", "Backward Design", "Cognitive Load", "Constructivism", "Scaffolding", "Multimodal", "Trauma-Informed", "UDL"]} />
+          </div>
+
+          {/* Built with — the tech stack (portfolio's common thread) */}
+          <SectionLabel margin="72px 0 20px">Built With</SectionLabel>
+          <p style={{ maxWidth: "60ch", fontSize: 15, lineHeight: 1.7, color: "rgba(241,238,229,0.72)", margin: "0 0 22px", textWrap: "pretty" }}>
+            Not authored in a drag-and-drop tool — designed and coded as a real web application, so the interactions could do exactly what the instruction needed.
+          </p>
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 10 }}>
+            {["Next.js", "React", "TypeScript", "GSAP", "AI-assisted build"].map((t) => (
+              <li key={t} className="ds-chip ds-chip--dark">{t}</li>
+            ))}
+          </ul>
+
+          {/* From concept to working code — the code-to-concept walkthrough */}
+          <SectionLabel margin="72px 0 30px">From Concept to Working Code</SectionLabel>
+          <div className="cr-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0, borderTop: "0.5px solid rgba(241,238,229,0.18)" }}>
+            {[
+              { k: "Concept", d: "The skill has to transfer to a real, unfamiliar device — the learner will meet it with no one there to help." },
+              { k: "Mechanism", d: "So the capstone isn't a video of a desktop. It's a real, working desktop, coded in React — files open, windows minimize, items drag to the Trash." },
+              { k: "Working result", d: "The learner rehearses the exact moment that matters, hands-on, before it counts — and every action names its real-world equivalent as they go." },
+            ].map((c, i, a) => (
+              <div key={c.k} style={{ padding: i === 0 ? "30px 26px 30px 0" : i === a.length - 1 ? "30px 0 30px 26px" : "30px 26px", borderRight: i < a.length - 1 ? "0.5px solid rgba(241,238,229,0.18)" : undefined }}>
+                <div style={{ fontSize: 11, letterSpacing: "0.20em", textTransform: "uppercase", color: "#E3C8C2", marginBottom: 14 }}>{c.k}</div>
+                <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(241,238,229,0.82)", margin: 0, textWrap: "pretty" }}>{c.d}</p>
+              </div>
+            ))}
+          </div>
 
           {/* Data — content quality (placeholder) */}
           <SectionLabel margin="96px 0 0" trailing={

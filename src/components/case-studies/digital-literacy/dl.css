@@ -133,6 +133,18 @@
   .dl-lesson:nth-child(even) .dl-lesson__cap { grid-column: 1; grid-row: 2; }
 }
 
+/* Tail "concept → mechanism → result" grid stacks on small screens.
+   Inline styles set the desktop columns + dividers, so overrides need !important. */
+@media (max-width: 720px) {
+  .cr-grid-3 { grid-template-columns: 1fr !important; }
+  .cr-grid-3 > * {
+    border-right: none !important;
+    padding: 26px 0 !important;
+    border-top: 0.5px solid rgba(241, 238, 229, 0.18);
+  }
+  .cr-grid-3 > *:first-child { border-top: none; }
+}
+
 /* Launch CTA — into the playable course */
 .dl-launch {
   display: inline-flex;

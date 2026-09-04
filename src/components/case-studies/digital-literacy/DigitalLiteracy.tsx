@@ -58,31 +58,36 @@ export default function DigitalLiteracy() {
       <div style={{ position: "relative" }}>
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "0 48px" }}>
 
-          {/* Hero */}
-          <div style={{ padding: "80px 0 0", maxWidth: 980 }}>
-            <SectionLabel margin="0 0 34px">Course Design</SectionLabel>
-            <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(44px,6.2vw,82px)", lineHeight: 1.02, letterSpacing: "0.015em", textTransform: "uppercase", margin: 0, maxWidth: "16ch", textWrap: "pretty", color: "var(--paper)" }}>
-              Digital Literacy Fundamentals
-            </h1>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 18, marginTop: 32, maxWidth: "62ch" }}>
-              <span style={{ flex: "0 0 auto", width: 44, height: 0, borderTop: "0.5px solid #E3C8C2", marginTop: 16 }} />
-              <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(19px,2.2vw,26px)", lineHeight: 1.34, color: "#E3C8C2", margin: 0, textWrap: "pretty" }}>
-                A full six-lesson course that teaches first-time users the four input domains of a laptop — built for learners preparing for reentry, where the first real laptop they touch might be at a job interview.
-              </p>
+          {/* Hero — split: the story on the left, a live course preview on the right */}
+          <div className="dl-hero">
+            <div className="dl-hero__text">
+              <SectionLabel margin="0 0 34px">Course Design</SectionLabel>
+              <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(40px,4.8vw,68px)", lineHeight: 1.02, letterSpacing: "0.015em", textTransform: "uppercase", margin: 0, maxWidth: "14ch", textWrap: "pretty", color: "var(--paper)" }}>
+                Digital Literacy Fundamentals
+              </h1>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 18, marginTop: 30, maxWidth: "48ch" }}>
+                <span style={{ flex: "0 0 auto", width: 44, height: 0, borderTop: "0.5px solid #E3C8C2", marginTop: 15 }} />
+                <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.34, color: "#E3C8C2", margin: 0, textWrap: "pretty" }}>
+                  A full six-lesson course that teaches first-time users the four input domains of a laptop — built for learners preparing for reentry, where the first real laptop they touch might be at a job interview.
+                </p>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px 24px", marginTop: 38, paddingTop: 22, borderTop: "0.5px solid rgba(241,238,229,0.18)", fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" }}>
+                {[["Role", "Instructional Designer"], ["Focus", "Full Course · Prototype-first"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
+                  <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
+                ))}
+              </div>
+              <div style={{ marginTop: 38, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
+                <Link href="/work/digital-literacy/course" className="dl-launch">
+                  <span className="dl-launch__dot" />Launch the course
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </Link>
+                <span style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
+                  Six lessons · playable · ~30 min
+                </span>
+              </div>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px 26px", marginTop: 44, paddingTop: 22, borderTop: "0.5px solid rgba(241,238,229,0.18)", fontSize: 11, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase" }}>
-              {[["Role", "Instructional Designer"], ["Focus", "Full Course Design · Prototype-first"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
-                <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
-              ))}
-            </div>
-            <div style={{ marginTop: 44, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "16px 22px" }}>
-              <Link href="/work/digital-literacy/course" className="dl-launch">
-                <span className="dl-launch__dot" />Launch the course
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </Link>
-              <span style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
-                All six lessons · playable · ~30 min
-              </span>
+            <div className="dl-hero__preview" aria-label="A lesson from the course, shown on the tablet it's delivered on">
+              <TabletMock lesson={2} />
             </div>
           </div>
 

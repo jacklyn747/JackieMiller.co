@@ -49,7 +49,7 @@ export default function WorkPage() {
       <main className="work-page">
         {/* ── Hero: thesis + one line + scannable constraints ── */}
         <section className="wk-hero">
-          <div className="wk-eyebrow">
+          <div className="ds-eyebrow">
             <span>Instructional Design · Correctional Education</span>
           </div>
           <h1 className="wk-thesis">
@@ -61,14 +61,14 @@ export default function WorkPage() {
           </p>
           <ul className="wk-constraints" aria-label="The realities I design around">
             {CONSTRAINTS.map((c) => (
-              <li key={c}>{c}</li>
+              <li key={c} className="ds-chip">{c}</li>
             ))}
           </ul>
         </section>
 
         {/* ── Selected Work: cards, high on the page ── */}
         <section className="wk-block">
-          <div className="wk-label"><span>Selected Work</span></div>
+          <div className="ds-eyebrow"><span>Selected Work</span></div>
           <div className="wk-cards">
             {caseStudies.map((cs) => (
               <Link key={cs.slug} href={`/work/${cs.slug}`} className="work-card">
@@ -101,7 +101,7 @@ export default function WorkPage() {
 
         {/* ── The Approach: an editorial manifesto index, not a box grid ── */}
         <section className="wk-block">
-          <div className="wk-label"><span>The Approach</span></div>
+          <div className="ds-eyebrow"><span>The Approach</span></div>
           <p className="wk-approach-lead">
             Learning designed to be <em>experienced,</em> not endured.
           </p>
@@ -117,7 +117,7 @@ export default function WorkPage() {
 
         {/* ── Working with AI: compact module, not an essay ── */}
         <section className="wk-block">
-          <div className="wk-label"><span>Working with AI</span></div>
+          <div className="ds-eyebrow"><span>Working with AI</span></div>
           <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
           <div className="wk-ai-grid">
             {AI_WORK.map((a) => (
@@ -132,7 +132,7 @@ export default function WorkPage() {
         {/* ── Closer + CTA ── */}
         <section className="wk-closer">
           <p className="wk-closer-line">Different environment. Different problems. Different design.</p>
-          <Link href="/contact" className="wk-cta">
+          <Link href="/contact" className="ds-btn ds-btn--solid">
             Start a conversation <span aria-hidden="true">→</span>
           </Link>
           <p className="wk-note">More case studies in progress.</p>

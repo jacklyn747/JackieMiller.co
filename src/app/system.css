@@ -47,6 +47,12 @@
 .ds-btn--solid:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 18px 36px -14px rgba(93,15,14,0.72); }
 .ds-btn--ghost { border: 1.5px solid var(--ink-dim); color: var(--ink); }
 .ds-btn--ghost:hover { border-color: var(--ox-accent); color: var(--ox-accent); }
+/* trailing arrow (→ in a <span>) sits a step back from the label on solid buttons */
+.ds-btn--solid span { color: rgba(243, 237, 225, 0.82); }
+/* dark ground: ghost button on an immersive dark band (matches .ds-chip--dark) */
+.ds-btn--ghost.ds-btn--dark { border-color: rgba(241, 238, 229, 0.32); color: var(--nav-fg); }
+.ds-btn--ghost.ds-btn--dark:hover { border-color: var(--nav-fg); color: var(--nav-fg); background: rgba(241, 238, 229, 0.06); }
+@media (prefers-reduced-motion: reduce) { .ds-btn { transition: none !important; } }
 
 /* ── Selection: chip / tag ── */
 .ds-chip {

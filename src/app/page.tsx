@@ -68,7 +68,7 @@ export default function Home() {
         {/* ── HERO ── */}
         <section className="hm hm-hero">
           <div className="hm-hero__lede">
-            <p className="hm-eyebrow">Instructional Designer</p>
+            <p className="ds-eyebrow">Instructional Designer</p>
             <h1 className="hm-hero__title">
               Most learning is boring. <em>Mine isn&apos;t.</em>
             </h1>
@@ -77,10 +77,10 @@ export default function Home() {
               people, real constraints, and the belief that learning is the way out.
             </p>
             <div className="hm-hero__cta">
-              <Link href="/work" className="btn btn--solid">
+              <Link href="/work" className="ds-btn ds-btn--solid">
                 See the work <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/about" className="btn btn--ghost">
+              <Link href="/about" className="ds-btn ds-btn--ghost">
                 Read my story
               </Link>
             </div>
@@ -113,7 +113,7 @@ export default function Home() {
         {/* ── SELECTED WORK ── */}
         <section className="hm hm-sec">
           <div className="hm-sec__head">
-            <p className="hm-eyebrow">Selected Work</p>
+            <p className="ds-eyebrow">Selected Work</p>
             <h2 className="hm-sec__title">
               Courses built to be <em>worth someone&apos;s time.</em>
             </h2>
@@ -152,7 +152,7 @@ export default function Home() {
         <section className="hm hm-sec hm-about">
           <div className="hm-about__grid">
             <div>
-              <p className="hm-eyebrow">About</p>
+              <p className="ds-eyebrow">About</p>
               <h2 className="hm-sec__title">Education is in my blood.</h2>
               <p className="hm-sec__intro">
                 A superintendent grandfather, a librarian grandmother, two lifelong-teacher aunts — and a
@@ -161,7 +161,7 @@ export default function Home() {
                 lets me use all of it at once.
               </p>
               <div className="hm-cta-inline">
-                <Link href="/about" className="btn btn--ghost">
+                <Link href="/about" className="ds-btn ds-btn--ghost">
                   More about me <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -179,7 +179,7 @@ export default function Home() {
         {/* ── HOW I WORK ── */}
         <section className="hm hm-sec">
           <div className="hm-sec__head">
-            <p className="hm-eyebrow">How I Work</p>
+            <p className="ds-eyebrow">How I Work</p>
             <h2 className="hm-sec__title">
               A designer who thinks learning should look like something you&apos;d <em>choose</em> to do.
             </h2>
@@ -213,7 +213,7 @@ export default function Home() {
             <p className="hm-close__line">
               Let&apos;s make learning <em>worth someone&apos;s time.</em>
             </p>
-            <Link href="/contact" className="btn btn--ghost">
+            <Link href="/contact" className="ds-btn ds-btn--ghost ds-btn--dark">
               Start a conversation <span aria-hidden="true">→</span>
             </Link>
           </div>

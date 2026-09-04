@@ -105,22 +105,36 @@ export default function DigitalLiteracy() {
             ))}
           </div>
 
-          {/* The Learner — persona research (Marcus) */}
+          {/* The Learner — persona card (show, don't tell) */}
           <SectionLabel margin="96px 0 30px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>Persona research</span>}>The Learner</SectionLabel>
-          <p style={{ maxWidth: "64ch", fontSize: 17, lineHeight: 1.72, color: "rgba(241,238,229,0.90)", margin: 0, textWrap: "pretty" }}>
-            This course isn&apos;t designed for an abstract &ldquo;beginner.&rdquo; It&apos;s designed for Marcus — a composite learner built from real interviews with justice-involved adults. Incarcerated 27 years, he&apos;ll sit down at a real laptop for the first time at a job center, unsupervised. He learns on a tablet, with no desk, in a room he can&apos;t make quiet, and he gets pulled away without warning.
-          </p>
-          <blockquote style={{ margin: "34px 0 0", paddingLeft: 22, borderLeft: "2px solid #E3C8C2", maxWidth: "60ch" }}>
-            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(21px,2.4vw,30px)", lineHeight: 1.3, color: "#E3C8C2", margin: 0, textWrap: "pretty" }}>
+          <div style={{ border: "0.5px solid rgba(241,238,229,0.18)", borderRadius: 10, padding: "clamp(24px,3.4vw,40px)", maxWidth: 920 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: "8px 16px" }}>
+              <span style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(26px,3.2vw,38px)", letterSpacing: "0.02em", textTransform: "uppercase", color: "var(--paper)" }}>Marcus</span>
+              <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>Composite · based on real interviews with Edovo users</span>
+            </div>
+            <ul style={{ listStyle: "none", margin: "20px 0 0", padding: 0, display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {["27 years inside", "Tablet only", "On-call job", "Parole denied"].map((t) => (
+                <li key={t} className="ds-chip ds-chip--dark">{t}</li>
+              ))}
+            </ul>
+            <p style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(20px,2.4vw,30px)", lineHeight: 1.3, color: "#E3C8C2", margin: "28px 0 0", maxWidth: "24ch", textWrap: "pretty" }}>
               &ldquo;You can&apos;t learn something you&apos;ve never touched just by watching it.&rdquo;
             </p>
-            <cite style={{ display: "block", marginTop: 16, fontStyle: "normal", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
-              Marcus · based on real interviews with Edovo users
-            </cite>
-          </blockquote>
-          <p style={{ maxWidth: "64ch", fontSize: 15, lineHeight: 1.72, color: "rgba(241,238,229,0.72)", margin: "30px 0 0", textWrap: "pretty" }}>
-            Every structural choice answers something Marcus named. The course is <span style={{ color: "#E3C8C2" }}>tablet-first</span> because that&apos;s the device he holds. Lessons are <span style={{ color: "#E3C8C2" }}>short and resumable</span> because he gets interrupted. Pacing is <span style={{ color: "#E3C8C2" }}>learner-controlled and non-punitive</span> — no forced rewatch — because that&apos;s what defeated him elsewhere. And the whole thing builds to a <span style={{ color: "#E3C8C2" }}>live, hands-on capstone</span>, because you learn a laptop by touching one, not by watching a video about it.
-          </p>
+            <div style={{ marginTop: 30, borderTop: "0.5px solid rgba(241,238,229,0.18)" }}>
+              {[
+                ["No desk, gets pulled away", "Short, resumable lessons"],
+                ["Only a tablet, no laptop", "Tablet-first, touch-first"],
+                ["Punished for a wrong answer", "Non-punitive pacing"],
+                ["Learns by doing, not watching", "A live, hands-on capstone"],
+              ].map(([f, a]) => (
+                <div key={f} className="dl-persona-row" style={{ display: "grid", gridTemplateColumns: "1fr 24px 1fr", alignItems: "center", gap: 16, borderBottom: "0.5px solid rgba(241,238,229,0.18)", padding: "14px 0" }}>
+                  <span style={{ fontSize: 13.5, lineHeight: 1.45, color: "rgba(241,238,229,0.68)", textWrap: "pretty" }}>{f}</span>
+                  <span aria-hidden="true" style={{ color: "rgba(241,238,229,0.35)", textAlign: "center" }}>→</span>
+                  <span style={{ fontSize: 13.5, lineHeight: 1.45, color: "var(--paper)", textWrap: "pretty" }}>{a}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* The Course — 6-lesson architecture */}
           <SectionLabel margin="96px 0 44px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>Six lessons</span>}>The Course</SectionLabel>
@@ -205,10 +219,7 @@ export default function DigitalLiteracy() {
           </div>
 
           {/* Built with — the tech stack (portfolio's common thread) */}
-          <SectionLabel margin="72px 0 20px">Built With</SectionLabel>
-          <p style={{ maxWidth: "60ch", fontSize: 15, lineHeight: 1.7, color: "rgba(241,238,229,0.72)", margin: "0 0 22px", textWrap: "pretty" }}>
-            Not authored in a drag-and-drop tool — designed and coded as a real web application, so the interactions could do exactly what the instruction needed.
-          </p>
+          <SectionLabel margin="72px 0 20px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>Coded, not drag-and-drop</span>}>Built With</SectionLabel>
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 10 }}>
             {["Next.js", "React", "TypeScript", "GSAP", "AI-assisted build"].map((t) => (
               <li key={t} className="ds-chip ds-chip--dark">{t}</li>
@@ -219,13 +230,13 @@ export default function DigitalLiteracy() {
           <SectionLabel margin="72px 0 30px">From Concept to Working Code</SectionLabel>
           <div className="cr-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 0, borderTop: "0.5px solid rgba(241,238,229,0.18)" }}>
             {[
-              { k: "Concept", d: "The skill has to transfer to a real, unfamiliar device — the learner will meet it with no one there to help." },
-              { k: "Mechanism", d: "So the capstone isn't a video of a desktop. It's a real, working desktop, coded in React — files open, windows minimize, items drag to the Trash." },
-              { k: "Working result", d: "The learner rehearses the exact moment that matters, hands-on, before it counts — and every action names its real-world equivalent as they go." },
+              { k: "Concept", d: "Transfer to a real, unfamiliar device." },
+              { k: "Mechanism", d: "A working desktop, coded in React — not a video." },
+              { k: "Result", d: "Hands-on rehearsal before it counts." },
             ].map((c, i, a) => (
               <div key={c.k} style={{ padding: i === 0 ? "30px 26px 30px 0" : i === a.length - 1 ? "30px 0 30px 26px" : "30px 26px", borderRight: i < a.length - 1 ? "0.5px solid rgba(241,238,229,0.18)" : undefined }}>
-                <div style={{ fontSize: 11, letterSpacing: "0.20em", textTransform: "uppercase", color: "#E3C8C2", marginBottom: 14 }}>{c.k}</div>
-                <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(241,238,229,0.82)", margin: 0, textWrap: "pretty" }}>{c.d}</p>
+                <div style={{ fontSize: 11, letterSpacing: "0.20em", textTransform: "uppercase", color: "#E3C8C2", marginBottom: 12 }}>{c.k}</div>
+                <p style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(16px,1.7vw,19px)", lineHeight: 1.35, color: "var(--paper)", margin: 0, textWrap: "pretty" }}>{c.d}</p>
               </div>
             ))}
           </div>

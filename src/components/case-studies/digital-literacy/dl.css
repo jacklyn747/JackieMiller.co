@@ -145,6 +145,12 @@
   .cr-grid-3 > *:first-child { border-top: none; }
 }
 
+/* Persona friction → answer rows stack on small screens (arrow hidden). */
+@media (max-width: 620px) {
+  .dl-persona-row { grid-template-columns: 1fr !important; gap: 3px !important; }
+  .dl-persona-row > span[aria-hidden="true"] { display: none; }
+}
+
 /* Launch CTA — into the playable course */
 .dl-launch {
   display: inline-flex;

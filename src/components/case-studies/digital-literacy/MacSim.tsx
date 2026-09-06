@@ -95,6 +95,7 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
   const simRef = useRef<HTMLDivElement>(null);
   const trashRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ mode: "win" | "file"; id: string; offX: number; offY: number; moved: boolean } | null>(null);
+  const rafRef = useRef<number | null>(null); // requestAnimationFrame handle for smooth drag
   // Keep the latest callback without churning memoized deps.
   const evRef = useRef(onEvent);
   useEffect(() => { evRef.current = onEvent; }, [onEvent]);
@@ -143,11 +144,29 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
   const focus = useCallback((id: string) => {
     const target = winsRef.current.find((w) => w.id === id);
     if (target) emit({ type: target.min ? "restore" : "focus", kind: target.kind, fileId: target.fileId, title: target.title });
-    setWindows((ws) => {
-      const nz = zTop + 1;
-      setZTop(nz);
-      return ws.map((w) => (w.id === id ? { ...w, z: nz, min: false } : w));
-    });
+
+    // If restoring from minimized, add restoring animation class
+    if (target?.min) {
+      setWindows((ws) => {
+        const nz = zTop + 1;
+        setZTop(nz);
+        return ws.map((w) => (w.id === id ? { ...w, z: nz, min: false } : w));
+      });
+      // Add restoring class after state update
+      setTimeout(() => {
+        const el = document.querySelector(`[data-win-id="${id}"]`) as HTMLElement;
+        if (el) {
+          el.classList.add("restoring");
+          setTimeout(() => el.classList.remove("restoring"), 300);
+        }
+      }, 0);
+    } else {
+      setWindows((ws) => {
+        const nz = zTop + 1;
+        setZTop(nz);
+        return ws.map((w) => (w.id === id ? { ...w, z: nz, min: false } : w));
+      });
+    }
   }, [zTop, emit]);
 
   const openWin = useCallback((kind: Kind, opts?: { fileId?: string; title?: string }) => {
@@ -186,7 +205,16 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
   const minWin = (id: string) => {
     const w = winsRef.current.find((x) => x.id === id);
     if (w) emit({ type: "minimize", kind: w.kind, fileId: w.fileId, title: w.title });
-    setWindows((ws) => ws.map((x) => (x.id === id ? { ...x, min: true } : x)));
+    // Add minimizing class for animation, then remove window after animation completes
+    const el = document.querySelector(`[data-win-id="${id}"]`) as HTMLElement;
+    if (el) {
+      el.classList.add("minimizing");
+      setTimeout(() => {
+        setWindows((ws) => ws.map((x) => (x.id === id ? { ...x, min: true } : x)));
+      }, 300); // Match 0.3s animation duration
+    } else {
+      setWindows((ws) => ws.map((x) => (x.id === id ? { ...x, min: true } : x)));
+    }
   };
 
   const trashFile = (id: string) => {
@@ -221,31 +249,60 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
 
   useEffect(() => {
     if (!dragging) return;
+
+    // Use requestAnimationFrame for smooth 60fps drag updates
+    let lastMouseEvent: MouseEvent | null = null;
+
     const move = (e: MouseEvent) => {
+      lastMouseEvent = e;
       const d = dragRef.current;
       if (!d) return;
       d.moved = true;
-      const p = toLocal(e);
-      if (d.mode === "win") {
-        setWindows((ws) => ws.map((w) => (w.id === d.id ? { ...w, x: clampNum(p.x - d.offX, -w.w + 80, p.w - 40), y: clampNum(p.y - d.offY, 26, p.h - 40) } : w)));
-      } else {
-        setFiles((fs) => fs.map((f) => (f.id === d.id ? { ...f, x: p.x - d.offX, y: p.y - d.offY } : f)));
-        setTrashHot(overTrash(e));
-      }
+
+      // Cancel previous frame if still pending
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+      // Schedule update on next animation frame
+      rafRef.current = requestAnimationFrame(() => {
+        if (!lastMouseEvent) return;
+        const p = toLocal(lastMouseEvent);
+
+        if (d.mode === "win") {
+          setWindows((ws) => ws.map((w) => (w.id === d.id ? { ...w, x: clampNum(p.x - d.offX, -w.w + 80, p.w - 40), y: clampNum(p.y - d.offY, 26, p.h - 40) } : w)));
+        } else {
+          setFiles((fs) => fs.map((f) => (f.id === d.id ? { ...f, x: p.x - d.offX, y: p.y - d.offY } : f)));
+          setTrashHot(overTrash(lastMouseEvent));
+        }
+      });
     };
+
     const up = (e: MouseEvent) => {
       const d = dragRef.current;
       if (d && d.mode === "file" && overTrash(e)) trashFile(d.id);
+
+      // Cancel any pending animation frame
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+
       dragRef.current = null;
       setDragging(false);
       setDragId(null);
       setTrashHot(false);
     };
+
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseup", up);
+
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseup", up);
+      // Clean up any pending animation frame
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
     };
   }, [dragging]);
 
@@ -283,7 +340,13 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
 
       {/* windows */}
       {windows.filter((w) => !w.min).map((w) => (
-        <div key={w.id} className="mac-window" style={{ left: w.x, top: w.y, width: w.w, height: w.h, zIndex: w.z }} onMouseDown={() => focus(w.id)}>
+        <div
+          key={w.id}
+          className={`mac-window${dragId === w.id ? " dragging" : ""}`}
+          data-win-id={w.id}
+          style={{ left: w.x, top: w.y, width: w.w, height: w.h, zIndex: w.z }}
+          onMouseDown={() => focus(w.id)}
+        >
           <div className="mac-titlebar" onMouseDown={(e) => startWinDrag(e, w.id)}>
             <span className="mac-lights">
               <span className="light red" onMouseDown={(e) => e.stopPropagation()} onClick={() => closeWin(w.id)}><svg viewBox="0 0 8 8"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5" /></svg></span>

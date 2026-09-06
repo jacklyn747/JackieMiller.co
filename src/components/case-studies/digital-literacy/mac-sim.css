@@ -74,9 +74,21 @@
   padding: 6px 4px;
   border-radius: 8px;
   cursor: default;
+
+  /* Hardware-accelerated transitions */
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+  will-change: transform;
 }
 .mac-file.sel { background: rgba(120, 130, 220, 0.28); }
-.mac-file.dragging { z-index: 500; opacity: 0.92; }
+.mac-file.dragging {
+  z-index: 500;
+  opacity: 0.92;
+  /* Disable transitions during drag for immediate feedback */
+  transition: none;
+}
 .mac-file .ico {
   width: 52px; height: 62px;
   filter: drop-shadow(0 3px 5px rgba(0,0,0,0.35));
@@ -104,6 +116,17 @@
   box-shadow:
     0 0 0 0.5px rgba(0, 0, 0, 0.28),
     0 26px 60px -12px rgba(0, 0, 0, 0.55);
+
+  /* Hardware-accelerated transitions */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+/* Disable transitions during drag for immediate feedback */
+.mac-window.dragging {
+  transition: none;
 }
 .mac-titlebar {
   height: 38px;
@@ -117,8 +140,25 @@
   cursor: default;
 }
 .mac-lights { display: flex; align-items: center; gap: 8px; }
-.light { width: 12px; height: 12px; border-radius: 50%; display: grid; place-items: center; }
-.light svg { width: 7px; height: 7px; opacity: 0; stroke: rgba(0,0,0,0.5); stroke-width: 1.6; fill: none; }
+.light {
+  width: 12px; height: 12px; border-radius: 50%;
+  display: grid; place-items: center;
+  /* Subtle scale on hover */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.light:hover {
+  transform: scale(1.08) translateZ(0);
+}
+.light svg {
+  width: 7px; height: 7px;
+  opacity: 0;
+  stroke: rgba(0,0,0,0.5);
+  stroke-width: 1.6;
+  fill: none;
+  /* Smooth icon fade-in */
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
 .mac-lights:hover .light svg { opacity: 1; }
 .light.red { background: #ff5f57; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12) inset; }
 .light.yellow { background: #febc2e; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.12) inset; }
@@ -165,8 +205,21 @@
 /* Trash window */
 .trashw { padding: 0; height: 100%; display: flex; flex-direction: column; }
 .trashw .bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 0.5px solid rgba(0,0,0,0.1); font-size: 12.5px; color: var(--text-soft); }
-.trashw .empty-btn { font-size: 12px; color: var(--accent); cursor: pointer; padding: 4px 10px; border-radius: 6px; }
-.trashw .empty-btn:hover { background: rgba(58,109,240,0.12); }
+.trashw .empty-btn {
+  font-size: 12px;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  /* Smooth background fade */
+  transition: background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.trashw .empty-btn:hover {
+  background: rgba(58,109,240,0.12);
+  transform: scale(1.02) translateZ(0);
+}
 .trashw .list { flex: 1; padding: 14px; display: grid; grid-template-columns: repeat(auto-fill, 92px); gap: 14px 8px; align-content: start; }
 .trashw .none { padding: 40px; text-align: center; color: #a0a0a6; font-size: 13px; }
 
@@ -195,16 +248,29 @@
   display: grid;
   place-items: center;
   cursor: default;
-  transition: transform 140ms ease;
+
+  /* Premium 0.3s cubic-bezier transition */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+  will-change: transform;
 }
-.dock-item:hover { transform: translateY(-8px) scale(1.08); }
+.dock-item:hover {
+  transform: translateY(-8px) scale(1.08) translateZ(0);
+}
 .dock-item img, .dock-item .glyph { width: 46px; height: 46px; display: block; }
 .dock-item .run { position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.85); }
 .dock-sep { width: 0.5px; height: 40px; background: rgba(255,255,255,0.28); margin: 0 3px; align-self: center; }
-.mac-dock.trash-hot .dock-item.trash { transform: translateY(-8px) scale(1.14); }
+.mac-dock.trash-hot .dock-item.trash {
+  transform: translateY(-8px) scale(1.14) translateZ(0);
+}
 .mac-dock.trash-hot .dock-item.trash::after {
-  content: ""; position: absolute; inset: -3px; border-radius: 14px;
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
   box-shadow: 0 0 0 2px rgba(255,255,255,0.85);
+  /* Smooth ring appearance */
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 /* hint chip shown over the sim */
@@ -224,8 +290,47 @@
   transition: opacity 400ms ease;
 }
 
+/* Minimize animation — smooth scale-down into dock */
+.mac-window.minimizing {
+  animation: minimize-to-dock 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes minimize-to-dock {
+  to {
+    opacity: 0;
+    transform: scale(0.2) translateY(400px) translateZ(0);
+  }
+}
+
+/* Restore animation — smooth scale-up from dock */
+.mac-window.restoring {
+  animation: restore-from-dock 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes restore-from-dock {
+  from {
+    opacity: 0;
+    transform: scale(0.2) translateY(400px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0) translateZ(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .dock-item { transition: none; }
+  .dock-item,
+  .mac-window,
+  .mac-file,
+  .light,
+  .light svg,
+  .trashw .empty-btn {
+    transition: none !important;
+  }
+  .mac-window.minimizing,
+  .mac-window.restoring {
+    animation: none !important;
+  }
 }
 
 /* Course-mode editable note (capstone typing task) */

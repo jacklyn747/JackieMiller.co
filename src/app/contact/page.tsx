@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <>
       <SiteNav />
-      <main style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
+      <main id="main-content" style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
         <section style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(72px,10vw,120px) clamp(24px,5vw,48px) 128px" }}>
           <div
             style={{

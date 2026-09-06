@@ -69,7 +69,7 @@ const AUDIT: AuditCard[] = [
   {
     n: "01",
     slot: "audit-01",
-    slotLabel: "Screenshot: locked video screen",
+    slotLabel: "Original course screen showing forced video playback with 'WATCH THE VIDEO TO CONTINUE' message and no skip option",
     issue: "Forced video gate, no skip option",
     fix: "Learner-controlled skip, reworded prompt",
     detail: [
@@ -82,7 +82,7 @@ const AUDIT: AuditCard[] = [
   {
     n: "02",
     slot: "audit-02",
-    slotLabel: "Screenshot: outbound links screen",
+    slotLabel: "Original course screen displaying three external website links with no embedded content",
     issue: "Standalone screen of outbound links",
     fix: "Embedded original content, no outbound dependency",
     detail: [
@@ -95,7 +95,7 @@ const AUDIT: AuditCard[] = [
   {
     n: "03",
     slot: "audit-03",
-    slotLabel: "Screenshot: second video gate",
+    slotLabel: "Second instance of forced video playback screen with locked progress controls",
     issue: "Second forced video gate",
     fix: "Same fix applied consistently",
     detail: [
@@ -105,7 +105,7 @@ const AUDIT: AuditCard[] = [
   {
     n: "04",
     slot: "audit-04",
-    slotLabel: "Screenshot: 'Voice Switch' activity",
+    slotLabel: "Voice Switch activity screen showing link to external website for story selection",
     issue: "Activity depends on an external website",
     fix: "Source material embedded directly in the activity",
     detail: [
@@ -118,7 +118,7 @@ const AUDIT: AuditCard[] = [
   {
     n: "05",
     slot: "audit-05",
-    slotLabel: "Screenshot: character-profile prompt",
+    slotLabel: "Character-building activity showing prompt asking 'Do they come from a broken home?'",
     issue: "Stigmatizing character-profile prompt",
     fix: "Reworded to focus on interiority, not biography",
     detail: [

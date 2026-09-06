@@ -17,9 +17,9 @@
   align-items: center;
   gap: 14px;
   font-family: var(--font-sans), sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--ink-mid);
 }
@@ -39,21 +39,52 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  /* Hardware-accelerated transitions — 0.3s cubic-bezier for organic feel */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              background 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Force GPU acceleration */
+  transform: translateZ(0);
+  will-change: transform;
 }
 .ds-btn--solid {
   background: linear-gradient(160deg, #7a1c18, #5d0f0e);
   color: #f3ede1;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 14px 30px -14px rgba(93, 15, 14, 0.6);
 }
-.ds-btn--solid:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 18px 36px -14px rgba(93,15,14,0.72); }
-.ds-btn--ghost { border: 1.5px solid var(--ink-dim); color: var(--ink); }
-.ds-btn--ghost:hover { border-color: var(--ox-accent); color: var(--ox-accent); }
+/* Subtle scaling lift on hover — organic, not instant */
+.ds-btn--solid:hover {
+  transform: translateY(-2px) scale(1.02) translateZ(0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), 0 20px 42px -14px rgba(93,15,14,0.80);
+}
+.ds-btn--ghost {
+  border: 1.5px solid var(--ink-dim);
+  color: var(--ink);
+}
+/* Organic highlight shift — border + color together */
+.ds-btn--ghost:hover {
+  border-color: var(--ox-accent);
+  color: var(--ox-accent);
+  transform: scale(1.02) translateZ(0);
+}
 /* trailing arrow (→ in a <span>) sits a step back from the label on solid buttons */
 .ds-btn--solid span { color: rgba(243, 237, 225, 0.82); }
 /* dark ground: ghost button on an immersive dark band (matches .ds-chip--dark) */
 .ds-btn--ghost.ds-btn--dark { border-color: rgba(241, 238, 229, 0.32); color: var(--nav-fg); }
-.ds-btn--ghost.ds-btn--dark:hover { border-color: var(--nav-fg); color: var(--nav-fg); background: rgba(241, 238, 229, 0.06); }
+.ds-btn--ghost.ds-btn--dark:hover {
+  border-color: var(--nav-fg);
+  color: var(--nav-fg);
+  background: rgba(241, 238, 229, 0.08);
+  transform: scale(1.02) translateZ(0);
+}
+.ds-btn:focus-visible {
+  outline: 2px solid var(--ox-accent);
+  outline-offset: 2px;
+}
 @media (prefers-reduced-motion: reduce) { .ds-btn { transition: none !important; } }
 
 /* ── Selection: chip / tag ── */
@@ -61,9 +92,9 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--font-sans), sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-mid);
   padding: 7px 14px;
@@ -86,15 +117,23 @@
   margin: 0;
   font-family: var(--font-serif), serif;
   font-weight: 400;
-  font-size: clamp(26px, 3.8vw, 48px);
-  line-height: 1.02;
-  letter-spacing: 0.015em;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 0.96;
+  letter-spacing: -0.005em;
   color: var(--ink);
   text-wrap: balance;
-  transition: color 0.18s ease;
+
+  /* Hardware-accelerated color transition */
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
 }
+/* Subtle scale + color shift on hover — organic highlight */
 .ds-index__row:hover .ds-index__t,
-.ds-index__row:focus-visible .ds-index__t { color: var(--ox-accent); }
+.ds-index__row:focus-visible .ds-index__t {
+  color: var(--ox-accent);
+  transform: scale(1.01) translateZ(0);
+}
 .ds-index__row:focus-visible { outline: 2px solid var(--ox-accent); outline-offset: 4px; border-radius: 3px; }
 .ds-index__d {
   margin: 0;
@@ -107,7 +146,11 @@
   line-height: 1.6;
   color: var(--ink-mid);
   text-wrap: pretty;
-  transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+
+  /* Smooth progressive disclosure */
+  transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              margin-top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .ds-index__row:hover .ds-index__d,
 .ds-index__row:focus-within .ds-index__d {

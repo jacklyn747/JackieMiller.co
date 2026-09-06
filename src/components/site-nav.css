@@ -2,6 +2,25 @@
    Reuses the site's --nav-bg / --nav-fg tokens (globals.css), which hold
    the dark journal-spine look in both light and dark themes. */
 
+/* Skip link for keyboard navigation accessibility */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 12px 20px;
+  background: var(--ox-accent);
+  color: var(--ox-fg);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.skip-link:focus {
+  left: 20px;
+  top: 10px;
+}
+
 .site-nav {
   position: sticky;
   top: 0;
@@ -25,6 +44,15 @@
   color: var(--nav-fg);
   text-decoration: none;
   white-space: nowrap;
+
+  /* Subtle hover interaction on brand mark */
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.site-nav__mark:hover {
+  color: rgba(241, 238, 229, 0.85);
+  transform: scale(1.02) translateZ(0);
 }
 
 .site-nav__links {
@@ -43,12 +71,20 @@
   color: rgba(241, 238, 229, 0.5);
   text-decoration: none;
   white-space: nowrap;
-  transition: color 140ms ease;
+
+  /* Hardware-accelerated organic highlight */
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              letter-spacing 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
 }
 
+/* Organic highlight: color + subtle letter-spacing shift */
 .site-nav__link:hover,
 .site-nav__link:focus-visible {
   color: var(--nav-fg);
+  letter-spacing: 0.24em;
+  transform: translateY(-1px) translateZ(0);
 }
 /* Keyboard focus gets a clear, distinct indicator (not just the hover color) */
 .site-nav__link:focus-visible {

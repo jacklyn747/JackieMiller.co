@@ -1,10 +1,30 @@
 /* Next-project hand-off + footer for case studies (dark-editorial). */
-.cs-next { transition: opacity 0.15s ease; }
-.cs-next:hover { opacity: 0.85; }
-.cs-next__arrow { display: inline-block; transition: transform 0.18s ease; }
-.cs-next:hover .cs-next__arrow { transform: translateX(7px); }
-.cs-foot-link { transition: color 0.15s ease; }
-.cs-foot-link:hover { color: #E3C8C2 !important; }
+.cs-next {
+  /* Hardware-accelerated opacity transition */
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.cs-next:hover {
+  opacity: 0.88;
+  transform: translateY(-2px) translateZ(0);
+}
+.cs-next__arrow {
+  display: inline-block;
+  /* Hardware-accelerated slide */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.cs-next:hover .cs-next__arrow {
+  transform: translateX(10px) translateZ(0);
+}
+.cs-foot-link {
+  /* Smooth color transition */
+  transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.cs-foot-link:hover {
+  color: #E3C8C2 !important;
+}
 
 @media (max-width: 640px) {
   .cs-next { flex-direction: column; align-items: flex-start !important; gap: 22px !important; }

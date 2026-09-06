@@ -46,7 +46,7 @@ const CURATED = INTERVIEW.filter((x) => x.key);
 
 export default function MeetJackie({ portrait }: { portrait: string | null }) {
   return (
-    <main className="about-page">
+    <main id="main-content" className="about-page">
       <div className="mj-inner">
         {/* ── Hero: portrait + thesis + routes ── */}
         <header className={`mj-hero${portrait ? "" : " mj-hero--solo"}`}>

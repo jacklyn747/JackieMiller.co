@@ -22,6 +22,9 @@ export default function SiteNav() {
 
   return (
     <header className="site-nav">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Link href="/" className="site-nav__mark">
         Jackie Miller
       </Link>

@@ -4,6 +4,7 @@ import TabletMock from "./TabletMock";
 import ProcessDocs from "./ProcessDocs";
 import CaseNav from "../CaseNav";
 import GroundedIn from "../GroundedIn";
+import DarkImmersion from "../DarkImmersion";
 import "../content-review.css"; // reuse the dark-editorial case-study chrome (.cr-root, .cr-wrap, grids)
 import "./dl.css";
 
@@ -26,7 +27,7 @@ const DOCS = [
 
 function SectionLabel({ children, trailing, margin }: { children: React.ReactNode; trailing?: React.ReactNode; margin: string }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 11, fontWeight: 500, letterSpacing: "0.20em", textTransform: "uppercase", color: "rgba(241,238,229,0.72)", margin }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 9, fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(241,238,229,0.72)", margin }}>
       <span>{children}</span>
       <span style={{ flex: 1, height: 0, borderTop: "0.5px solid rgba(241,238,229,0.18)" }} />
       {trailing}
@@ -62,7 +63,7 @@ export default function DigitalLiteracy() {
           <div className="dl-hero">
             <div className="dl-hero__text">
               <SectionLabel margin="0 0 34px">Course Design</SectionLabel>
-              <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(40px,4.8vw,68px)", lineHeight: 1.02, letterSpacing: "0.015em", textTransform: "uppercase", margin: 0, maxWidth: "14ch", textWrap: "pretty", color: "var(--paper)" }}>
+              <h1 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(60px,7.8vw,120px)", lineHeight: 0.92, letterSpacing: "-0.01em", textTransform: "uppercase", margin: 0, maxWidth: "14ch", textWrap: "pretty", color: "var(--paper)" }}>
                 Digital Literacy Fundamentals
               </h1>
               <div style={{ display: "flex", alignItems: "flex-start", gap: 18, marginTop: 30, maxWidth: "48ch" }}>
@@ -71,7 +72,7 @@ export default function DigitalLiteracy() {
                   A full six-lesson course that teaches first-time users the four input domains of a laptop — built for learners preparing for reentry, where the first real laptop they touch might be at a job interview.
                 </p>
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px 24px", marginTop: 38, paddingTop: 22, borderTop: "0.5px solid rgba(241,238,229,0.18)", fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "12px 24px", marginTop: 38, paddingTop: 22, borderTop: "0.5px solid rgba(241,238,229,0.18)", fontSize: 9, fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase" }}>
                 {[["Role", "Instructional Designer"], ["Focus", "Full Course · Prototype-first"], ["Delivery", "Tablet, self-paced"]].map(([k, v]) => (
                   <span key={k} style={{ color: "rgba(241,238,229,0.55)" }}>{k}<span style={{ color: "rgba(241,238,229,0.30)", padding: "0 8px" }}>/</span><span style={{ color: "var(--paper)" }}>{v}</span></span>
                 ))}
@@ -81,7 +82,7 @@ export default function DigitalLiteracy() {
                   <span className="dl-launch__dot" />Launch the course
                   <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </Link>
-                <span style={{ fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
+                <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(241,238,229,0.5)" }}>
                   Six lessons · playable · ~30 min
                 </span>
               </div>
@@ -190,13 +191,13 @@ export default function DigitalLiteracy() {
           {/* The Capstone — the live simulation */}
           <div className="dl-capstone-intro">
             <SectionLabel margin="104px 0 30px" trailing={<span style={{ color: "#E3C8C2" }}>Live</span>}>The Capstone</SectionLabel>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(30px,3.8vw,48px)", lineHeight: 1.08, letterSpacing: "0.015em", textTransform: "uppercase", margin: 0, maxWidth: "18ch", color: "var(--paper)" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, fontSize: "clamp(42px,5.6vw,72px)", lineHeight: 0.96, letterSpacing: "-0.01em", textTransform: "uppercase", margin: 0, maxWidth: "18ch", color: "var(--paper)" }}>
               Then the sixth lesson breaks the pattern
             </h2>
             <p style={{ maxWidth: "66ch", fontSize: 17, lineHeight: 1.72, color: "rgba(241,238,229,0.9)", margin: "26px 0 0", textWrap: "pretty" }}>
               The teaching lessons look like the course. The capstone deliberately doesn&apos;t — it looks like a real laptop, because the whole point is transfer to a device the learner will one day use unsupervised. So the final lesson is a live, working desktop. Open a file. Drag one to the Trash. Move a window, minimize it, find it again. Every action names its real-world equivalent as you go.
             </p>
-            <p style={{ fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: "#E3C8C2", margin: "22px 0 0" }}>
+            <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.26em", textTransform: "uppercase", color: "#E3C8C2", margin: "22px 0 0" }}>
               This one is real — try it ↓
             </p>
           </div>

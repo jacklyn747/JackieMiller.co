@@ -166,24 +166,51 @@
   letter-spacing: 0.04em;
   text-decoration: none;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.14) inset, 0 16px 34px -14px rgba(93, 15, 14, 0.7);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  /* Hardware-accelerated transitions — 0.3s cubic-bezier */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+  will-change: transform;
 }
-.dl-launch:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 20px 40px -14px rgba(93,15,14,0.8); }
+/* Subtle scaling lift + enhanced shadow */
+.dl-launch:hover {
+  transform: translateY(-2px) scale(1.02) translateZ(0);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.20) inset, 0 22px 48px -14px rgba(93,15,14,0.88);
+}
 .dl-launch__dot { width: 8px; height: 8px; border-radius: 50%; background: #e3c8c2; box-shadow: 0 0 12px 2px rgba(227,200,194,0.6); }
 .dl-launch svg { color: rgba(243, 237, 225, 0.85); }
 
 /* ── Hero: split layout — the story + a live course preview tile ── */
 .dl-hero {
   padding: 80px 0 0;
+  /* 11-column asymmetrical grid — story spans 7, gap 1, tablet preview 3 */
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(40px, 5vw, 64px);
+  grid-template-columns: repeat(7, 1fr) minmax(40px, 80px) repeat(3, 1fr);
+  gap: clamp(20px, 2.5vw, 40px);
   align-items: center;
 }
-@media (min-width: 900px) {
-  .dl-hero { grid-template-columns: 1.02fr 0.98fr; }
+/* Mobile: stack, preview first */
+@media (max-width: 900px) {
+  .dl-hero {
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 5vw, 64px);
+  }
 }
+
+/* Story content spans columns 1-7 */
+.dl-hero__text {
+  grid-column: 1 / 8;
+}
+@media (max-width: 900px) {
+  .dl-hero__text {
+    grid-column: 1;
+  }
+}
+
+/* Tablet preview — bold visual anchor in columns 9-11 */
 .dl-hero__preview {
+  grid-column: 9 / 12;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
@@ -192,5 +219,11 @@
   border: 0.5px solid rgba(241, 238, 229, 0.14);
   display: grid;
   place-items: center;
+}
+@media (max-width: 900px) {
+  .dl-hero__preview {
+    grid-column: 1;
+    order: -1; /* Preview on top for mobile immediacy */
+  }
 }
 .dl-hero__preview .tbl { width: 100%; max-width: 440px; }

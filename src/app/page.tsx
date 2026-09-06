@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <>
       <SiteNav />
-      <main className="home">
+      <main id="main-content" className="home">
         {/* ── HERO ── */}
         <section className="hm hm-hero">
           <div className="hm-hero__lede">

@@ -46,24 +46,40 @@ export default function WorkPage() {
   return (
     <>
       <SiteNav />
-      <main className="work-page">
+      <main id="main-content" className="work-page">
         {/* ── Hero: thesis + one line + scannable constraints ── */}
         <section className="wk-hero">
-          <div className="ds-eyebrow">
-            <span>Instructional Design · Correctional Education</span>
+          <div className="wk-hero__story">
+            <div className="ds-eyebrow">
+              <span>Instructional Design · Correctional Education</span>
+            </div>
+            <h1 className="wk-thesis">
+              Designing for learners is one thing. Designing for learners <em>inside</em> is another.
+            </h1>
+            <p className="wk-sub">
+              I build learning for incarcerated and reentry-bound adults — designed around the realities of the
+              environment, not despite them.
+            </p>
+            <ul className="wk-constraints" aria-label="The realities I design around">
+              {CONSTRAINTS.map((c) => (
+                <li key={c} className="ds-chip">{c}</li>
+              ))}
+            </ul>
           </div>
-          <h1 className="wk-thesis">
-            Designing for learners is one thing. Designing for learners <em>inside</em> is another.
-          </h1>
-          <p className="wk-sub">
-            I build learning for incarcerated and reentry-bound adults — designed around the realities of the
-            environment, not despite them.
-          </p>
-          <ul className="wk-constraints" aria-label="The realities I design around">
-            {CONSTRAINTS.map((c) => (
-              <li key={c} className="ds-chip">{c}</li>
-            ))}
-          </ul>
+          <div className="wk-hero__stat" aria-label="Portfolio at a glance">
+            <div className="wk-stat-item">
+              <div className="wk-stat-item__num">2</div>
+              <div className="wk-stat-item__label">Case Studies</div>
+            </div>
+            <div className="wk-stat-item">
+              <div className="wk-stat-item__num">6</div>
+              <div className="wk-stat-item__label">Interactive Lessons</div>
+            </div>
+            <div className="wk-stat-item">
+              <div className="wk-stat-item__num">1</div>
+              <div className="wk-stat-item__label">Live Simulation</div>
+            </div>
+          </div>
         </section>
 
         {/* ── Selected Work: cards, high on the page ── */}
@@ -102,12 +118,13 @@ export default function WorkPage() {
         {/* ── The Approach: an editorial manifesto index, not a box grid ── */}
         <section className="wk-block">
           <div className="ds-eyebrow"><span>The Approach</span></div>
+          <h2 className="sr-only">Design Approach</h2>
           <p className="wk-approach-lead">
             Learning designed to be <em>experienced,</em> not endured.
           </p>
           <div className="wk-approach ds-index">
             {APPROACH.map((a) => (
-              <div key={a.t} className="ds-index__row" tabIndex={0}>
+              <div key={a.t} className="ds-index__row" tabIndex={0} role="button" aria-label={`${a.t} — press Enter to reveal details`}>
                 <h3 className="ds-index__t">{a.t}</h3>
                 <p className="ds-index__d">{a.d}</p>
               </div>
@@ -118,6 +135,7 @@ export default function WorkPage() {
         {/* ── Working with AI: compact module, not an essay ── */}
         <section className="wk-block">
           <div className="ds-eyebrow"><span>Working with AI</span></div>
+          <h2 className="sr-only">Working with AI</h2>
           <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
           <div className="wk-ai-grid">
             {AI_WORK.map((a) => (

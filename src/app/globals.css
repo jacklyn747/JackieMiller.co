@@ -7,12 +7,12 @@
   --ink:     #1A1614;
   --paper:   #F1EEE5;
   --paper2:  #EDE9DF;
-  --ox:      #5D0F0E;
-  --ox-accent: #5D0F0E; /* red for small text/links — must stay readable on paper */
+  --ox:      #4B0D0C;
+  --ox-accent: #4B0D0C; /* red for small text/links — WCAG AA 4.5:1 on paper */
   --ox-dim:  rgba(93,15,14,0.18);
   --ox-fg:   #F1EEE5;
   --ink-dim: rgba(26,22,20,0.12);
-  --ink-mid: rgba(26,22,20,0.62); /* WCAG 4.5:1 on paper (was 0.38 @ ~3:1) */
+  --ink-mid: rgba(26,22,20,0.72); /* WCAG AA 4.5:1 on paper */
   --rule:    rgba(26,22,20,0.07);
   --margin:  rgba(93,15,14,0.22);
   --cover-bg: #0a0a0c;
@@ -30,11 +30,11 @@
   --paper:   #0d0d0f;
   --paper2:  #141417;
   --ox:      #4A1210;
-  --ox-accent: #c65e55; /* lightened to clear WCAG 4.5:1 as text on dark paper (was #B04A44 @ 3.6:1) */
+  --ox-accent: #d47268; /* lightened to WCAG AA 4.5:1 on dark paper */
   --ox-dim:  rgba(176,74,68,0.22);
   --ox-fg:   #E7E1D3;
   --ink-dim: rgba(231,225,211,0.12);
-  --ink-mid: rgba(231,225,211,0.58); /* WCAG 4.5:1 on faded-black paper (was 0.42 @ 3.4:1) */
+  --ink-mid: rgba(231,225,211,0.68); /* WCAG AA 4.5:1 on dark paper */
   --rule:    rgba(231,225,211,0.06);
   --margin:  rgba(176,74,68,0.32);
 
@@ -76,6 +76,20 @@ body {
 /* Theme switch fade */
 body, main section {
   transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+/* ─── ACCESSIBILITY ─── */
+/* Screen reader only - visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* ─── SCROLL REVEAL ─── */
@@ -151,4 +165,56 @@ body, main section {
   border: none;
   border-top: 1px solid var(--ink-dim);
   margin: 2.5em 0;
+}
+
+/* ─── 11-COLUMN ASYMMETRICAL GRID ─── */
+/* Core: 7 cols story + 1 col breathing space + 3 cols visual anchor.
+   Awwwards-level asymmetry — intentional negative space, bold visual balance. */
+
+.grid-11-asym {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr) minmax(40px, 80px) repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  align-items: center;
+}
+
+/* Named areas for semantic clarity */
+.grid-11-story {
+  grid-column: 1 / 8;
+}
+
+.grid-11-gap {
+  grid-column: 8 / 9;
+  /* Intentionally empty — breathing space, not void */
+}
+
+.grid-11-visual {
+  grid-column: 9 / 12;
+}
+
+/* ── Responsive: collapse asymmetry at breakpoints ── */
+
+/* Tablet: 8 columns (5 story / 1 gap / 2 visual) */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .grid-11-asym {
+    grid-template-columns: repeat(5, 1fr) minmax(32px, 60px) repeat(2, 1fr);
+  }
+  .grid-11-story { grid-column: 1 / 6; }
+  .grid-11-gap { grid-column: 6 / 7; }
+  .grid-11-visual { grid-column: 7 / 9; }
+}
+
+/* Mobile: stack to single column, visual on top for immediacy */
+@media (max-width: 900px) {
+  .grid-11-asym {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 5vw, 48px);
+  }
+  .grid-11-story,
+  .grid-11-gap,
+  .grid-11-visual {
+    grid-column: 1;
+  }
+  /* Visual first in source, story second — or reverse via order if needed */
+  .grid-11-visual { order: -1; }
 }

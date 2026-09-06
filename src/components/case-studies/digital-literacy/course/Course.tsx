@@ -85,7 +85,7 @@ function ClickStage({ onReady }: StageProps) {
       <button className={`crs-target${lit ? " lit" : ""}`} onClick={() => { setLit(true); onReady(); }} aria-pressed={lit}>
         {I.folder}<span className="tl">Documents</span>
       </button>
-      <Flag show={lit}>This is a click. <span className="rl">On a real laptop, you'd press the mouse or trackpad once.</span></Flag>
+      <Flag show={lit}>This is a click. <span className="rl">On a real laptop, you&apos;d press the mouse or trackpad once.</span></Flag>
     </div>
   );
 }
@@ -133,7 +133,7 @@ function RightClickStage({ onReady }: StageProps) {
           </div>
         )}
       </div>
-      <Flag show={used}>A right-click just shows <b>more choices</b> — it's never a mistake. <span className="rl">Close it by tapping away or choosing Close.</span></Flag>
+      <Flag show={used}>A right-click just shows <b>more choices</b> — it&apos;s never a mistake. <span className="rl">Close it by tapping away or choosing Close.</span></Flag>
     </div>
   );
 }
@@ -169,7 +169,7 @@ function DragDemoStage({ onReady }: StageProps) {
         {DRAG_STEPS.map((s, i) => <span key={s} className={`crs-dragstep${step >= i ? " on" : ""}`}>{s}</span>)}
       </div>
       <button className="crs-playbtn" onClick={play}>▷ {step < 0 ? "Watch it happen" : "Watch again"}</button>
-      <Flag show={step >= 3}>Dragging is one motion: press, hold, move, release. <span className="rl">You'll try it for real in the last lesson.</span></Flag>
+      <Flag show={step >= 3}>Dragging is one motion: press, hold, move, release. <span className="rl">You&apos;ll try it for real in the last lesson.</span></Flag>
     </div>
   );
 }
@@ -240,11 +240,14 @@ function CapitalStage({ onReady }: StageProps) {
 /* 4.2 — What's a window? toggle */
 function WindowToggleStage({ onReady }: StageProps) {
   const [on, setOn] = useState(true);
-  const seen = useRef({ on: true, off: false });
+  const [seen, setSeen] = useState({ on: true, off: false });
   const set = (next: boolean) => {
     setOn(next);
-    seen.current[next ? "on" : "off"] = true;
-    if (seen.current.on && seen.current.off) onReady();
+    setSeen((prev) => {
+      const updated = { ...prev, [next ? "on" : "off"]: true };
+      if (updated.on && updated.off) onReady();
+      return updated;
+    });
   };
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -261,7 +264,7 @@ function WindowToggleStage({ onReady }: StageProps) {
         <button className={on ? "on" : ""} onClick={() => set(true)}>With a window open</button>
         <button className={!on ? "on" : ""} onClick={() => set(false)}>Just the desktop</button>
       </div>
-      <Flag show={seen.current.on && seen.current.off}>A window is its own space that sits on top of the desktop. You can open it, and close it again.</Flag>
+      <Flag show={seen.on && seen.off}>A window is its own space that sits on top of the desktop. You can open it, and close it again.</Flag>
     </div>
   );
 }
@@ -443,37 +446,59 @@ const HELP: Record<number, { h: string; p: string[] }> = {
 const STORE_KEY = "dl-course-v1";
 
 export default function Course() {
-  const [idx, setIdx] = useState(0);
-  const [ready, setReady] = useState(false);
-  const [goal, setGoal] = useState<string | null>(null);
-  const [help, setHelp] = useState(false);
-  const [resumed, setResumed] = useState(false);
-
   const total = SCREENS.length;
-  const s = SCREENS[idx];
 
   // Resume from where the learner left off (trauma-informed: no penalty, no reset).
-  useEffect(() => {
+  const [idx, setIdx] = useState(() => {
     try {
       const raw = localStorage.getItem(STORE_KEY);
       if (raw) {
         const d = JSON.parse(raw);
-        if (typeof d.idx === "number" && d.idx > 0 && d.idx < total) { setIdx(d.idx); setResumed(true); }
-        if (d.goal) setGoal(d.goal);
+        if (typeof d.idx === "number" && d.idx > 0 && d.idx < total) return d.idx;
       }
     } catch { /* storage blocked — start fresh */ }
-  }, [total]);
+    return 0;
+  });
+
+  const [ready, setReady] = useState(false);
+
+  const [goal, setGoal] = useState<string | null>(() => {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        const d = JSON.parse(raw);
+        if (d.goal) return d.goal;
+      }
+    } catch { /* storage blocked — start fresh */ }
+    return null;
+  });
+
+  const [help, setHelp] = useState(false);
+  const resumed = (() => {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (raw) {
+        const d = JSON.parse(raw);
+        return typeof d.idx === "number" && d.idx > 0 && d.idx < total;
+      }
+    } catch { /* storage blocked — start fresh */ }
+    return false;
+  })();
+
+  const s = SCREENS[idx];
 
   useEffect(() => {
     try { localStorage.setItem(STORE_KEY, JSON.stringify({ idx, goal })); } catch { /* ignore */ }
   }, [idx, goal]);
 
   // Reset the gate whenever the screen changes.
+  // This is a valid use of setState in effect - synchronizing derived state
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setReady(!SCREENS[idx].gate); setHelp(false); }, [idx]);
 
   const onReady = useCallback(() => setReady(true), []);
-  const next = useCallback(() => setIdx((i) => Math.min(i + 1, total - 1)), [total]);
-  const back = useCallback(() => setIdx((i) => Math.max(i - 1, 0)), []);
+  const next = useCallback(() => setIdx((i: number) => Math.min(i + 1, total - 1)), [total]);
+  const back = useCallback(() => setIdx((i: number) => Math.max(i - 1, 0)), []);
 
   const pct = Math.round(((idx + 1) / total) * 100);
   const StageEl = s.Stage;
@@ -529,7 +554,7 @@ export default function Course() {
 
               <div className="crs-foot">
                 <span className="crs-note">
-                  {resumed && idx > 0 ? "Resumed where you left off" : s.gate && ready ? <><span className="ok">✓</span> Nice — that's it</> : s.note}
+                  {resumed && idx > 0 ? "Resumed where you left off" : s.gate && ready ? <><span className="ok">✓</span> Nice — that&apos;s it</> : s.note}
                 </span>
                 <span className="crs-navbtns">
                   <button className="crs-back" onClick={back} disabled={idx === 0}>Back</button>
@@ -563,7 +588,7 @@ function CapstoneScreen({ onReady, back, next, ready, help, setHelp, lesson, not
           <Capstone onAllDone={onReady} />
         </div>
         <div className="crs-foot">
-          <span className="crs-note">{ready ? <><span className="ok">✓</span> All four done — whenever you're ready</> : note}</span>
+          <span className="crs-note">{ready ? <><span className="ok">✓</span> All four done — whenever you&apos;re ready</> : note}</span>
           <span className="crs-navbtns">
             <button className="crs-back" onClick={back}>Back</button>
             <button className={`crs-cta go${!ready ? " locked" : ""}`} onClick={next} disabled={!ready}>{cta}<span className="a">→</span></button>
@@ -616,10 +641,15 @@ function HelpSheet({ lesson, onClose }: { lesson: number; onClose: () => void })
 
 /* prefers-reduced-motion hook */
 function usePrefersReducedMotion() {
-  const [reduce, setReduce] = useState(false);
+  const [reduce, setReduce] = useState(() => {
+    if (typeof window !== "undefined") {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      return mq.matches;
+    }
+    return false;
+  });
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduce(mq.matches);
     const on = () => setReduce(mq.matches);
     mq.addEventListener("change", on);
     return () => mq.removeEventListener("change", on);

@@ -97,7 +97,7 @@ export default function MacSim({ courseMode = false, onEvent }: { courseMode?: b
   const dragRef = useRef<{ mode: "win" | "file"; id: string; offX: number; offY: number; moved: boolean } | null>(null);
   // Keep the latest callback without churning memoized deps.
   const evRef = useRef(onEvent);
-  evRef.current = onEvent;
+  useEffect(() => { evRef.current = onEvent; }, [onEvent]);
   const emit = useCallback((e: SimEvent) => evRef.current?.(e), []);
   const winsRef = useRef<Win[]>([]);
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import TabletMock from "@/components/case-studies/digital-literacy/TabletMock";
+import GovernanceAccordion from "@/components/GovernanceAccordion";
 import { caseStudies } from "@/lib/caseStudies";
 import "./home.css";
 import "./work/work.css";
@@ -261,6 +262,17 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* ── ENTERPRISE AI SAFETY & GOVERNANCE ── */}
+        <section className="hm hm-sec" id="governance">
+          <div className="hm-sec__head">
+            <p className="ds-eyebrow">Enterprise AI Safety & Governance</p>
+            <h2 className="hm-sec__title">
+              Ask your CISO. <em>We already answered.</em>
+            </h2>
+          </div>
+          <GovernanceAccordion />
         </section>
 
         {/* ── SELECTED WORK ── */}

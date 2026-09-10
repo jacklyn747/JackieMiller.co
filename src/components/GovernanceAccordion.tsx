@@ -15,8 +15,8 @@ const PANELS: Panel[] = [
     a: "Models are strictly constrained using closed-context retrieval (grounding prompts) and bounded system parameters. More importantly, we enforce a mandatory Human-in-the-Loop (HITL) gate: no instructional objective, technical task, or assessment item is finalized without subject-matter and instructional validation.",
   },
   {
-    q: 'How does this differ from generic "AI-generated" content?',
-    a: 'Anyone can ask an LLM to "write a 5-question quiz." That produces shallow, generic "slop." I build multi-layered system prompt architectures that enforce specific pedagogical structures, tone constraints, Bloom-level targeting, and behavioral branch points. AI handles raw synthesis; instructional design governs the output.',
+    q: "How does this differ from generic “AI-generated” content?",
+    a: "Anyone can ask an LLM to “write a 5-question quiz.” That produces shallow, generic “slop.” I build multi-layered system prompt architectures that enforce specific pedagogical structures, tone constraints, Bloom-level targeting, and behavioral branch points. AI handles raw synthesis; instructional design governs the output.",
   },
 ];
 

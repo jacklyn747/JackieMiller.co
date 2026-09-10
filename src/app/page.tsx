@@ -11,9 +11,9 @@ import "./home.css";
 import "./work/work.css";
 
 export const metadata: Metadata = {
-  title: "Jackie Miller — Instructional Designer",
+  title: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
   description:
-    "Jackie Miller designs learning people actually want to do — built around real people, real constraints, and the belief that learning is the way out.",
+    "Senior Learning Experience Architect & AI Workflow Lead. Compressing enterprise learning production timelines 3x–5x through LLM orchestration and synthetic persona simulation — secured by zero-data-retention, human-in-the-loop governance.",
 };
 
 // Portrait appears once dropped at public/about/portrait.(jpg|jpeg|png|webp).
@@ -224,6 +224,7 @@ export default function Home() {
           <div className="hm-foot__in">
             <span className="hm-foot__mark">Jackie Miller</span>
             <nav className="hm-foot__links" aria-label="Footer">
+              <Link href="/systems">Systems</Link>
               <Link href="/work">Work</Link>
               <Link href="/about">About</Link>
               <Link href="/field-notes">Field Notes</Link>

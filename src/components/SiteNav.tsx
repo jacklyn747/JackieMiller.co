@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import "./site-nav.css";
 
 const LINKS = [
+  { href: "/systems", label: "Systems" },
   { href: "/work", label: "Work" },
   { href: "/field-notes", label: "Field Notes" },
   { href: "/contact", label: "Contact" },

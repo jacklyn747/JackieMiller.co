@@ -1,6 +1,6 @@
 # Phase 2 — /work Rebuild & 3 Flagship Case Studies Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Rebuild `/work` around the new enterprise L&D positioning per the master roadmap's Step 2/3 spec (meta-header, structured project cards, deep-dive case study pages), ship the 3 flagship case studies using a shared 5-tier template, and reconcile the two real existing case studies per Jacklyn's explicit direction: *Digital Literacy Fundamentals* gets equal weight alongside the 3 new flagship studies in the grid; *Discovering Your Narrative Voice* (content-review) is removed from every grid/listing but its page stays live at its existing URL.
 
@@ -30,7 +30,7 @@
 **Interfaces:**
 - Produces: `CaseStudy` type gains `statNum?: string`, `statLabel?: string`, `isDemonstration?: boolean`. Tasks 2, 6, 7 consume these.
 
-- [ ] **Step 1: Update the type and array**
+- [x] **Step 1: Update the type and array**
 
 Replace the full contents of `src/lib/caseStudies.ts`:
 
@@ -118,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
 
 (Note: `content-review` is intentionally removed from this array — its page at `src/app/work/content-review/page.tsx` and component are untouched and stay live at that URL; it's simply no longer rendered in any grid.)
 
-- [ ] **Step 2: Add the no-image "stat" card face**
+- [x] **Step 2: Add the no-image "stat" card face**
 
 Append to `src/app/work/work.css`, right after the existing `.work-card__cover.is-live .tbl` rules (after the line `.work-card:hover .work-card__cover.is-live .tbl { transform: translateY(-4px); }`):
 
@@ -149,12 +149,12 @@ Append to `src/app/work/work.css`, right after the existing `.work-card__cover.i
 }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: build will show type errors in `src/app/page.tsx` and `src/app/work/page.tsx` where they render `cs.cover`/`Image` unconditionally for entries that now have `cover: ""` — this is expected and resolved by Tasks 6 and 7, which update both render sites. Do not attempt to fix those files here.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/lib/caseStudies.ts src/app/work/work.css
@@ -176,7 +176,7 @@ EOF
 **Interfaces:**
 - Produces: `export default function CaseStudyTemplate(props: CaseStudyTemplateProps)`. Consumed by Tasks 3, 4, 5. `CaseStudyTemplateProps` type is exported from this file so the 3 page files can type their own content objects against it.
 
-- [ ] **Step 1: Create the component**
+- [x] **Step 1: Create the component**
 
 Create `src/components/case-studies/CaseStudyTemplate.tsx`:
 
@@ -319,12 +319,12 @@ export default function CaseStudyTemplate({
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: exit 0 (this component isn't imported anywhere yet, so it just needs to type-check and lint clean on its own).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/case-studies/CaseStudyTemplate.tsx
@@ -346,7 +346,7 @@ EOF
 **Interfaces:**
 - Consumes: `CaseStudyTemplate` (`@/components/case-studies/CaseStudyTemplate`) from Task 2.
 
-- [ ] **Step 1: Create the page**
+- [x] **Step 1: Create the page**
 
 Create `src/app/work/fintech-systems-onboarding/page.tsx`:
 
@@ -391,12 +391,12 @@ export default function FintechSystemsOnboarding() {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: exit 0. Route `/work/fintech-systems-onboarding` appears in the build's route list as a static page.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/work/fintech-systems-onboarding/page.tsx
@@ -418,7 +418,7 @@ EOF
 **Interfaces:**
 - Consumes: `CaseStudyTemplate` from Task 2.
 
-- [ ] **Step 1: Create the page**
+- [x] **Step 1: Create the page**
 
 Create `src/app/work/leadership-simulation/page.tsx`:
 
@@ -465,12 +465,12 @@ export default function LeadershipSimulation() {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: exit 0. Route `/work/leadership-simulation` appears in the build's route list.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/work/leadership-simulation/page.tsx
@@ -492,7 +492,7 @@ EOF
 **Interfaces:**
 - Consumes: `CaseStudyTemplate` from Task 2.
 
-- [ ] **Step 1: Create the page**
+- [x] **Step 1: Create the page**
 
 Create `src/app/work/developer-enablement/page.tsx`:
 
@@ -535,12 +535,12 @@ export default function DeveloperEnablement() {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: exit 0. Route `/work/developer-enablement` appears in the build's route list.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/work/developer-enablement/page.tsx
@@ -562,7 +562,7 @@ EOF
 **Interfaces:**
 - Consumes: `caseStudies` (Task 1), `TabletMock` (existing), `ThemeToggle` (existing, newly added to this page for consistency with `/systems` and `/about`).
 
-- [ ] **Step 1: Rewrite the page**
+- [x] **Step 1: Rewrite the page**
 
 Replace the full contents of `src/app/work/page.tsx`:
 
@@ -657,12 +657,12 @@ export default function WorkPage() {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0. This resolves Task 1's expected type error at this file.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/work/page.tsx
@@ -690,7 +690,7 @@ EOF
 **Interfaces:**
 - Consumes: `caseStudies` (Task 1), same as Task 6's rendering logic.
 
-- [ ] **Step 1: Update the render logic**
+- [x] **Step 1: Update the render logic**
 
 In `src/app/page.tsx`, find the `{/* ── SELECTED WORK ── */}` section's `caseStudies.map(...)` block:
 
@@ -733,12 +733,12 @@ Replace with:
 
 Nothing else in this section (the surrounding `<section>`, the `.hm-sec__head` heading, the closing markup) changes.
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0. This resolves Task 1's expected type error at this file. Homepage now shows all 4 case studies (Digital Literacy + 3 flagship); content-review no longer appears here either.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/page.tsx
@@ -756,11 +756,11 @@ EOF
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Start the dev server**
+- [x] **Step 1: Start the dev server**
 
 Run: `npm run dev`
 
-- [ ] **Step 2: Verify in a real browser, fresh tab / hard load for each URL (per AUTHORITIES.md's deploy-verify gate, and per Phase 1's lesson that client-side nav can mask a rendering bug a hard load exposes)**
+- [x] **Step 2: Verify in a real browser, fresh tab / hard load for each URL (per AUTHORITIES.md's deploy-verify gate, and per Phase 1's lesson that client-side nav can mask a rendering bug a hard load exposes)**
 
 Visit `/work` directly and confirm:
 - New hero copy renders, no leftover correctional-education framing.
@@ -780,7 +780,7 @@ Visit each of `/work/fintech-systems-onboarding`, `/work/leadership-simulation`,
 
 Toggle dark/light mode on `/work` and on one case study page; confirm no unstyled flashes, no dark-body-bleed-through gutters (the specific bug class found in Phase 1 — check at a viewport wider than 1080px too).
 
-- [ ] **Step 3: Report back**
+- [x] **Step 3: Report back**
 
 Note any visual issues found for follow-up — do not silently patch and move on without flagging what broke.
 
@@ -791,3 +791,26 @@ Note any visual issues found for follow-up — do not silently patch and move on
 - **Spec coverage:** 5-Tier Case Study Architecture ✓ (Task 2), 3 flagship case studies ✓ (Tasks 3-5), Security Footnote disclosure ✓ (Task 2, verbatim), `/work` meta-header + structured card grid ✓ (Task 6), Digital Literacy equal weight ✓ (Task 6/7 — same card treatment, no visual demotion), content-review delisted-not-deleted ✓ (Task 1). **Not in this phase, by design:** the live persona sandbox and interactive velocity visualizer (Phase 4 — needs an API backend); `/contact` dual-track router (Phase 3).
 - **Placeholder scan:** clean — every task has real, complete code and real, roadmap-sourced or explicitly-authored-and-labeled copy; no `{{...}}` or TODO markers.
 - **Type consistency:** `CaseStudyTemplateProps` is defined once in Task 2 and consumed identically by Tasks 3-5; `CaseStudy`'s new optional fields (Task 1) are consumed identically in Tasks 6 and 7's render logic.
+
+## Status: Shipped (2026-09-10)
+
+All 8 tasks complete, executed subagent-driven. Final commit: `6dceb46` on `feature/enterprise-ld-rebrand`.
+
+## Deviations & fixes found in final review
+
+The final whole-branch review (opus) found the architecture, token/utility discipline, numeric consistency across all three case-study surfaces, and Content Review's untouched status to all be clean — no Critical findings in the original implementation. One consolidated fix pass (`6dceb46`) addressed everything below, re-reviewed clean:
+
+1. **Real-world case-study slugs were renamed** at Jacklyn's explicit request, after the plan shipped: `fintech-systems-onboarding` → `fintech-systems-migration`, `leadership-simulation` → `high-stakes-leadership-simulation`, `developer-enablement` → `technical-product-enablement`. Done via `git mv` to preserve history; `caseStudies.ts`'s `slug` fields updated to match; verified zero live-source references to the old slugs survive.
+2. **A real former employer's name was generalized out of fabricated content.** The leadership-simulation case study originally cited "Character.ai behavioral modeling techniques" — Character.AI is Jacklyn's real former employer, named inside an admittedly-synthesized client engagement. Changed to "advanced persona modeling and behavioral conditioning techniques" at her explicit request.
+3. **The disclosure the plan shipped with wasn't strong enough, and Jacklyn asked for more.** The Security Footnote text (pulled verbatim from the roadmap) reads as "we protected a real client's data," not "this engagement didn't happen" — and nothing distinguished the 3 fabricated studies from Digital Literacy's real one in either grid. Added: a visible "Demonstration" chip on the flagship cards' label row in both `/work` and the homepage grid (gated on `caseStudies.ts`'s pre-existing but previously-unused `isDemonstration` field), and the `CaseStudyTemplate`'s footnote now renders the roadmap's own more explicit "Demonstration Artifact: ...synthesized for portfolio demonstration..." text when `isDemonstration` is true, falling back to the original Security Note otherwise (so a future real case study built on this template still gets the correct copy).
+4. **`/systems#governance` was a dead anchor** — that id only exists on the homepage, not `/systems`. The Instructional Artifact tier's "See the underlying prompt architecture →" link on all 3 case studies was silently landing at the top of `/systems` instead of the Prompt & Scaffolding Vault. Added `id="vault"` to that section and fixed the link.
+5. **One stat label conflated two different metrics.** The FinTech case study's card said "78% Faster Time-to-Certification," but 78% is a production-time reduction and 94% is the actual certification pass rate. Relabeled to "Faster Content Production."
+6. **`/work`'s closer section had doubled horizontal padding** after the Task 6 rewrite nested it inside a new `<main>` wrapper that already provided the same max-width/padding as the old standalone `.wk-closer` rule. Removed `.wk-closer` from the old shared-column CSS selector.
+7. **5 section-tier labels were `<p>` elements with no real heading**, leaving each case study page with a single `<h1>` and no document outline for 6 sections. Changed to `<h2>` (same class, same text).
+8. Two small accessibility items: `role="list"` on 3 bulleted lists (Safari/VoiceOver drops list semantics with `list-style: none` and no explicit role); arrow glyphs in link text wrapped in `aria-hidden` spans so they don't get announced as part of the accessible name.
+
+**Not addressed, flagged for a human decision:**
+- `work.css` has ~90 lines of now-orphaned selectors from the old `/work` hero/Approach/AI-work sections Task 6 removed (`.wk-hero`, `.wk-thesis`, `.wk-sub`, `.wk-constraints`, `.ds-index__row/t/d`, `.wk-ai-grid`, `.wk-ai-card`, `.wk-lead`, `.wk-note`, plus `.wk-block`/`.wk-hero` themselves after fix #6 above). Doesn't break anything — dead CSS, not a bug — but worth a cleanup pass.
+- `caseStudies.ts`'s `live: true` branch (and the `TabletMock` import it requires in both grid files) has been unreachable since before this phase — no entry sets `live: true`. Pre-existing, not a regression, but the natural moment to remove it was this phase's grid rewrites.
+- The exported function names on 2 of the 3 renamed case-study pages (`FintechSystemsOnboarding`, `DeveloperEnablement`) still reflect the old slugs — cosmetic only, Next.js doesn't care, but a future reader might.
+- No `CaseNav`-style "next case study" link exists between the 3 new flagship studies (only "← Back to all work" on each); Digital Literacy and Content Review still link to each other in a closed loop. A real cross-case-study nav ring is a Phase 3-sized decision, not a defect in this phase.

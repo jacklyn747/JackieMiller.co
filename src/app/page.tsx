@@ -149,6 +149,71 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── THE MODERN L&D DILEMMA ── */}
+        <section className="hm hm-sec" id="dilemma">
+          <div className="hm-sec__head">
+            <p className="ds-eyebrow">The Production Reality</p>
+            <h2 className="hm-sec__title">
+              Why the next generation of enterprise learning requires <em>a new operational standard.</em>
+            </h2>
+            <p className="hm-sec__intro">
+              Speed without governance is an enterprise compliance disaster. Governance without speed is
+              an organizational bottleneck. Generative models have made it possible to rapidly extract
+              expertise, scaffold complex scenarios, and deploy interactive simulations in days rather
+              than quarters — but off-the-shelf prompts and public consumer tools create hallucination
+              risks, IP exposure, and generic learner fatigue. True acceleration requires an architect who
+              understands both sides of the glass: the computational mechanics of system prompts and
+              behavioral persona parameters, and the human psychology of cognitive load, narrative
+              immersion, and enterprise accountability.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 md:mt-12">
+            <div className="rounded-[18px] p-6 md:p-8 border-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
+              <p className="ds-eyebrow ds-eyebrow--solo">The Traditional Bottleneck</p>
+              <ul className="flex flex-col gap-3 mt-4 p-0 list-none">
+                {[
+                  "12–16 week development cycles.",
+                  "SME interview transcripts gathering dust.",
+                  "Static multiple-choice click-through quizzes.",
+                  "Fear-driven paralysis regarding AI adoption.",
+                ].map((line) => (
+                  <li key={line} className="relative pl-[18px] text-[15px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+                    <span
+                      className="absolute left-0 top-[0.6em] w-1.5 h-1.5 rounded-full"
+                      style={{ background: "var(--ink-dim)" }}
+                      aria-hidden="true"
+                    />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div
+              className="rounded-[18px] p-6 md:p-8 border-[0.5px]"
+              style={{ borderColor: "var(--ox-dim)", background: "color-mix(in srgb, var(--ox) 4%, transparent)" }}
+            >
+              <p className="ds-eyebrow ds-eyebrow--solo">The Jackie Miller Engine</p>
+              <ul className="flex flex-col gap-3 mt-4 p-0 list-none">
+                {[
+                  "2–3 week agile sprint cycles.",
+                  "LLM-driven thematic synthesis and rapid storyboarding.",
+                  "Dynamic, multi-turn synthetic persona simulations (role-plays).",
+                  "Strict private-sandbox protocols ensuring zero data leakage.",
+                ].map((line) => (
+                  <li key={line} className="relative pl-[18px] text-[15px] leading-snug" style={{ color: "var(--ink)" }}>
+                    <span
+                      className="absolute left-0 top-[0.6em] w-1.5 h-1.5 rounded-full"
+                      style={{ background: "var(--ox-accent)" }}
+                      aria-hidden="true"
+                    />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* ── SELECTED WORK ── */}
         <section className="hm hm-sec">
           <div className="hm-sec__head">

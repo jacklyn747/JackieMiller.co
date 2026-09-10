@@ -68,20 +68,38 @@ export default function Home() {
         {/* ── HERO ── */}
         <section className="hm hm-hero">
           <div className="hm-hero__lede">
-            <p className="ds-eyebrow">Instructional Designer</p>
+            <p className="ds-eyebrow">Jackie Miller · Senior Learning Experience Architect & AI Workflow Lead</p>
             <h1 className="hm-hero__title">
-              Most learning is boring. <em>Mine isn&apos;t.</em>
+              High-Velocity Learning Architecture. <em>Governed Enterprise AI.</em>
             </h1>
             <p className="hm-hero__sub">
-              I&apos;m Jackie Miller. I design learning people actually want to do — built around real
-              people, real constraints, and the belief that learning is the way out.
+              Most enterprise learning teams are trapped between two extremes: traditional 16-week
+              production bottlenecks that lag behind business change, or unvetted AI experiments that
+              leak proprietary data and output sterile content. I engineer the high-performance middle
+              ground — uniting classical learning science with private LLM orchestration and synthetic
+              persona simulations to compress development timelines by 3x–5x, secured by strict
+              human-in-the-loop governance.
             </p>
+            <ul className="hm-trust" aria-label="Trust signals">
+              <li className="hm-trust__badge">
+                <span className="hm-trust__t">3x–5x Delivery Compression</span>
+                <span className="hm-trust__d">From SME discovery to high-fidelity pilot.</span>
+              </li>
+              <li className="hm-trust__badge">
+                <span className="hm-trust__t">Zero-Data-Retention Security</span>
+                <span className="hm-trust__d">Private sandbox isolation for all enterprise IP.</span>
+              </li>
+              <li className="hm-trust__badge">
+                <span className="hm-trust__t">Cognitive Rigor Guaranteed</span>
+                <span className="hm-trust__d">Every objective anchored in measurable behavioral change.</span>
+              </li>
+            </ul>
             <div className="hm-hero__cta">
-              <Link href="/work" className="ds-btn ds-btn--solid">
-                See the work <span aria-hidden="true">→</span>
+              <Link href="/systems" className="ds-btn ds-btn--solid">
+                Explore the Production Systems <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/about" className="ds-btn ds-btn--ghost">
-                Read my story
+              <Link href="#governance" className="ds-btn ds-btn--ghost">
+                Review the AI Governance Charter
               </Link>
             </div>
           </div>

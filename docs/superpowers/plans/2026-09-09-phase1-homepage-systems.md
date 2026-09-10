@@ -10,7 +10,9 @@
 
 ## Global Constraints
 
-- Never hardcode a color or spacing value — reference an existing token from `globals.css` (`--ink`, `--paper`, `--ox-accent`, `--ink-mid`, `--ink-dim`, etc.). [`AGENTS.md`]
+- **Spacing & typography use standard Tailwind utility classes** (`gap-*`, `p-*`/`px-*`/`py-*`, `m-*`/`mt-*`, `text-*`, `font-*`, `tracking-*`, `leading-*`, `rounded-*`, `max-w-*`, etc.) directly in JSX `className` — this project does not have and should not gain custom `--space-*`/`--text-*` CSS variables. Use Tailwind's default scale first; use its bracket arbitrary-value syntax (`w-[220px]`, `text-[11px]`) only when the design needs a value off that scale — this is itself standard Tailwind, not a hardcoded escape hatch. Matches real precedent in `src/components/Nav.tsx` and `src/components/Cover.tsx`.
+- **Colors** still come only from the existing CSS custom-property tokens (`--ink`, `--paper`, `--ox-accent`, `--ink-mid`, `--ink-dim`, etc.) — but applied via inline `style={{ color: "var(--ink-mid)" }}` (or `borderColor`/`background`), never a new custom CSS class or a Tailwind color utility, matching every existing use of these tokens (`src/components/case-studies/ContentReview.tsx`, `Cover.tsx`). Tailwind has no utility for them.
+- **Hover states, transitions, and pseudo-elements** (`:hover`, `:focus-visible`, `::before`) are the one thing that stays in a real CSS file — nothing in this codebase uses Tailwind's `hover:`/`focus:` variants (verified: zero occurrences), and the project's motion rule (0.3s `cubic-bezier(0.25, 1, 0.5, 1)`, hardware-accelerated) needs real CSS. So: static layout/spacing/type/color → JSX (Tailwind classes + inline style for colors); interactive state → a small scoped CSS file, same as the existing `.ds-btn:hover`, `.work-card:hover` pattern.
 - Compose existing `.ds-*` primitives (`ds-eyebrow`, `ds-btn`, `ds-chip`) instead of reinventing them; only add a new primitive to `system.css` if it's truly reusable site-wide. [`AGENTS.md`]
 - Preserve all existing working code — this phase is additive only, no deletions. [original task Step 3]
 - Enterprise vocabulary in all new copy: "LLM orchestration," "dynamic persona modeling," "zero-data-retention (ZDR)," "human-in-the-loop (HITL)" — already satisfied by using the spec's verbatim copy below; don't paraphrase it away.
@@ -118,11 +120,10 @@ git commit -m "feat: add /systems to nav, update homepage metadata for enterpris
 ### Task 2: Rewrite the homepage hero + add the Dual-Trust Badges strip
 
 **Files:**
-- Modify: `src/app/page.tsx:68-100` (hero section)
-- Modify: `src/app/home.css` (append `.hm-trust*` rules after the existing `.hm-hero__cta` block, ~line 68)
+- Modify: `src/app/page.tsx:68-100` (hero section) — this task is JSX-only; the trust badges are static (no hover state), so no CSS file changes at all.
 
 **Interfaces:**
-- Produces: `.hm-trust`, `.hm-trust__badge`, `.hm-trust__t`, `.hm-trust__d` classes reused nowhere else in Phase 1 (self-contained).
+- Produces: no new classes — trust badges are plain Tailwind utility classes inline, not reused elsewhere.
 
 - [ ] **Step 1: Replace the hero markup**
 
@@ -165,18 +166,39 @@ with:
     persona simulations to compress development timelines by 3x–5x, secured by strict
     human-in-the-loop governance.
   </p>
-  <ul className="hm-trust" aria-label="Trust signals">
-    <li className="hm-trust__badge">
-      <span className="hm-trust__t">3x–5x Delivery Compression</span>
-      <span className="hm-trust__d">From SME discovery to high-fidelity pilot.</span>
+  <ul className="flex flex-wrap gap-3 mt-2 p-0 list-none" aria-label="Trust signals">
+    <li
+      className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+      style={{ borderColor: "var(--ink-dim)" }}
+    >
+      <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+        3x–5x Delivery Compression
+      </span>
+      <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+        From SME discovery to high-fidelity pilot.
+      </span>
     </li>
-    <li className="hm-trust__badge">
-      <span className="hm-trust__t">Zero-Data-Retention Security</span>
-      <span className="hm-trust__d">Private sandbox isolation for all enterprise IP.</span>
+    <li
+      className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+      style={{ borderColor: "var(--ink-dim)" }}
+    >
+      <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+        Zero-Data-Retention Security
+      </span>
+      <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+        Private sandbox isolation for all enterprise IP.
+      </span>
     </li>
-    <li className="hm-trust__badge">
-      <span className="hm-trust__t">Cognitive Rigor Guaranteed</span>
-      <span className="hm-trust__d">Every objective anchored in measurable behavioral change.</span>
+    <li
+      className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+      style={{ borderColor: "var(--ink-dim)" }}
+    >
+      <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+        Cognitive Rigor Guaranteed
+      </span>
+      <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+        Every objective anchored in measurable behavioral change.
+      </span>
     </li>
   </ul>
   <div className="hm-hero__cta">
@@ -190,53 +212,15 @@ with:
 </div>
 ```
 
-- [ ] **Step 2: Add the trust-badge CSS**
-
-Append to `src/app/home.css`:
-
-```css
-/* ── DUAL-TRUST BADGES ── */
-.hm-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-}
-.hm-trust__badge {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 12px 18px;
-  border: 0.5px solid var(--ink-dim);
-  border-radius: 14px;
-  max-width: 220px;
-}
-.hm-trust__t {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-}
-.hm-trust__d {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 11px;
-  line-height: 1.4;
-  color: var(--ink-mid);
-}
-```
-
-- [ ] **Step 3: Verify**
+- [ ] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 3: Commit**
 
 ```bash
-git add src/app/page.tsx src/app/home.css
+git add src/app/page.tsx
 git commit -m "feat: rewrite homepage hero with enterprise L&D positioning + trust badges"
 ```
 
@@ -245,8 +229,7 @@ git commit -m "feat: rewrite homepage hero with enterprise L&D positioning + tru
 ### Task 3: Add "The Modern L&D Dilemma" 2-column module
 
 **Files:**
-- Modify: `src/app/page.tsx` (insert new `<section>` immediately after the `hm-proof` section, before `{/* ── SELECTED WORK ── */}`)
-- Modify: `src/app/home.css` (append `.dilemma-*` rules)
+- Modify: `src/app/page.tsx` (insert new `<section>` immediately after the `hm-proof` section, before `{/* ── SELECTED WORK ── */}`) — JSX-only, no CSS file (static, no hover state; spacing/type via Tailwind utilities, colors via inline `style`).
 
 - [ ] **Step 1: Insert the section**
 
@@ -271,92 +254,63 @@ In `src/app/page.tsx`, immediately after the closing `</section>` of `hm-proof` 
       immersion, and enterprise accountability.
     </p>
   </div>
-  <div className="dilemma-grid">
-    <div className="dilemma-col">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mt-8 md:mt-12">
+    <div className="rounded-[18px] p-6 md:p-8 border-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
       <p className="ds-eyebrow ds-eyebrow--solo">The Traditional Bottleneck</p>
-      <ul>
-        <li>12–16 week development cycles.</li>
-        <li>SME interview transcripts gathering dust.</li>
-        <li>Static multiple-choice click-through quizzes.</li>
-        <li>Fear-driven paralysis regarding AI adoption.</li>
+      <ul className="flex flex-col gap-3 mt-4 p-0 list-none">
+        {[
+          "12–16 week development cycles.",
+          "SME interview transcripts gathering dust.",
+          "Static multiple-choice click-through quizzes.",
+          "Fear-driven paralysis regarding AI adoption.",
+        ].map((line) => (
+          <li key={line} className="relative pl-[18px] text-[15px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+            <span
+              className="absolute left-0 top-[0.6em] w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--ink-dim)" }}
+              aria-hidden="true"
+            />
+            {line}
+          </li>
+        ))}
       </ul>
     </div>
-    <div className="dilemma-col dilemma-col--accent">
+    <div
+      className="rounded-[18px] p-6 md:p-8 border-[0.5px]"
+      style={{ borderColor: "var(--ox-dim)", background: "color-mix(in srgb, var(--ox) 4%, transparent)" }}
+    >
       <p className="ds-eyebrow ds-eyebrow--solo">The Jackie Miller Engine</p>
-      <ul>
-        <li>2–3 week agile sprint cycles.</li>
-        <li>LLM-driven thematic synthesis and rapid storyboarding.</li>
-        <li>Dynamic, multi-turn synthetic persona simulations (role-plays).</li>
-        <li>Strict private-sandbox protocols ensuring zero data leakage.</li>
+      <ul className="flex flex-col gap-3 mt-4 p-0 list-none">
+        {[
+          "2–3 week agile sprint cycles.",
+          "LLM-driven thematic synthesis and rapid storyboarding.",
+          "Dynamic, multi-turn synthetic persona simulations (role-plays).",
+          "Strict private-sandbox protocols ensuring zero data leakage.",
+        ].map((line) => (
+          <li key={line} className="relative pl-[18px] text-[15px] leading-snug" style={{ color: "var(--ink)" }}>
+            <span
+              className="absolute left-0 top-[0.6em] w-1.5 h-1.5 rounded-full"
+              style={{ background: "var(--ox-accent)" }}
+              aria-hidden="true"
+            />
+            {line}
+          </li>
+        ))}
       </ul>
     </div>
   </div>
 </section>
 ```
 
-- [ ] **Step 2: Add the CSS**
-
-Append to `src/app/home.css`:
-
-```css
-/* ── L&D DILEMMA ── */
-.dilemma-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(20px, 3vw, 40px);
-  margin-top: clamp(28px, 4vw, 48px);
-}
-@media (max-width: 720px) {
-  .dilemma-grid { grid-template-columns: 1fr; }
-}
-.dilemma-col {
-  padding: clamp(22px, 3vw, 32px);
-  border: 0.5px solid var(--ink-dim);
-  border-radius: 18px;
-}
-.dilemma-col--accent {
-  border-color: var(--ox-dim);
-  background: color-mix(in srgb, var(--ox) 4%, transparent);
-}
-.dilemma-col ul {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.dilemma-col li {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--ink-mid);
-  padding-left: 18px;
-  position: relative;
-}
-.dilemma-col li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ink-dim);
-}
-.dilemma-col--accent li::before { background: var(--ox-accent); }
-.dilemma-col--accent li { color: var(--ink); }
-```
-
-- [ ] **Step 3: Verify**
+- [ ] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 3: Commit**
 
 ```bash
-git add src/app/page.tsx src/app/home.css
+git add src/app/page.tsx
 git commit -m "feat: add The Modern L&D Dilemma comparison module to homepage"
 ```
 
@@ -366,7 +320,7 @@ git commit -m "feat: add The Modern L&D Dilemma comparison module to homepage"
 
 **Files:**
 - Modify: `src/app/page.tsx` (insert new `<section>` immediately after the Task 3 section)
-- Modify: `src/app/home.css` (append `.pillars-*` rules)
+- Modify: `src/app/home.css` (append a small `.pillar-card` rule — hover lift + hover border-color only; everything else is Tailwind utilities + inline `style` in the JSX. The hover border-color must live in CSS, not inline `style`, because an inline `style` value always wins over a stylesheet `:hover` rule regardless of specificity — there's no way to override it from CSS.)
 
 - [ ] **Step 1: Insert the section**
 
@@ -381,12 +335,18 @@ In `src/app/page.tsx`, immediately after the closing `</section>` of the L&D Dil
       Four pillars, <em>one governed pipeline.</em>
     </h2>
   </div>
-  <div className="pillars-grid">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7 mt-8 lg:mt-12">
     {PILLARS.map((p) => (
-      <div key={p.t} className="pillar-card">
-        <span className="pillar-card__n">{p.n}</span>
-        <h3>{p.t}</h3>
-        <p>{p.d}</p>
+      <div key={p.t} className="pillar-card rounded-2xl p-5 lg:p-7" style={{ background: "var(--paper)" }}>
+        <span className="block text-[13px] mb-2.5" style={{ fontFamily: "var(--font-serif)", color: "var(--ox-accent)" }}>
+          {p.n}
+        </span>
+        <h3 className="text-base font-bold mb-2.5" style={{ color: "var(--ink)" }}>
+          {p.t}
+        </h3>
+        <p className="text-[13.5px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+          {p.d}
+        </p>
       </div>
     ))}
   </div>
@@ -423,50 +383,17 @@ const PILLARS: Pillar[] = [
 
 - [ ] **Step 2: Add the CSS**
 
-Append to `src/app/home.css`:
+Append to `src/app/home.css`. This is the interactive hover behavior only — border (base + hover color), lift transform, and the motion guard. Padding, radius, background, and typography are Tailwind utilities in the JSX above, not here:
 
 ```css
-/* ── 4 OPERATING PILLARS ── */
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2.4vw, 28px);
-  margin-top: clamp(28px, 4vw, 48px);
-}
-@media (max-width: 1024px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .pillars-grid { grid-template-columns: 1fr; } }
+/* ── 4 OPERATING PILLARS (hover only — layout/type is Tailwind in the JSX) ── */
 .pillar-card {
-  padding: clamp(20px, 2.6vw, 28px);
-  border-radius: 16px;
-  background: var(--paper);
   border: 0.5px solid var(--ink-dim);
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
               border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   transform: translateZ(0);
 }
 .pillar-card:hover { transform: translateY(-3px) translateZ(0); border-color: var(--ox-dim); }
-.pillar-card__n {
-  display: block;
-  font-family: var(--font-serif), serif;
-  font-size: 13px;
-  color: var(--ox-accent);
-  margin-bottom: 10px;
-}
-.pillar-card h3 {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0 0 10px;
-  line-height: 1.3;
-}
-.pillar-card p {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: var(--ink-mid);
-  margin: 0;
-}
 @media (prefers-reduced-motion: reduce) { .pillar-card { transition: none !important; } }
 ```
 
@@ -488,7 +415,7 @@ git commit -m "feat: add 4 Operating Pillars grid to homepage"
 
 **Files:**
 - Create: `src/components/GovernanceAccordion.tsx`
-- Create: `src/components/governance-accordion.css`
+- Create: `src/components/governance-accordion.css` — just the `:focus-visible` outline (the one thing that needs a real token color on a pseudo-class); everything else is Tailwind utilities + inline `style` in the JSX.
 - Modify: `src/app/page.tsx` (import + insert section after Task 4's section)
 
 **Interfaces:**
@@ -525,25 +452,28 @@ export default function GovernanceAccordion() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="gov-accordion">
+    <div className="mt-8 md:mt-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
       {PANELS.map((panel, i) => {
         const expanded = open === i;
         return (
-          <div key={panel.q} className="gov-accordion__row">
+          <div key={panel.q} className="border-b-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
             <button
               type="button"
-              className="gov-accordion__q"
+              className="gov-q flex w-full items-center justify-between gap-4 py-5 md:py-6 px-1 text-left text-[15px] md:text-lg font-semibold"
+              style={{ color: "var(--ink)" }}
               aria-expanded={expanded}
               aria-controls={`gov-panel-${i}`}
               onClick={() => setOpen(expanded ? null : i)}
             >
               <span>{panel.q}</span>
-              <span className="gov-accordion__icon" aria-hidden="true">
+              <span className="text-lg flex-shrink-0" style={{ color: "var(--ox-accent)" }} aria-hidden="true">
                 {expanded ? "–" : "+"}
               </span>
             </button>
-            <div id={`gov-panel-${i}`} className="gov-accordion__a" role="region" hidden={!expanded}>
-              <p>{panel.a}</p>
+            <div id={`gov-panel-${i}`} className="max-w-[68ch] px-1 pb-5 md:pb-6" role="region" hidden={!expanded}>
+              <p className="text-[14.5px] leading-relaxed" style={{ color: "var(--ink-mid)" }}>
+                {panel.a}
+              </p>
             </div>
           </div>
         );
@@ -558,45 +488,10 @@ export default function GovernanceAccordion() {
 Create `src/components/governance-accordion.css`:
 
 ```css
-.gov-accordion { border-top: 0.5px solid var(--ink-dim); margin-top: clamp(24px, 3vw, 40px); }
-.gov-accordion__row { border-bottom: 0.5px solid var(--ink-dim); }
-.gov-accordion__q {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: clamp(18px, 2.4vw, 26px) 4px;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  font-family: var(--font-sans), sans-serif;
-  font-size: clamp(15px, 1.6vw, 18px);
-  font-weight: 600;
-  color: var(--ink);
+.gov-q:focus-visible {
+  outline: 2px solid var(--ox-accent);
+  outline-offset: 4px;
 }
-.gov-accordion__q:focus-visible { outline: 2px solid var(--ox-accent); outline-offset: 4px; }
-.gov-accordion__icon {
-  flex-shrink: 0;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 18px;
-  color: var(--ox-accent);
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  transform: translateZ(0);
-}
-.gov-accordion__a {
-  padding: 0 4px clamp(18px, 2.4vw, 26px);
-  max-width: 68ch;
-}
-.gov-accordion__a p {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: var(--ink-mid);
-  margin: 0;
-}
-@media (prefers-reduced-motion: reduce) { .gov-accordion__icon { transition: none !important; } }
 ```
 
 - [ ] **Step 3: Import and embed on the homepage**
@@ -639,8 +534,7 @@ git commit -m "feat: add Enterprise AI Safety & Governance accordion to homepage
 ### Task 6: Create the `/systems` route with the High-Velocity ADDIE Pipeline
 
 **Files:**
-- Create: `src/app/systems/page.tsx`
-- Create: `src/app/systems/systems.css`
+- Create: `src/app/systems/page.tsx` — no CSS file. Everything on this page is static (no hover/interactive state), so it's Tailwind utilities + inline `style` for token colors, same rule as Tasks 2-3.
 
 **Interfaces:**
 - Consumes: `SiteNav` (`@/components/SiteNav`), `ThemeToggle` (`@/components/ThemeToggle`) — same pattern as `src/app/about/page.tsx`.
@@ -655,7 +549,6 @@ import type { Metadata } from "next";
 import SiteNav from "@/components/SiteNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import PromptVault from "@/components/PromptVault";
-import "./systems.css";
 
 export const metadata: Metadata = {
   title: "Systems — Jackie Miller",
@@ -699,32 +592,48 @@ export default function Systems() {
   return (
     <>
       <SiteNav />
-      <main id="main-content" className="systems">
-        <section className="sys sys-hero">
+      <main id="main-content" className="max-w-[1120px] mx-auto px-6">
+        <section className="pt-16 md:pt-24 lg:pt-28 pb-8 md:pb-12">
           <p className="ds-eyebrow">Applied Methodology</p>
-          <h1 className="sys-hero__title">The High-Velocity ADDIE Pipeline</h1>
-          <p className="sys-hero__sub">
+          <h1
+            className="text-4xl md:text-6xl mt-3 mb-4"
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 400, lineHeight: 1.02, color: "var(--ink)" }}
+          >
+            The High-Velocity ADDIE Pipeline
+          </h1>
+          <p className="text-base md:text-lg leading-snug max-w-[62ch]" style={{ color: "var(--ink-mid)" }}>
             How enterprise learning production compresses from a 16-week baseline to a 3-week
             sprint — without cutting pedagogical corners.
           </p>
         </section>
 
-        <section className="sys sys-sec">
-          <div className="addie-list">
+        <section className="py-10 md:py-16">
+          <div className="flex flex-col gap-8 md:gap-11">
             {STAGES.map((s) => (
-              <div key={s.n} className="addie-stage">
-                <div className="addie-stage__head">
-                  <span className="addie-stage__n">{s.n}</span>
-                  <h2>{s.t}</h2>
+              <div key={s.n} className="border-t-[0.5px] pt-5 md:pt-8" style={{ borderColor: "var(--ink-dim)" }}>
+                <div className="flex items-baseline gap-3.5 mb-4">
+                  <span className="text-base" style={{ fontFamily: "var(--font-serif)", color: "var(--ox-accent)" }}>
+                    {s.n}
+                  </span>
+                  <h2 className="text-lg md:text-xl font-bold" style={{ color: "var(--ink)" }}>
+                    {s.t}
+                  </h2>
                 </div>
-                <div className="addie-stage__cols">
-                  <div className="addie-stage__col">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-7">
+                  <div className="rounded-2xl p-4 md:p-5 border-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
                     <p className="ds-eyebrow ds-eyebrow--solo">Traditional</p>
-                    <p>{s.traditional}</p>
+                    <p className="mt-2 text-sm leading-snug" style={{ color: "var(--ink-mid)" }}>
+                      {s.traditional}
+                    </p>
                   </div>
-                  <div className="addie-stage__col addie-stage__col--accent">
+                  <div
+                    className="rounded-2xl p-4 md:p-5 border-[0.5px]"
+                    style={{ borderColor: "var(--ox-dim)", background: "color-mix(in srgb, var(--ox) 4%, transparent)" }}
+                  >
                     <p className="ds-eyebrow ds-eyebrow--solo">Accelerated</p>
-                    <p>{s.accelerated}</p>
+                    <p className="mt-2 text-sm leading-snug" style={{ color: "var(--ink)" }}>
+                      {s.accelerated}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -732,8 +641,8 @@ export default function Systems() {
           </div>
         </section>
 
-        <section className="sys sys-sec sys-sec--alt">
-          <div className="hm-sec__head">
+        <section className="py-10 md:py-16">
+          <div className="mb-6">
             <p className="ds-eyebrow">Prompt & Scaffolding Vault</p>
             <h2 className="hm-sec__title">
               Sanitized architecture, <em>inspectable in the open.</em>
@@ -748,51 +657,7 @@ export default function Systems() {
 }
 ```
 
-- [ ] **Step 2: Create the CSS**
-
-Create `src/app/systems/systems.css`:
-
-```css
-.systems { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.sys { max-width: 100%; }
-.sys-hero { padding: clamp(64px, 10vw, 120px) 0 clamp(32px, 5vw, 56px); }
-.sys-hero__title {
-  font-family: var(--font-serif), serif;
-  font-weight: 400;
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1.02;
-  color: var(--ink);
-  margin: 14px 0 18px;
-}
-.sys-hero__sub {
-  font-family: var(--font-sans), sans-serif;
-  font-size: clamp(15px, 1.6vw, 18px);
-  line-height: 1.55;
-  color: var(--ink-mid);
-  max-width: 62ch;
-}
-.sys-sec { padding: clamp(40px, 6vw, 72px) 0; }
-.sys-sec--alt { background: var(--paper2); margin: 0 -24px; padding: clamp(40px, 6vw, 72px) 24px; }
-
-.addie-list { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
-.addie-stage { border-top: 0.5px solid var(--ink-dim); padding-top: clamp(20px, 3vw, 32px); }
-.addie-stage__head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 16px; }
-.addie-stage__n { font-family: var(--font-serif), serif; color: var(--ox-accent); font-size: 16px; }
-.addie-stage__head h2 {
-  font-family: var(--font-sans), sans-serif;
-  font-weight: 700;
-  font-size: clamp(18px, 2vw, 22px);
-  color: var(--ink);
-}
-.addie-stage__cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2.4vw, 28px); }
-@media (max-width: 720px) { .addie-stage__cols { grid-template-columns: 1fr; } }
-.addie-stage__col { padding: 16px 18px; border: 0.5px solid var(--ink-dim); border-radius: 14px; }
-.addie-stage__col--accent { border-color: var(--ox-dim); background: color-mix(in srgb, var(--ox) 4%, transparent); }
-.addie-stage__col p:last-child { margin-top: 8px; font-family: var(--font-sans), sans-serif; font-size: 14px; line-height: 1.55; color: var(--ink-mid); }
-.addie-stage__col--accent p:last-child { color: var(--ink); }
-```
-
-- [ ] **Step 3: Verify (will fail until Task 7 adds `PromptVault` — expected)**
+- [ ] **Step 2: Verify (will fail until Task 7 adds `PromptVault` — expected)**
 
 Run: `npm run lint`
 Expected: FAIL — `Cannot find module '@/components/PromptVault'`. This is expected; Task 7 creates it next. Do not attempt to work around it — proceed directly to Task 7.
@@ -802,8 +667,7 @@ Expected: FAIL — `Cannot find module '@/components/PromptVault'`. This is expe
 ### Task 7: Build the Prompt & Scaffolding Vault component
 
 **Files:**
-- Create: `src/components/PromptVault.tsx`
-- Create: `src/components/prompt-vault.css`
+- Create: `src/components/PromptVault.tsx` — no CSS file. The active-tab look is driven by React state (`active === i`), not a CSS `:hover`/`:focus` pseudo-class, so it can be plain conditional inline `style` — no inline-style-vs-`:hover`-specificity problem here since nothing needs to override it from a stylesheet. The copy button reuses the existing `.ds-btn.ds-btn--ghost` primitive, which already owns its own hover CSS in `system.css` — untouched, no new CSS needed.
 
 **Interfaces:**
 - Produces: `export default function PromptVault()` — no props, self-contained tab state. Consumed by `src/app/systems/page.tsx` (Task 6).
@@ -816,7 +680,6 @@ Create `src/components/PromptVault.tsx`:
 "use client";
 
 import { useState } from "react";
-import "./prompt-vault.css";
 
 type Prompt = { key: string; label: string; note: string; body: string };
 
@@ -886,32 +749,45 @@ export default function PromptVault() {
   }
 
   return (
-    <div className="prompt-vault">
-      <div className="prompt-vault__tabs" role="tablist" aria-label="Sanitized prompt templates">
-        {PROMPTS.map((p, i) => (
-          <button
-            key={p.key}
-            type="button"
-            role="tab"
-            aria-selected={active === i}
-            className={`prompt-vault__tab${active === i ? " is-active" : ""}`}
-            onClick={() => setActive(i)}
-          >
-            {p.label}
-          </button>
-        ))}
+    <div className="mt-6 md:mt-10">
+      <div className="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="Sanitized prompt templates">
+        {PROMPTS.map((p, i) => {
+          const isActive = active === i;
+          return (
+            <button
+              key={p.key}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className="rounded-full px-4 py-2.5 text-xs font-semibold border-[0.5px] transition-colors duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--ox-accent)]"
+              style={{ borderColor: isActive ? "var(--ox-accent)" : "var(--ink-dim)", color: isActive ? "var(--ox-accent)" : "var(--ink-mid)" }}
+              onClick={() => setActive(i)}
+            >
+              {p.label}
+            </button>
+          );
+        })}
       </div>
-      <div className="prompt-vault__panel" role="tabpanel">
-        <div className="prompt-vault__meta">
-          <span className="prompt-vault__note">{current.note}</span>
-          <button type="button" className="ds-btn ds-btn--ghost prompt-vault__copy" onClick={handleCopy}>
+      <div
+        className="rounded-2xl p-5 md:p-6 border-[0.5px]"
+        style={{ borderColor: "var(--ink-dim)", background: "var(--paper)" }}
+        role="tabpanel"
+      >
+        <div className="flex items-center justify-between gap-3 mb-3.5">
+          <span className="text-xs" style={{ color: "var(--ink-mid)" }}>
+            {current.note}
+          </span>
+          <button type="button" className="ds-btn ds-btn--ghost px-4 py-2 text-xs" onClick={handleCopy}>
             {copied ? "Copied" : "Copy"}
           </button>
         </div>
-        <pre className="prompt-vault__code">
+        <pre
+          className="m-0 p-4 rounded-[10px] overflow-x-auto text-[12.5px] leading-relaxed whitespace-pre"
+          style={{ background: "var(--paper2)", color: "var(--ink)", fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}
+        >
           <code>{current.body}</code>
         </pre>
-        <p className="prompt-vault__watermark">
+        <p className="mt-3.5 text-[10.5px] leading-snug opacity-75" style={{ color: "var(--ink-mid)" }}>
           Demonstration Artifact: All organizational data, transcripts, and persona dialogue
           synthesized for portfolio demonstration in compliance with enterprise NDAs.
         </p>
@@ -921,69 +797,15 @@ export default function PromptVault() {
 }
 ```
 
-- [ ] **Step 2: Create the CSS**
-
-Create `src/components/prompt-vault.css`:
-
-```css
-.prompt-vault { margin-top: clamp(24px, 3vw, 40px); }
-.prompt-vault__tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.prompt-vault__tab {
-  padding: 9px 16px;
-  border-radius: 999px;
-  border: 0.5px solid var(--ink-dim);
-  background: none;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--ink-mid);
-  cursor: pointer;
-  transition: border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-              color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.prompt-vault__tab.is-active { border-color: var(--ox-accent); color: var(--ox-accent); }
-.prompt-vault__tab:focus-visible { outline: 2px solid var(--ox-accent); outline-offset: 2px; }
-.prompt-vault__panel {
-  border: 0.5px solid var(--ink-dim);
-  border-radius: 16px;
-  padding: clamp(18px, 2.4vw, 26px);
-  background: var(--paper);
-}
-.prompt-vault__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.prompt-vault__note { font-family: var(--font-sans), sans-serif; font-size: 12px; color: var(--ink-mid); }
-.prompt-vault__copy { padding: 8px 16px; font-size: 12px; }
-.prompt-vault__code {
-  margin: 0;
-  padding: 16px;
-  border-radius: 10px;
-  background: var(--paper2);
-  overflow-x: auto;
-  font-family: ui-monospace, "SF Mono", Menlo, monospace;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: var(--ink);
-  white-space: pre;
-}
-.prompt-vault__watermark {
-  margin: 14px 0 0;
-  font-family: var(--font-sans), sans-serif;
-  font-size: 10.5px;
-  line-height: 1.5;
-  color: var(--ink-mid);
-  opacity: 0.75;
-}
-@media (prefers-reduced-motion: reduce) { .prompt-vault__tab { transition: none !important; } }
-```
-
-- [ ] **Step 3: Verify**
+- [ ] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0. This also resolves Task 6's expected failure.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 3: Commit**
 
 ```bash
-git add src/app/systems/ src/components/PromptVault.tsx src/components/prompt-vault.css
+git add src/app/systems/ src/components/PromptVault.tsx
 git commit -m "feat: add /systems route with ADDIE pipeline and Prompt & Scaffolding Vault"
 ```
 

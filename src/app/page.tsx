@@ -314,6 +314,13 @@ export default function Home() {
                   <div className="work-card__cover is-live" aria-label={cs.coverAlt}>
                     <TabletMock lesson={2} />
                   </div>
+                ) : cs.statNum ? (
+                  <div className="work-card__cover is-stat">
+                    <div>
+                      <div className="stat-num">{cs.statNum}</div>
+                      <div className="stat-label">{cs.statLabel}</div>
+                    </div>
+                  </div>
                 ) : (
                   <div className="work-card__cover">
                     <Image src={cs.cover} alt={cs.coverAlt} fill sizes="(max-width: 900px) 100vw, 520px" />

@@ -80,18 +80,39 @@ export default function Home() {
               persona simulations to compress development timelines by 3x–5x, secured by strict
               human-in-the-loop governance.
             </p>
-            <ul className="hm-trust" aria-label="Trust signals">
-              <li className="hm-trust__badge">
-                <span className="hm-trust__t">3x–5x Delivery Compression</span>
-                <span className="hm-trust__d">From SME discovery to high-fidelity pilot.</span>
+            <ul className="flex flex-wrap gap-3 mt-2 p-0 list-none" aria-label="Trust signals">
+              <li
+                className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+                style={{ borderColor: "var(--ink-dim)" }}
+              >
+                <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+                  3x–5x Delivery Compression
+                </span>
+                <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+                  From SME discovery to high-fidelity pilot.
+                </span>
               </li>
-              <li className="hm-trust__badge">
-                <span className="hm-trust__t">Zero-Data-Retention Security</span>
-                <span className="hm-trust__d">Private sandbox isolation for all enterprise IP.</span>
+              <li
+                className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+                style={{ borderColor: "var(--ink-dim)" }}
+              >
+                <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+                  Zero-Data-Retention Security
+                </span>
+                <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+                  Private sandbox isolation for all enterprise IP.
+                </span>
               </li>
-              <li className="hm-trust__badge">
-                <span className="hm-trust__t">Cognitive Rigor Guaranteed</span>
-                <span className="hm-trust__d">Every objective anchored in measurable behavioral change.</span>
+              <li
+                className="flex flex-col gap-1 max-w-[220px] rounded-2xl px-5 py-3 border-[0.5px]"
+                style={{ borderColor: "var(--ink-dim)" }}
+              >
+                <span className="text-xs font-bold tracking-[0.01em]" style={{ color: "var(--ink)" }}>
+                  Cognitive Rigor Guaranteed
+                </span>
+                <span className="text-[11px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+                  Every objective anchored in measurable behavioral change.
+                </span>
               </li>
             </ul>
             <div className="hm-hero__cta">

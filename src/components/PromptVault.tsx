@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Prompt = { key: string; label: string; note: string; body: string };
 
@@ -60,6 +60,12 @@ export default function PromptVault() {
   const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const current = PROMPTS[active];
 
+  useEffect(() => {
+    return () => {
+      if (copyTimeout.current) clearTimeout(copyTimeout.current);
+    };
+  }, []);
+
   function handleTabChange(i: number) {
     setActive(i);
     setCopied(false);
@@ -78,7 +84,7 @@ export default function PromptVault() {
 
   return (
     <div className="mt-6 md:mt-10">
-      <div className="flex flex-wrap gap-2 mb-4" aria-label="Sanitized prompt templates">
+      <div className="flex flex-wrap gap-2 mb-4" role="group" aria-label="Sanitized prompt templates">
         {PROMPTS.map((p, i) => {
           const isActive = active === i;
           return (
@@ -109,6 +115,7 @@ export default function PromptVault() {
         </div>
         <pre
           tabIndex={0}
+          role="group"
           aria-label="Prompt template code"
           className="m-0 p-4 rounded-[10px] overflow-x-auto text-[12.5px] leading-relaxed whitespace-pre"
           style={{ background: "var(--paper2)", color: "var(--ink)", fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}

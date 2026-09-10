@@ -19,6 +19,8 @@ export const metadata: Metadata = {
     title: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
     description:
       "Senior Learning Experience Architect & AI Workflow Lead. Compressing enterprise learning production timelines 3x–5x through LLM orchestration and synthetic persona simulation.",
+    url: "https://jackiemiller.co",
+    siteName: "Jackie Miller",
     images: [
       {
         url: "/og.png",
@@ -27,6 +29,8 @@ export const metadata: Metadata = {
         alt: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",

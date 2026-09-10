@@ -11,12 +11,14 @@ export const metadata: Metadata = {
     title: "Systems — Jackie Miller",
     description:
       "The High-Velocity ADDIE Pipeline: how enterprise learning production compresses from 16 weeks to 3 weeks, and the sanitized prompt architecture behind it.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Systems — Jackie Miller" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Systems — Jackie Miller",
     description:
       "The High-Velocity ADDIE Pipeline: how enterprise learning production compresses from 16 weeks to 3 weeks, and the sanitized prompt architecture behind it.",
+    images: ["/og.png"],
   },
 };
 
@@ -57,7 +59,7 @@ export default function Systems() {
     <>
       <SiteNav />
       <div style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)" }}>
-        <main id="main-content" className="max-w-[1120px] mx-auto px-6">
+        <main className="max-w-[1120px] mx-auto px-6">
           <section className="pt-16 md:pt-24 lg:pt-28 pb-8 md:pb-12">
             <p className="ds-eyebrow">Applied Methodology</p>
             <h1
@@ -113,7 +115,7 @@ export default function Systems() {
                 className="text-2xl md:text-4xl mt-3"
                 style={{ fontFamily: "var(--font-serif)", fontWeight: 400, lineHeight: 1.05, color: "var(--ink)" }}
               >
-                Sanitized architecture, <em>inspectable in the open.</em>
+                Sanitized architecture, <em style={{ color: "var(--ox-accent)" }}>inspectable in the open.</em>
               </h2>
             </div>
             <PromptVault />

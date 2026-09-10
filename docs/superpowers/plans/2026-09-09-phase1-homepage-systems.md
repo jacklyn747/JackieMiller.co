@@ -1,6 +1,6 @@
 # Phase 1 — Homepage Rebrand & /systems Page Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Ship the new "High-Velocity Learning Architecture. Governed Enterprise AI." positioning on the homepage (new hero, trust badges, L&D Dilemma module, 4 Operating Pillars, Governance Accordion) and stand up the `/systems` route (ADDIE pipeline breakdown + Prompt & Scaffolding Vault), without touching or deleting any existing real content.
 
@@ -33,7 +33,7 @@
 **Interfaces:**
 - Produces: a working `/systems` link in the persistent nav and footer that later tasks' route (Task 6) resolves.
 
-- [ ] **Step 1: Add the nav link**
+- [x] **Step 1: Add the nav link**
 
 In `src/components/SiteNav.tsx`, change:
 
@@ -56,7 +56,7 @@ const LINKS = [
 ];
 ```
 
-- [ ] **Step 2: Update homepage metadata to the new positioning**
+- [x] **Step 2: Update homepage metadata to the new positioning**
 
 In `src/app/page.tsx`, change:
 
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 };
 ```
 
-- [ ] **Step 3: Add Systems to the footer nav**
+- [x] **Step 3: Add Systems to the footer nav**
 
 In `src/app/page.tsx`, inside the `<footer className="hm-foot">` block, change:
 
@@ -103,12 +103,12 @@ to:
 </nav>
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0, no new warnings.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/SiteNav.tsx src/app/page.tsx
@@ -125,7 +125,7 @@ git commit -m "feat: add /systems to nav, update homepage metadata for enterpris
 **Interfaces:**
 - Produces: no new classes — trust badges are plain Tailwind utility classes inline, not reused elsewhere.
 
-- [ ] **Step 1: Replace the hero markup**
+- [x] **Step 1: Replace the hero markup**
 
 In `src/app/page.tsx`, replace the entire hero `<div className="hm-hero__lede">` block:
 
@@ -212,12 +212,12 @@ with:
 </div>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/page.tsx
@@ -231,7 +231,7 @@ git commit -m "feat: rewrite homepage hero with enterprise L&D positioning + tru
 **Files:**
 - Modify: `src/app/page.tsx` (insert new `<section>` immediately after the `hm-proof` section, before `{/* ── SELECTED WORK ── */}`) — JSX-only, no CSS file (static, no hover state; spacing/type via Tailwind utilities, colors via inline `style`).
 
-- [ ] **Step 1: Insert the section**
+- [x] **Step 1: Insert the section**
 
 In `src/app/page.tsx`, immediately after the closing `</section>` of `hm-proof` and before `{/* ── SELECTED WORK ── */}`, insert:
 
@@ -302,12 +302,12 @@ In `src/app/page.tsx`, immediately after the closing `</section>` of `hm-proof` 
 </section>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/page.tsx
@@ -322,7 +322,7 @@ git commit -m "feat: add The Modern L&D Dilemma comparison module to homepage"
 - Modify: `src/app/page.tsx` (insert new `<section>` immediately after the Task 3 section)
 - Modify: `src/app/home.css` (append a small `.pillar-card` rule — hover lift + hover border-color only; everything else is Tailwind utilities + inline `style` in the JSX. The hover border-color must live in CSS, not inline `style`, because an inline `style` value always wins over a stylesheet `:hover` rule regardless of specificity — there's no way to override it from CSS.)
 
-- [ ] **Step 1: Insert the section**
+- [x] **Step 1: Insert the section**
 
 In `src/app/page.tsx`, immediately after the closing `</section>` of the L&D Dilemma module (Task 3), insert:
 
@@ -381,7 +381,7 @@ const PILLARS: Pillar[] = [
 ];
 ```
 
-- [ ] **Step 2: Add the CSS**
+- [x] **Step 2: Add the CSS**
 
 Append to `src/app/home.css`. This is the interactive hover behavior only — border (base + hover color), lift transform, and the motion guard. Padding, radius, background, and typography are Tailwind utilities in the JSX above, not here:
 
@@ -397,12 +397,12 @@ Append to `src/app/home.css`. This is the interactive hover behavior only — bo
 @media (prefers-reduced-motion: reduce) { .pillar-card { transition: none !important; } }
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/app/page.tsx src/app/home.css
@@ -421,7 +421,7 @@ git commit -m "feat: add 4 Operating Pillars grid to homepage"
 **Interfaces:**
 - Produces: `export default function GovernanceAccordion()` — no props, self-contained state.
 
-- [ ] **Step 1: Create the component**
+- [x] **Step 1: Create the component**
 
 Create `src/components/GovernanceAccordion.tsx`:
 
@@ -483,7 +483,7 @@ export default function GovernanceAccordion() {
 }
 ```
 
-- [ ] **Step 2: Create the CSS**
+- [x] **Step 2: Create the CSS**
 
 Create `src/components/governance-accordion.css`:
 
@@ -494,7 +494,7 @@ Create `src/components/governance-accordion.css`:
 }
 ```
 
-- [ ] **Step 3: Import and embed on the homepage**
+- [x] **Step 3: Import and embed on the homepage**
 
 In `src/app/page.tsx`, add the import near the other component imports:
 
@@ -517,12 +517,12 @@ Immediately after the closing `</section>` of the 4 Pillars grid (Task 4), inser
 </section>
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/GovernanceAccordion.tsx src/components/governance-accordion.css src/app/page.tsx
@@ -540,7 +540,7 @@ git commit -m "feat: add Enterprise AI Safety & Governance accordion to homepage
 - Consumes: `SiteNav` (`@/components/SiteNav`), `ThemeToggle` (`@/components/ThemeToggle`) — same pattern as `src/app/about/page.tsx`.
 - Produces: the `/systems` route that Task 1's nav link points to; the page shell that Task 7's `PromptVault` mounts into.
 
-- [ ] **Step 1: Create the page**
+- [x] **Step 1: Create the page**
 
 Create `src/app/systems/page.tsx`:
 
@@ -657,7 +657,7 @@ export default function Systems() {
 }
 ```
 
-- [ ] **Step 2: Verify (will fail until Task 7 adds `PromptVault` — expected)**
+- [x] **Step 2: Verify (will fail until Task 7 adds `PromptVault` — expected)**
 
 Run: `npm run lint`
 Expected: FAIL — `Cannot find module '@/components/PromptVault'`. This is expected; Task 7 creates it next. Do not attempt to work around it — proceed directly to Task 7.
@@ -672,7 +672,7 @@ Expected: FAIL — `Cannot find module '@/components/PromptVault'`. This is expe
 **Interfaces:**
 - Produces: `export default function PromptVault()` — no props, self-contained tab state. Consumed by `src/app/systems/page.tsx` (Task 6).
 
-- [ ] **Step 1: Create the component**
+- [x] **Step 1: Create the component**
 
 Create `src/components/PromptVault.tsx`:
 
@@ -797,12 +797,12 @@ export default function PromptVault() {
 }
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0. This also resolves Task 6's expected failure.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/app/systems/ src/components/PromptVault.tsx
@@ -815,11 +815,11 @@ git commit -m "feat: add /systems route with ADDIE pipeline and Prompt & Scaffol
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Start the dev server**
+- [x] **Step 1: Start the dev server**
 
 Run: `npm run dev`
 
-- [ ] **Step 2: Verify in a real browser (per AUTHORITIES.md's deploy-verify gate — never trust the build alone)**
+- [x] **Step 2: Verify in a real browser (per AUTHORITIES.md's deploy-verify gate — never trust the build alone)**
 
 Visit `http://localhost:3000/` and confirm:
 - Hero shows the new headline, trust badges render and wrap correctly at mobile width.
@@ -833,7 +833,7 @@ Visit `http://localhost:3000/systems` and confirm:
 
 Toggle dark mode (theme toggle) and confirm all new sections repaint correctly in both themes.
 
-- [ ] **Step 3: Report back**
+- [x] **Step 3: Report back**
 
 Note any visual issues found for follow-up — do not silently patch and move on without flagging what broke.
 
@@ -844,3 +844,28 @@ Note any visual issues found for follow-up — do not silently patch and move on
 - **Spec coverage:** Hero headline ✓ (Task 2), Dual-Trust Badges ✓ (Task 2), L&D Dilemma 2-col module ✓ (Task 3), 4 Operating Pillars ✓ (Task 4), Governance Accordion ✓ (Task 5), ADDIE Pipeline comparison ✓ (Task 6), Prompt Vault w/ syntax display + copy triggers ✓ (Task 7). **Not in this phase, by design** (see master plan): live persona simulation sandbox (Phase 4 — needs an API backend), `/work` case studies (Phase 2), `/contact` router (Phase 3).
 - **Placeholder scan:** clean — every step has real, complete code; no `{{...}}` outside the intentionally-templated prompt bodies (which are the deliverable, not a TODO).
 - **Type consistency:** `PromptVault` and `GovernanceAccordion` are both zero-prop, self-contained default exports — no signature drift risk with later tasks in this phase.
+
+## Status: Shipped (2026-09-09)
+
+All 8 tasks complete, executed subagent-driven (implementer + reviewer per task, final whole-branch review, two consolidated fix passes). Final commit: `25e11a8` on `feature/enterprise-ld-rebrand`.
+
+## Deviations & fixes found in verification
+
+Two deviations from this plan's original text, both superseded mid-execution by a course correction from Jacklyn (this project uses standard Tailwind utility classes for spacing/typography, not custom `--space-*`/`--text-*` CSS variables) — every task from Task 2 onward was rewritten in-place in this file to match before being dispatched. Task 6's Architecture note originally said `/systems` would follow `/about`'s "SiteNav + ThemeToggle + a page-scoped CSS file" pattern; it ended up needing no CSS file at all once the Tailwind-utilities convention was applied (only true exceptions: `.pillar-card:hover` in Task 4, `.gov-q:focus-visible` in Task 5).
+
+Manual browser verification (Task 8) and the subsequent final whole-branch review together found and fixed real rendering/metadata bugs invisible to `npm run lint`/`npm run build` and to diff-based per-task review:
+
+1. **Sitewide CSS layer bug** (`3f6f89e`) — `globals.css`'s universal reset was unlayered, so per the CSS Cascade Layers spec it beat every Tailwind utility class (all wrapped in `@layer utilities`) regardless of specificity. Every padding/margin utility site-wide computed to 0px. Pre-existing bug (predates this branch), newly consequential because this phase leans on Tailwind spacing utilities. Fixed by wrapping the reset in `@layer base {}`. **Flagged, not fixed:** `system.css` has a smaller-blast-radius version of the same pattern on specific `.ds-*` classes (confirmed to still bite once, below) — a separate decision for a future pass.
+2. **`/systems` missing background paint** (`34eda30`) — the homepage's `.home` class paints `background: var(--paper)` over the site's permanently-dark `<body>`; `/systems`'s `<main>` never got the equivalent, so it was invisible in dark mode but broken in light mode.
+3. **`/systems` heading using a homepage-only CSS class** (`36adfc6`, Critical) — `<h2 className="hm-sec__title">` depends on `home.css`, which isn't loaded on `/systems`, so it rendered unstyled on any hard/direct page load (only looked fine via client-side nav from the homepage, which is why Task 8's manual check first missed it). Fixed with an inline-styled heading matching the page's own `<h1>` pattern.
+4. **`/systems` background only covered the 1120px column** (`36adfc6`) — same class of bug as #2, recurring at the page edges above 1120px viewport width; fixed with a full-bleed wrapper.
+5. **Stale Open Graph/Twitter metadata**, then **a metadata regression from fixing it** (`36adfc6` → `25e11a8`) — the homepage/`/systems` pages' own `openGraph`/`twitter` fields replace (not merge with) the root layout's, so adding page-level metadata without copying every field the root previously supplied silently dropped `og:image` on `/systems` and `url`/`siteName`/`locale`/`type` on the homepage. `layout.tsx` itself was correctly never touched (it's shared by pages this rebrand hasn't reached yet).
+6. **Copy button on the Prompt Vault rendered full-size, not compact** (`36adfc6`) — same root cause as #1 but on `system.css`'s `.ds-btn` instead of the global reset: Tailwind utility classes (`px-4 py-2 text-xs`) were silently dead against the unlayered `.ds-btn` rule. Fixed by adding a proper `.ds-btn--sm` modifier to `system.css` per `AGENTS.md`'s own "add a variant modifier, don't fork a local copy" rule, rather than reaching for more dead utility classes.
+7. Several accessibility gaps in the two new interactive components (incomplete ARIA tabs pattern on the Prompt Vault, unnamed accordion region, non-keyboard-scrollable code block, stale "Copied" state across tab switches) — all fixed; see `36adfc6` and `25e11a8`.
+8. **Controller error, corrected:** an `id="main-content"` was added to `/systems`'s `<main>` under the mistaken belief that `SiteNav.tsx` contains a skip-link targeting it sitewide. Verified directly: no skip link exists anywhere in this codebase, on this branch or on `main` before it — the id was dead. Removed (`25e11a8`). A real, sitewide skip-link is a legitimate future accessibility improvement (the project's own `AUTHORITIES.md` commits to WCAG 2.2 AA) but is out of scope for this phase — it would touch every page's `<main>`, not just this one.
+
+**Not addressed, flagged for a human decision** (copy/positioning judgment calls, not code defects):
+- The final review noted the new copy mixes first-person ("I engineer...") with plural ("We eliminate...", "we enforce...") across the hero, pillars, and governance sections — all transcribed verbatim from the source roadmap docs. Worth a copy pass if the plural reads as agency-speak rather than intentional.
+- "Cognitive Rigor Guaranteed" (hero trust badge) is the only unqualified guarantee on the page.
+- The "Review the AI Governance Charter" CTA links to a 3-question FAQ (this phase's Governance Accordion); the actual Charter artifact is Phase 5 work. Consider renaming the CTA now, or accepting the gap knowingly until Phase 5 ships.
+- Tone seam between the new enterprise-L&D sections and the retained "Boring is the enemy" / justice-involved-learners homepage sections below them — expected since Phase 1 is additive and `/work` (Phase 2) owns the case-study reframe, but worth deciding deliberately once seen end-to-end.

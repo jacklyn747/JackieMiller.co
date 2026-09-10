@@ -31,6 +31,30 @@ const PROOF = [
   <>Built a <b>live, playable course</b></>,
 ];
 
+type Pillar = { n: string; t: string; d: string };
+const PILLARS: Pillar[] = [
+  {
+    n: "01",
+    t: "Applied AI Workflow Acceleration",
+    d: "The Velocity Layer. Transforming unstructured SME transcripts, technical roadmaps, and fragmented documentation into structured instructional outlines, branching storyboards, and interactive exercises in hours. We eliminate mechanical drag so instructional craft can focus on deep impact.",
+  },
+  {
+    n: "02",
+    t: "Dynamic Persona & Simulation Architecture",
+    d: "The Immersive Layer. Leveraging advanced conversational modeling to build responsive, role-specific agents. Learners navigate difficult conversations, complex sales objections, and leadership challenges with synthetic stakeholders that react with authentic behavioral fidelity.",
+  },
+  {
+    n: "03",
+    t: "Strict Enterprise IP & Data Sandboxing",
+    d: "The Trust Layer. No corporate secrets in public training models. Ever. All workflow acceleration is executed within zero-data-retention APIs, air-gapped instances, or sanitized local environments. Your IP remains your IP.",
+  },
+  {
+    n: "04",
+    t: "Human-in-the-Loop Pedagogical Rigor",
+    d: "The Integrity Layer. AI generates the baseline; human expertise approves the artifact. Every module is verified against adult learning principles, cognitive load thresholds, and company-specific compliance standards before it ever reaches a learner.",
+  },
+];
+
 type HowCard = { t: string; d: string; icon?: string; iw?: number; ih?: number; alt?: string };
 const HOW: HowCard[] = [
   {
@@ -211,6 +235,31 @@ export default function Home() {
                 ))}
               </ul>
             </div>
+          </div>
+        </section>
+
+        {/* ── 4 OPERATING PILLARS ── */}
+        <section className="hm hm-sec hm-sec--alt" id="pillars">
+          <div className="hm-sec__head">
+            <p className="ds-eyebrow">The Operating System</p>
+            <h2 className="hm-sec__title">
+              Four pillars, <em>one governed pipeline.</em>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7 mt-8 lg:mt-12">
+            {PILLARS.map((p) => (
+              <div key={p.t} className="pillar-card rounded-2xl p-5 lg:p-7" style={{ background: "var(--paper)" }}>
+                <span className="block text-[13px] mb-2.5" style={{ fontFamily: "var(--font-serif)", color: "var(--ox-accent)" }}>
+                  {p.n}
+                </span>
+                <h3 className="text-base font-bold mb-2.5" style={{ color: "var(--ink)" }}>
+                  {p.t}
+                </h3>
+                <p className="text-[13.5px] leading-snug" style={{ color: "var(--ink-mid)" }}>
+                  {p.d}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
 

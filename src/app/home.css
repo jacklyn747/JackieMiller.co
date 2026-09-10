@@ -267,3 +267,13 @@
 @media (prefers-reduced-motion: reduce) {
   .hm-flash { transition: none !important; }
 }
+
+/* ── 4 OPERATING PILLARS (hover only — layout/type is Tailwind in the JSX) ── */
+.pillar-card {
+  border: 0.5px solid var(--ink-dim);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateZ(0);
+}
+.pillar-card:hover { transform: translateY(-3px) translateZ(0); border-color: var(--ox-dim); }
+@media (prefers-reduced-motion: reduce) { .pillar-card { transition: none !important; } }

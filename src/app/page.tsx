@@ -12,9 +12,29 @@ import "./home.css";
 import "./work/work.css";
 
 export const metadata: Metadata = {
-  title: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
+  title: "Jackie Miller — High-Velocity Learning Architecture",
   description:
     "Senior Learning Experience Architect & AI Workflow Lead. Compressing enterprise learning production timelines 3x–5x through LLM orchestration and synthetic persona simulation — secured by zero-data-retention, human-in-the-loop governance.",
+  openGraph: {
+    title: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
+    description:
+      "Senior Learning Experience Architect & AI Workflow Lead. Compressing enterprise learning production timelines 3x–5x through LLM orchestration and synthetic persona simulation.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jackie Miller — High-Velocity Learning Architecture. Governed Enterprise AI.",
+    description:
+      "Senior Learning Experience Architect & AI Workflow Lead. Compressing enterprise learning production timelines 3x–5x through LLM orchestration and synthetic persona simulation.",
+    images: ["/og.png"],
+  },
 };
 
 // Portrait appears once dropped at public/about/portrait.(jpg|jpeg|png|webp).

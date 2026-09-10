@@ -31,6 +31,7 @@ export default function GovernanceAccordion() {
           <div key={panel.q} className="border-b-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
             <button
               type="button"
+              id={`gov-q-${i}`}
               className="gov-q flex w-full items-center justify-between gap-4 py-5 md:py-6 px-1 text-left text-[15px] md:text-lg font-semibold"
               style={{ color: "var(--ink)" }}
               aria-expanded={expanded}
@@ -42,7 +43,13 @@ export default function GovernanceAccordion() {
                 {expanded ? "–" : "+"}
               </span>
             </button>
-            <div id={`gov-panel-${i}`} className="max-w-[68ch] px-1 pb-5 md:pb-6" role="region" hidden={!expanded}>
+            <div
+              id={`gov-panel-${i}`}
+              className="max-w-[68ch] px-1 pb-5 md:pb-6"
+              role="region"
+              aria-labelledby={`gov-q-${i}`}
+              hidden={!expanded}
+            >
               <p className="text-[14.5px] leading-relaxed" style={{ color: "var(--ink-mid)" }}>
                 {panel.a}
               </p>

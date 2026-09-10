@@ -2,8 +2,8 @@
 
 /* Global site navigation — the persistent "visible nav fallback" the
    dreamscape brief calls for, and the industry-standard portfolio nav.
-   Four destinations, matching the site's four portals:
-     Work · About · Field Notes · Contact
+   Four destinations, matching the LINKS array below:
+     Systems · Work · Field Notes · Contact
    Rendered as the site's dark "spine" (same treatment in both themes),
    sticky at the top of every page except the dreamscape homepage. */
 

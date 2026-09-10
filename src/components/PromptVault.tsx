@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Prompt = { key: string; label: string; note: string; body: string };
 
@@ -57,13 +57,20 @@ OUTPUT_FORMAT: A table — [Line] | [Issue Type] | [Recommended Fix Direction]
 export default function PromptVault() {
   const [active, setActive] = useState(0);
   const [copied, setCopied] = useState(false);
+  const copyTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const current = PROMPTS[active];
+
+  function handleTabChange(i: number) {
+    setActive(i);
+    setCopied(false);
+  }
 
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(current.body);
+      if (copyTimeout.current) clearTimeout(copyTimeout.current);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      copyTimeout.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       // Clipboard API unavailable (e.g. insecure context) — fail silently, no crash.
     }
@@ -71,18 +78,17 @@ export default function PromptVault() {
 
   return (
     <div className="mt-6 md:mt-10">
-      <div className="flex flex-wrap gap-2 mb-4" role="tablist" aria-label="Sanitized prompt templates">
+      <div className="flex flex-wrap gap-2 mb-4" aria-label="Sanitized prompt templates">
         {PROMPTS.map((p, i) => {
           const isActive = active === i;
           return (
             <button
               key={p.key}
               type="button"
-              role="tab"
-              aria-selected={isActive}
+              aria-pressed={isActive}
               className="rounded-full px-4 py-2.5 text-xs font-semibold border-[0.5px] transition-colors duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:[outline-color:var(--ox-accent)]"
               style={{ borderColor: isActive ? "var(--ox-accent)" : "var(--ink-dim)", color: isActive ? "var(--ox-accent)" : "var(--ink-mid)" }}
-              onClick={() => setActive(i)}
+              onClick={() => handleTabChange(i)}
             >
               {p.label}
             </button>
@@ -92,17 +98,18 @@ export default function PromptVault() {
       <div
         className="rounded-2xl p-5 md:p-6 border-[0.5px]"
         style={{ borderColor: "var(--ink-dim)", background: "var(--paper)" }}
-        role="tabpanel"
       >
         <div className="flex items-center justify-between gap-3 mb-3.5">
           <span className="text-xs" style={{ color: "var(--ink-mid)" }}>
             {current.note}
           </span>
-          <button type="button" className="ds-btn ds-btn--ghost px-4 py-2 text-xs" onClick={handleCopy}>
+          <button type="button" className="ds-btn ds-btn--ghost ds-btn--sm" onClick={handleCopy}>
             {copied ? "Copied" : "Copy"}
           </button>
         </div>
         <pre
+          tabIndex={0}
+          aria-label="Prompt template code"
           className="m-0 p-4 rounded-[10px] overflow-x-auto text-[12.5px] leading-relaxed whitespace-pre"
           style={{ background: "var(--paper2)", color: "var(--ink)", fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace" }}
         >

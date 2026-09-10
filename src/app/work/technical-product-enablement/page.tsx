@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function DeveloperEnablement() {
   return (
     <CaseStudyTemplate
+      isDemonstration={true}
       eyebrow="Technical Enablement · Rapid Content Systems"
       title="Technical Product Enablement in 72-Hour Sprints"
       meta={[

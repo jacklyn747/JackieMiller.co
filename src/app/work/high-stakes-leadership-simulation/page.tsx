@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function LeadershipSimulation() {
   return (
     <CaseStudyTemplate
+      isDemonstration={true}
       eyebrow="Leadership Simulation · Persona Architecture & Narrative Design"
       title="High-Stakes Leadership Role-Play Simulation"
       meta={[
@@ -22,7 +23,7 @@ export default function LeadershipSimulation() {
         'Clinical managers were struggling with high-friction performance evaluations and retention conversations. Static e-learning was universally panned as "unrealistic," while live role-playing with human actors was cost-prohibitive to scale across 800+ facilities.'
       }
       methodology={[
-        "Engineered a synthetic stakeholder persona framework, drawing directly from Character.ai behavioral modeling techniques.",
+        "Engineered a synthetic stakeholder persona framework, drawing directly from advanced persona modeling and behavioral conditioning techniques.",
         "Built three distinct synthetic direct reports with hidden variables: emotional resistance, defensiveness, and motivation drivers.",
         "Integrated natural language input: managers conduct a live, text-based or voice-guided coaching conversation where the synthetic employee reacts in real time based on how well the manager applies active listening and conflict-de-escalation frameworks.",
       ]}

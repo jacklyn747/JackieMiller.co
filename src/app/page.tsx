@@ -330,6 +330,12 @@ export default function Home() {
                   <span>{cs.category}</span>
                   <span className="divider" />
                   <span className="disc">{cs.discipline}</span>
+                  {cs.isDemonstration && (
+                    <>
+                      <span className="divider" />
+                      <span style={{ color: "var(--ox-accent)" }}>Demonstration</span>
+                    </>
+                  )}
                 </div>
                 <h3 className="work-card__title">{cs.title}</h3>
                 <p className="work-card__summary">{cs.summary}</p>

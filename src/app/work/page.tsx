@@ -58,6 +58,12 @@ export default function WorkPage() {
                     <span>{cs.category}</span>
                     <span className="divider" />
                     <span className="disc">{cs.discipline}</span>
+                    {cs.isDemonstration && (
+                      <>
+                        <span className="divider" />
+                        <span style={{ color: "var(--ox-accent)" }}>Demonstration</span>
+                      </>
+                    )}
                   </div>
                   <h2 className="work-card__title">{cs.title}</h2>
                   <p className="work-card__summary">{cs.summary}</p>

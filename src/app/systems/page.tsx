@@ -108,7 +108,7 @@ export default function Systems() {
             </div>
           </section>
 
-          <section className="py-10 md:py-16">
+          <section id="vault" className="py-10 md:py-16">
             <div className="mb-6">
               <p className="ds-eyebrow">Prompt & Scaffolding Vault</p>
               <h2

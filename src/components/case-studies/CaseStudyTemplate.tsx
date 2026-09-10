@@ -13,6 +13,7 @@ export type CaseStudyTemplateProps = {
   governance: string[];
   artifact: string;
   impact: string[];
+  isDemonstration?: boolean;
 };
 
 export default function CaseStudyTemplate({
@@ -24,6 +25,7 @@ export default function CaseStudyTemplate({
   governance,
   artifact,
   impact,
+  isDemonstration,
 }: CaseStudyTemplateProps) {
   return (
     <>
@@ -53,15 +55,15 @@ export default function CaseStudyTemplate({
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
-            <p className="ds-eyebrow ds-eyebrow--solo mb-4">The Strategic Bottleneck</p>
+            <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">The Strategic Bottleneck</h2>
             <p className="text-base leading-relaxed max-w-[68ch]" style={{ color: "var(--ink-mid)" }}>
               {bottleneck}
             </p>
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
-            <p className="ds-eyebrow ds-eyebrow--solo mb-4">The AI-Accelerated Methodology</p>
-            <ul className="flex flex-col gap-3 p-0 list-none">
+            <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">The AI-Accelerated Methodology</h2>
+            <ul className="flex flex-col gap-3 p-0 list-none" role="list">
               {methodology.map((line) => (
                 <li key={line} className="relative pl-[18px] text-base leading-relaxed" style={{ color: "var(--ink)" }}>
                   <span
@@ -76,8 +78,8 @@ export default function CaseStudyTemplate({
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
-            <p className="ds-eyebrow ds-eyebrow--solo mb-4">Enterprise Data Governance & Privacy Protocol</p>
-            <ul className="flex flex-col gap-3 p-0 list-none">
+            <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">Enterprise Data Governance & Privacy Protocol</h2>
+            <ul className="flex flex-col gap-3 p-0 list-none" role="list">
               {governance.map((line) => (
                 <li key={line} className="relative pl-[18px] text-base leading-relaxed" style={{ color: "var(--ink)" }}>
                   <span
@@ -92,18 +94,18 @@ export default function CaseStudyTemplate({
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
-            <p className="ds-eyebrow ds-eyebrow--solo mb-4">The Instructional Artifact</p>
+            <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">The Instructional Artifact</h2>
             <p className="text-base leading-relaxed max-w-[68ch]" style={{ color: "var(--ink-mid)" }}>
               {artifact}{" "}
-              <Link href="/systems#governance" className="underline" style={{ color: "var(--ox-accent)" }}>
-                See the underlying prompt architecture →
+              <Link href="/systems#vault" className="underline" style={{ color: "var(--ox-accent)" }}>
+                See the underlying prompt architecture <span aria-hidden="true">→</span>
               </Link>
             </p>
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
-            <p className="ds-eyebrow ds-eyebrow--solo mb-4">Measurable Business & Efficiency Impact</p>
-            <ul className="flex flex-col gap-3 p-0 list-none">
+            <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">Measurable Business & Efficiency Impact</h2>
+            <ul className="flex flex-col gap-3 p-0 list-none" role="list">
               {impact.map((line) => (
                 <li
                   key={line}
@@ -118,14 +120,15 @@ export default function CaseStudyTemplate({
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
             <p className="text-[11px] leading-relaxed max-w-[68ch] opacity-80" style={{ color: "var(--ink-mid)" }}>
-              Enterprise Security Note: All proprietary data and SME transcripts shown have been fully anonymized,
-              synthesized, or demonstrated within sandboxed non-public environments.
+              {isDemonstration
+                ? "Demonstration Artifact: All organizational data, transcripts, and persona dialogue synthesized for portfolio demonstration in compliance with enterprise NDAs."
+                : "Enterprise Security Note: All proprietary data and SME transcripts shown have been fully anonymized, synthesized, or demonstrated within sandboxed non-public environments."}
             </p>
           </section>
 
           <section className="py-10 md:py-14">
             <Link href="/work" className="ds-btn ds-btn--ghost">
-              ← Back to all work
+              <span aria-hidden="true">←</span> Back to all work
             </Link>
           </section>
         </main>

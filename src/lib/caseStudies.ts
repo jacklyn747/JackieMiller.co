@@ -32,7 +32,7 @@ export const caseStudies: CaseStudy[] = [
     coverAlt: "The Digital Literacy Fundamentals course open to its title screen on a tablet.",
   },
   {
-    slug: "fintech-systems-onboarding",
+    slug: "fintech-systems-migration",
     category: "Enterprise Onboarding",
     discipline: "AI-Accelerated Instructional Design",
     title: "Enterprise Systems Modernization & Onboarding",
@@ -43,11 +43,11 @@ export const caseStudies: CaseStudy[] = [
     cover: "",
     coverAlt: "",
     statNum: "78%",
-    statLabel: "Faster Time-to-Certification",
+    statLabel: "Faster Content Production",
     isDemonstration: true,
   },
   {
-    slug: "leadership-simulation",
+    slug: "high-stakes-leadership-simulation",
     category: "Leadership Simulation",
     discipline: "Persona Architecture & Narrative Design",
     title: "High-Stakes Leadership Role-Play Simulation",
@@ -62,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
     isDemonstration: true,
   },
   {
-    slug: "developer-enablement",
+    slug: "technical-product-enablement",
     category: "Technical Enablement",
     discipline: "Rapid Content Systems",
     title: "Technical Product Enablement in 72-Hour Sprints",

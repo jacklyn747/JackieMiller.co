@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function FintechSystemsOnboarding() {
   return (
     <CaseStudyTemplate
+      isDemonstration={true}
       eyebrow="Enterprise Onboarding · AI-Accelerated Instructional Design"
       title="Enterprise Systems Modernization & Onboarding"
       meta={[

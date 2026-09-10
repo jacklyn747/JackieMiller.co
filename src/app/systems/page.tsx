@@ -45,7 +45,7 @@ export default function Systems() {
   return (
     <>
       <SiteNav />
-      <main id="main-content" className="max-w-[1120px] mx-auto px-6">
+      <main id="main-content" className="max-w-[1120px] mx-auto px-6" style={{ background: "var(--paper)", color: "var(--ink)" }}>
         <section className="pt-16 md:pt-24 lg:pt-28 pb-8 md:pb-12">
           <p className="ds-eyebrow">Applied Methodology</p>
           <h1

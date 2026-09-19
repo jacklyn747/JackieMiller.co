@@ -43,6 +43,11 @@ export const metadata: Metadata = {
 
 // The homepage About-teaser frame is a 4:5 vertical, so it prefers its own
 // portrait-home crop and falls back to the shared about/portrait if absent.
+// Coupling note: that fallback means if portrait-home.* is ever removed
+// while portrait.* still exists, this function and findHeroPortrait() below
+// will resolve to the same file — the hero and About-teaser will silently
+// show the same photo instead of the deliberate pair they're meant to be.
+// Keep that in mind before deleting either asset.
 function findPortrait(): string | null {
   for (const base of ["portrait-home", "portrait"]) {
     for (const ext of ["jpg", "jpeg", "png", "webp"]) {
@@ -194,7 +199,7 @@ export default function Home() {
               <div className="hm-hero__portrait">
                 <Image
                   src={heroPortrait}
-                  alt="Jackie Miller"
+                  alt="Jackie Miller, portrait"
                   fill
                   priority
                   sizes="(max-width: 900px) 90vw, 500px"
@@ -389,7 +394,7 @@ export default function Home() {
             </div>
             {portrait ? (
               <div className="hm-about__portrait">
-                <Image src={portrait} alt="Jackie Miller" fill sizes="(max-width: 820px) 100vw, 360px" />
+                <Image src={portrait} alt="Jackie Miller, seated portrait" fill sizes="(max-width: 820px) 100vw, 360px" />
               </div>
             ) : (
               <div className="hm-about__portrait is-empty">Portrait</div>
@@ -402,7 +407,7 @@ export default function Home() {
           <div className="hm-sec__head">
             <p className="ds-eyebrow">How I Work</p>
             <h2 className="hm-sec__title">
-              The craft decisions behind <em>every governed pipeline.</em>
+              The craft decisions behind <em>every accelerated delivery.</em>
             </h2>
           </div>
           <div className="hm-how__grid">

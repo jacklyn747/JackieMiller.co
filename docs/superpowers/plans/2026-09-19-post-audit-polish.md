@@ -1,6 +1,6 @@
 # Post-Audit Polish Pass Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Address the actionable findings from the Awwwards + VP-of-LXD audit (2026-09-19), plus add two new black-and-white portraits Jacklyn provided. Fixes the audit's #1 Critical finding (hero image contradicts hero copy) by reusing the new portrait photography rather than needing new visual assets.
 
@@ -26,7 +26,7 @@
 
 **Context:** A prior session already dropped two new black-and-white portraits into `public/about/` and updated `findPortrait()` in `src/app/page.tsx` to prefer `portrait-home.(jpg|jpeg|png|webp)` for the homepage's 4:5 About-teaser frame, falling back to the shared `portrait.*` if absent. This was never committed. Your job is to verify it's correct and commit it — not to redo the work.
 
-- [ ] **Step 1: Verify the current state**
+- [x] **Step 1: Verify the current state**
 
 Run:
 ```bash
@@ -41,11 +41,11 @@ file public/about/portrait.jpg public/about/portrait-home.jpg
 ```
 Both should report as valid JPEG images with reasonable dimensions (not 0 bytes, not obviously corrupt).
 
-- [ ] **Step 2: Verify it renders correctly**
+- [x] **Step 2: Verify it renders correctly**
 
 Start the dev server if not already running (`npm run dev`), then visit `http://localhost:3000/about` and confirm a real portrait photo renders (not the "Portrait" placeholder text). Visit `http://localhost:3000/` and scroll to the "About" teaser section (`id`-less section with eyebrow "About", header "Education is in my blood.") and confirm a portrait renders there too — it should be a DIFFERENT photo/pose than `/about`'s, per the existing fallback logic (portrait-home takes priority on the homepage).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add public/about/portrait.jpg public/about/portrait-home.jpg src/app/page.tsx
@@ -71,7 +71,7 @@ Note: this commit will only include `page.tsx`'s `findPortrait()` change. Task 2
 
 **Context:** The audit's #1 Critical finding: the current hero art is a flash-tattoo illustration (oxblood sunburst, open book, "The Way Out" banner) built for the old justice-involved-learner narrative — it sits directly beside "High-Velocity Learning Architecture. Governed Enterprise AI." copy with zero connective tissue. Replace it with the new portrait photo (the same file used on `/about`, giving the homepage hero a strong, editorial photographic treatment instead of mismatched illustration).
 
-- [ ] **Step 1: Replace the hero art block**
+- [x] **Step 1: Replace the hero art block**
 
 In `src/app/page.tsx`, find:
 
@@ -153,7 +153,7 @@ And in the hero art JSX you just added, use `heroPortrait` instead of `portrait`
           </div>
 ```
 
-- [ ] **Step 2: Add the CSS**
+- [x] **Step 2: Add the CSS**
 
 The hero art column currently sizes itself around the old `.hm-flash` illustration. Find the `.hm-flash` rule in `src/app/home.css` (search for `.hm-flash`) and read its container sizing (likely on `.hm-hero__art` itself or a fixed max-width). Add a new rule for the portrait treatment, styled as a tall editorial photo (not a square/logo mark) — append this near the existing `.hm-flash` rules in `home.css`:
 
@@ -178,12 +178,12 @@ The hero art column currently sizes itself around the old `.hm-flash` illustrati
 
 Do not delete the existing `.hm-flash` rules — they become unused CSS (matching how Phase 2 left `.wk-hero`/`.wk-block` unused rather than deleting mid-task) but the underlying asset and its styling stay available if needed later.
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/app/page.tsx src/app/home.css
@@ -204,7 +204,7 @@ connection. Replaced with the new portrait photography."
 
 **Context:** The evaluation section already measures exactly what a Kirkpatrick Level 1-3 framework measures (self-reported confidence = reaction/Level 1, capstone task success = learning/Level 2, completion by input domain = behavior/Level 3) but never names the framework. A VP of LXD scanning in 30 seconds pattern-matches on the term itself.
 
-- [ ] **Step 1: Add the line**
+- [x] **Step 1: Add the line**
 
 Find this paragraph (search for "completion by input domain"):
 
@@ -222,12 +222,12 @@ Add a new, second paragraph directly after it (same indentation level, as a sibl
           </p>
 ```
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/case-studies/digital-literacy/DigitalLiteracy.tsx
@@ -244,7 +244,7 @@ git commit -m "feat: name the Kirkpatrick framework in Digital Literacy's evalua
 
 **Context:** The audit flagged a tonal seam: the homepage drops from CISO-facing enterprise-governance language straight into "Courses built to be worth someone's time" and "Boring is the enemy" — casual, personal-voice copy left over from the pre-rebrand site. This task tones the copy to match the new register without deleting the section or duplicating the "4 Operating Pillars" section that already exists above it — the substance of each "How I Work" point (visual craft as instructional craft, designing for real constraints, AI as a force multiplier, narrative for retention) is real and stays; only the voice changes.
 
-- [ ] **Step 1: Update the "Selected Work" header**
+- [x] **Step 1: Update the "Selected Work" header**
 
 Find:
 
@@ -267,7 +267,7 @@ Replace the `<h2>` with:
             </h2>
 ```
 
-- [ ] **Step 2: Update the "How I Work" section**
+- [x] **Step 2: Update the "How I Work" section**
 
 Find the `HOW` array near the top of the file:
 
@@ -346,12 +346,12 @@ Replace the `<h2>` with:
             </h2>
 ```
 
-- [ ] **Step 3: Verify**
+- [x] **Step 3: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/app/page.tsx
@@ -368,7 +368,7 @@ git commit -m "fix: retone Selected Work and How I Work copy to match enterprise
 
 **Context:** The audit noted the 3 demonstration case studies' "Instructional Artifact" tier is a plain paragraph, while the real Digital Literacy case study has a genuinely embedded interactive prototype — an asymmetry that runs backward for the studies built specifically to prove capability. There is no real interactive artifact to embed here yet (that's Phase 4 territory — a live persona sandbox and interactive velocity visualizer). Do NOT fabricate a fake product screenshot or mockup image — that would stack a second fabrication on top of the case study's own already-disclosed synthetic content. Instead, give the existing text a distinct, bordered "artifact preview" callout treatment so it reads as a deliberate proof-element rather than another paragraph in the flow.
 
-- [ ] **Step 1: Update the Instructional Artifact section**
+- [x] **Step 1: Update the Instructional Artifact section**
 
 Find:
 
@@ -412,12 +412,12 @@ Replace with:
 
 (Note: the exact opening tag of this section — whether it's currently `<h2>` or `<p>` for "The Instructional Artifact" — depends on whether Phase 2's final-review fix already converted it. Check the actual current file first; if it's still `<p className="ds-eyebrow ds-eyebrow--solo mb-4">`, keep it as `<p>` in your edit rather than introducing a second `<h2>` inconsistently with the other tier labels in this same file — match whatever tag the OTHER 4 tier labels in this file currently use.)
 
-- [ ] **Step 2: Verify**
+- [x] **Step 2: Verify**
 
 Run: `npm run lint && npm run build`
 Expected: both exit 0. Visually the change only affects the 3 case studies using `CaseStudyTemplate` — confirm none of Digital Literacy or Content Review (which don't use this component) are affected.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/case-studies/CaseStudyTemplate.tsx
@@ -431,11 +431,11 @@ git commit -m "fix: give the Instructional Artifact tier a distinct visual callo
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Start the dev server**
+- [x] **Step 1: Start the dev server**
 
 Run: `npm run dev`
 
-- [ ] **Step 2: Verify in a real browser, fresh tab / hard load**
+- [x] **Step 2: Verify in a real browser, fresh tab / hard load**
 
 Visit `/` and confirm:
 - Hero shows the new portrait photo, correctly sized/cropped, not the flash-tattoo illustration.
@@ -451,7 +451,7 @@ Visit each of the 3 demonstration case studies (`/work/fintech-systems-migration
 
 Toggle dark/light mode on `/` and one case study page; confirm no unstyled flashes, no dark-body-bleed-through gutters, at a viewport wider than 1080px.
 
-- [ ] **Step 3: Report back**
+- [x] **Step 3: Report back**
 
 Note any visual issues found for follow-up — do not silently patch and move on without flagging what broke.
 

@@ -74,6 +74,29 @@
 }
 .hm-flash img { display: block; width: 100%; height: auto; }
 
+/* Portrait panel — replaces the flash-art illustration in the hero.
+   .hm-hero__art has no width of its own (it just centers its child via
+   flex), so this rule carries its own max-width — matching the ~500px
+   the flash art used to cap at — to keep the photo proportionate in the
+   single-column mobile layout instead of stretching edge-to-edge. */
+.hm-hero__portrait {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--paper2);
+}
+.hm-hero__portrait img { object-fit: cover; }
+.hm-hero__portrait.is-empty {
+  display: grid;
+  place-items: center;
+  color: var(--ink-mid);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+}
+
 /* ══════════ PROOF STRIP (dark band) ══════════ */
 .hm-proof {
   background: var(--nav-bg);

@@ -53,6 +53,18 @@ function findPortrait(): string | null {
   return null;
 }
 
+// The hero wants the direct-gaze "portrait" crop specifically (not
+// portrait-home, which the About-teaser section already uses lower on
+// this same page) so the two photos read as a deliberate pair, not a
+// repeat.
+function findHeroPortrait(): string | null {
+  for (const ext of ["jpg", "jpeg", "png", "webp"]) {
+    const rel = `about/portrait.${ext}`;
+    if (existsSync(path.join(process.cwd(), "public", rel))) return `/${rel}`;
+  }
+  return null;
+}
+
 const PROOF = [
   <>MEd · <b>Instructional Design</b></>,
   <>Trained LLMs at <b>Character.AI</b></>,
@@ -112,6 +124,7 @@ const TESTIMONIALS: { quote: string; name: string; role: string }[] = [];
 
 export default function Home() {
   const portrait = findPortrait();
+  const heroPortrait = findHeroPortrait();
 
   return (
     <>
@@ -177,16 +190,19 @@ export default function Home() {
             </div>
           </div>
           <div className="hm-hero__art">
-            <div className="hm-flash">
-              <Image
-                src="/home/hero-flash.png"
-                alt="Flash-tattoo illustration: an open book over an oxblood sunburst, with a banner reading The Way Out."
-                width={2400}
-                height={2800}
-                priority
-                sizes="(max-width: 900px) 90vw, 500px"
-              />
-            </div>
+            {heroPortrait ? (
+              <div className="hm-hero__portrait">
+                <Image
+                  src={heroPortrait}
+                  alt="Jackie Miller"
+                  fill
+                  priority
+                  sizes="(max-width: 900px) 90vw, 500px"
+                />
+              </div>
+            ) : (
+              <div className="hm-hero__portrait is-empty">Portrait</div>
+            )}
           </div>
         </section>
 

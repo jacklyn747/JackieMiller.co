@@ -272,6 +272,9 @@ export default function DigitalLiteracy() {
           <p style={{ maxWidth: "82ch", fontSize: 14, lineHeight: 1.7, color: "rgba(241,238,229,0.72)", margin: "22px 0 0", textWrap: "pretty" }}>
             The low marks — device-verified tap targets, a formal WCAG contrast pass — are left visible on purpose: a rubric that only ever returns fours isn&apos;t a rubric. In the field, three things get measured first: <span style={{ color: "#E3C8C2" }}>completion by input domain</span> (where does a first-time user stall — the mouse, the keyboard, or windows?), <span style={{ color: "#E3C8C2" }}>capstone task success unaided</span>, and <span style={{ color: "#E3C8C2" }}>self-reported confidence before versus after.</span>
           </p>
+          <p style={{ maxWidth: "82ch", fontSize: 13, lineHeight: 1.7, color: "rgba(241,238,229,0.55)", margin: "14px 0 0", textWrap: "pretty" }}>
+            That&apos;s a Kirkpatrick Level 1–3 measurement plan — reaction (confidence), learning (task success), and behavior (completion by domain) — chosen before a single learner touches the course, not backfilled after.
+          </p>
 
         </div>
 

@@ -41,11 +41,14 @@ export const metadata: Metadata = {
   },
 };
 
-// Portrait appears once dropped at public/about/portrait.(jpg|jpeg|png|webp).
+// The homepage About-teaser frame is a 4:5 vertical, so it prefers its own
+// portrait-home crop and falls back to the shared about/portrait if absent.
 function findPortrait(): string | null {
-  for (const ext of ["jpg", "jpeg", "png", "webp"]) {
-    const rel = `about/portrait.${ext}`;
-    if (existsSync(path.join(process.cwd(), "public", rel))) return `/${rel}`;
+  for (const base of ["portrait-home", "portrait"]) {
+    for (const ext of ["jpg", "jpeg", "png", "webp"]) {
+      const rel = `about/${base}.${ext}`;
+      if (existsSync(path.join(process.cwd(), "public", rel))) return `/${rel}`;
+    }
   }
   return null;
 }

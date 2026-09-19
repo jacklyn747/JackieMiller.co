@@ -95,12 +95,24 @@ export default function CaseStudyTemplate({
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>
             <h2 className="ds-eyebrow ds-eyebrow--solo mb-4">The Instructional Artifact</h2>
-            <p className="text-base leading-relaxed max-w-[68ch]" style={{ color: "var(--ink-mid)" }}>
-              {artifact}{" "}
-              <Link href="/systems#vault" className="underline" style={{ color: "var(--ox-accent)" }}>
+            <div
+              className="rounded-2xl p-6 md:p-7 border-[0.5px]"
+              style={{ borderColor: "var(--ox-dim)", background: "color-mix(in srgb, var(--ox) 4%, transparent)" }}
+            >
+              <p className="text-[10.5px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: "var(--ox-accent)" }}>
+                Artifact Summary
+              </p>
+              <p className="text-base leading-relaxed max-w-[68ch]" style={{ color: "var(--ink)" }}>
+                {artifact}
+              </p>
+              <Link
+                href="/systems#vault"
+                className="inline-flex items-center gap-1 mt-4 text-sm font-semibold underline"
+                style={{ color: "var(--ox-accent)" }}
+              >
                 See the underlying prompt architecture <span aria-hidden="true">→</span>
               </Link>
-            </p>
+            </div>
           </section>
 
           <section className="py-8 md:py-10 border-t-[0.5px]" style={{ borderColor: "var(--ink-dim)" }}>

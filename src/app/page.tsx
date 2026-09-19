@@ -98,23 +98,23 @@ const PILLARS: Pillar[] = [
 type HowCard = { t: string; d: string; icon?: string; iw?: number; ih?: number; alt?: string };
 const HOW: HowCard[] = [
   {
-    t: "Boring is the enemy",
-    d: "I treat visual craft as instructional craft. If a course looks like a chore, it teaches like one — so mine don't.",
+    t: "Visual craft is instructional craft",
+    d: "A course that looks like a chore teaches like one. Every interface decision is treated as a pedagogical decision, not a skin applied after the fact.",
     icon: "/home/icon-lightning.png", iw: 1640, ih: 2360, alt: "Lightning bolt",
   },
   {
-    t: "Designed for the real world",
-    d: "Locked-down devices, variable literacy, no IT support. I design around real constraints, not despite them.",
+    t: "Designed for real-world constraints",
+    d: "Locked-down devices, variable literacy, no IT support, or an enterprise security review — the design starts from the actual environment, not an idealized one.",
     icon: "/home/icon-anchor.png", iw: 1640, ih: 2360, alt: "Anchor",
   },
   {
-    t: "AI is my force-multiplier",
-    d: "I direct the instructional design; AI accelerates the build — storyboard to working prototype, faster.",
+    t: "AI as force-multiplier, not author",
+    d: "I direct the instructional design; AI accelerates the build — storyboard to working prototype, faster, with every objective still human-verified.",
     icon: "/home/icon-star.png", iw: 2360, ih: 1640, alt: "Shooting star",
   },
   {
-    t: "Humans are wired for story",
-    d: "We're built to remember narrative, not bullet points — so I design learning as story. That's what the creative-writing degree was really for.",
+    t: "Narrative for retention, not decoration",
+    d: "People remember story structure, not bullet points. Scenario-based learning and persona-driven simulation exist because narrative is a retention mechanism, not a stylistic choice.",
     icon: "/home/icon-pen.png", iw: 1640, ih: 2360, alt: "Fountain pen writing",
   },
 ];
@@ -323,7 +323,7 @@ export default function Home() {
           <div className="hm-sec__head">
             <p className="ds-eyebrow">Selected Work</p>
             <h2 className="hm-sec__title">
-              Courses built to be <em>worth someone&apos;s time.</em>
+              Case studies in <em>compressed, governed delivery.</em>
             </h2>
           </div>
           <div className="wk-cards">
@@ -402,7 +402,7 @@ export default function Home() {
           <div className="hm-sec__head">
             <p className="ds-eyebrow">How I Work</p>
             <h2 className="hm-sec__title">
-              A designer who thinks learning should look like something you&apos;d <em>choose</em> to do.
+              The craft decisions behind <em>every governed pipeline.</em>
             </h2>
           </div>
           <div className="hm-how__grid">

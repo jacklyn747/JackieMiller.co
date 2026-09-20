@@ -1,0 +1,38 @@
+/* /approach — reuses work.css for the hero/block/closer grammar; this file
+   only covers what's new to this page: the grouped framework chip lists. */
+
+.ap-fw-lead {
+  margin-top: 18px;
+  max-width: 56ch;
+  font-family: var(--font-sans), sans-serif;
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.6;
+  color: var(--ink-mid);
+  text-wrap: pretty;
+}
+
+.ap-fw-groups {
+  margin-top: clamp(28px, 3.5vw, 44px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(28px, 3vw, 40px);
+}
+
+.ap-fw-group__t {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ox-accent);
+  margin: 0 0 14px;
+}
+
+.ap-fw-group__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

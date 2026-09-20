@@ -14,34 +14,6 @@ export const metadata: Metadata = {
 
 const CONSTRAINTS = ["No open internet", "Shared, locked-down devices", "Variable literacy", "No IT support"];
 
-const AI_WORK = [
-  {
-    t: "Trained LLMs, from the inside",
-    d: "At Character.AI I wrote and evaluated thousands of dialogue examples alongside ML engineers — I know these models as materials, not magic.",
-  },
-  {
-    t: "Built my own AI tools",
-    d: "A RAG instructional-design assistant (LangChain, ChromaDB) that answers design questions against my own source library, with citations.",
-  },
-  {
-    t: "Built this course with AI",
-    d: "The Digital Literacy course and its live simulation — I directed the design; AI accelerated the build from storyboard to prototype.",
-  },
-  {
-    t: "AI-native production",
-    d: "Prompt-chained drafting, structuring, and quality-checking — more output, the same judgment over what's accurate and worth teaching.",
-  },
-];
-
-const APPROACH = [
-  { t: "Start from the real stakes", d: "Design backward from the moment the skill actually gets used — the interview, the job center — not the syllabus." },
-  { t: "Prototype, don't propose", d: "Build it playable and iterate (SAM / LXD), instead of handing over a document and hoping." },
-  { t: "Grounded in learning science", d: "Cognitive load, retrieval practice, Merrill's First Principles, andragogy — why it works, not just what looks good." },
-  { t: "Aesthetics are instruction", d: "How a screen feels decides whether a learner will risk a mistake. Craft is pedagogy, not decoration." },
-  { t: "Designed for dignity & access", d: "Trauma-informed pacing, UDL, and the real environment — locked devices, no internet — as the starting point." },
-  { t: "Made with AI, judged by a human", d: "AI accelerates the build; the call on what's accurate and worth teaching stays mine." },
-];
-
 export default function WorkPage() {
   return (
     <>
@@ -99,34 +71,19 @@ export default function WorkPage() {
           </div>
         </section>
 
-        {/* ── The Approach: an editorial manifesto index, not a box grid ── */}
+        {/* ── The Approach: teaser only — the full six commitments + frameworks + AI stance live at /approach ── */}
         <section className="wk-block">
           <div className="ds-eyebrow"><span>The Approach</span></div>
           <p className="wk-approach-lead">
             Learning designed to be <em>experienced,</em> not endured.
           </p>
-          <div className="wk-approach ds-index">
-            {APPROACH.map((a) => (
-              <div key={a.t} className="ds-index__row" tabIndex={0}>
-                <h3 className="ds-index__t">{a.t}</h3>
-                <p className="ds-index__d">{a.d}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Working with AI: compact module, not an essay ── */}
-        <section className="wk-block">
-          <div className="ds-eyebrow"><span>Working with AI</span></div>
-          <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
-          <div className="wk-ai-grid">
-            {AI_WORK.map((a) => (
-              <div key={a.t} className="wk-ai-card">
-                <h3>{a.t}</h3>
-                <p>{a.d}</p>
-              </div>
-            ))}
-          </div>
+          <p className="wk-lead" style={{ marginTop: 18 }}>
+            Six commitments run under every project here, grounded in learning science and tested against the
+            realities of the environment I design for most.
+          </p>
+          <Link href="/approach" className="ds-btn ds-btn--ghost" style={{ marginTop: 24 }}>
+            Read the full approach <span aria-hidden="true">→</span>
+          </Link>
         </section>
 
         {/* ── Closer + CTA ── */}

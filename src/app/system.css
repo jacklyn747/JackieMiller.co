@@ -122,3 +122,17 @@
 @media (prefers-reduced-motion: reduce) {
   .ds-index__t, .ds-index__d { transition: opacity 0.2s ease !important; }
 }
+
+/* ── Punch: bold condensed display face against the elegant italic serif ──
+   The type-pairing move from the Showit reference (Anton wordmark beside
+   an Instrument Serif italic line — same serif this site already uses).
+   Drop into a serif headline: "Most learning is <span class="ds-punch">boring.</span>" */
+.ds-punch {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  /* No hardcoded color — inherits from context, since this gets used on
+     both the paper background and the always-dark hero band. */
+}

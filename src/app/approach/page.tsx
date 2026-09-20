@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import "../work/work.css";
@@ -105,13 +106,18 @@ export default function ApproachPage() {
         <section className="wk-block">
           <div className="ds-eyebrow"><span>Working with AI</span></div>
           <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
-          <div className="wk-ai-grid">
-            {AI_WORK.map((a) => (
-              <div key={a.t} className="wk-ai-card">
-                <h3>{a.t}</h3>
-                <p>{a.d}</p>
-              </div>
-            ))}
+          <div className="ap-ai-layout">
+            <div className="ap-ai-photo">
+              <Image src="/approach/working.jpg" alt="Jackie Miller working at her laptop" fill sizes="(max-width: 820px) 100vw, 320px" />
+            </div>
+            <div className="wk-ai-grid">
+              {AI_WORK.map((a) => (
+                <div key={a.t} className="wk-ai-card">
+                  <h3>{a.t}</h3>
+                  <p>{a.d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

@@ -1,3 +1,19 @@
+/* Contact — a face before the icons, then email/résumé/LinkedIn */
+.contact-photo {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid var(--ox-accent);
+  margin-bottom: 28px;
+}
+.contact-photo img {
+  object-fit: cover;
+  object-position: 45% 30%;
+  filter: grayscale(1) contrast(1.03);
+}
+
 /* Contact — icon buttons for email, résumé, LinkedIn */
 .contact-icons {
   display: flex;

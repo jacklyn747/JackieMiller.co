@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Archivo, Caveat } from "next/font/google";
+import { Instrument_Serif, Archivo, Anton, Caveat } from "next/font/google";
 import "./globals.css";
 import "./system.css";
 
@@ -15,6 +15,13 @@ const archivo = Archivo({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
+});
+
+// Display face for oversized headline moments — bold, condensed, uppercase.
+const anton = Anton({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 const caveat = Caveat({
@@ -58,7 +65,7 @@ export default function RootLayout({
       lang="en"
       data-theme="light"
       suppressHydrationWarning
-      className={`${instrumentSerif.variable} ${archivo.variable} ${caveat.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${archivo.variable} ${anton.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <script

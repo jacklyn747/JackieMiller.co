@@ -20,27 +20,45 @@
 /* Eyebrow labels and buttons now use the shared .ds-eyebrow / .ds-btn
    components (system.css). No page-local copies. */
 
-/* ══════════ HERO ══════════ */
+/* ══════════ HERO — split: full-bleed photo one side, bold type on dark the other ══════════
+   The Showit-reference mechanic (photo + oversized type together) without
+   text sitting across a face — this portrait is a tight close-up with no
+   negative space, so a true full-bleed overlay doesn't have anywhere for
+   the headline to land. Always reads dark here, regardless of site theme —
+   same logic as the nav "spine". */
 .hm-hero {
-  padding-top: clamp(52px, 8vw, 100px);
-  padding-bottom: clamp(48px, 7vw, 84px);
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(34px, 5vw, 60px);
-  align-items: center;
+  background: var(--nav-bg);
 }
 @media (min-width: 900px) {
-  .hm-hero { grid-template-columns: 1.05fr 0.95fr; }
+  .hm-hero { grid-template-columns: 1fr 1fr; min-height: clamp(560px, 88vh, 860px); }
 }
+.hm-hero__media {
+  position: relative;
+  min-height: 340px;
+}
+@media (min-width: 900px) {
+  .hm-hero__media { min-height: 100%; order: 2; }
+}
+.hm-hero__media img { object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.03); }
+.hm-hero__content {
+  padding: clamp(48px, 7vw, 88px) clamp(24px, 5vw, 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hm-hero .ds-eyebrow { color: var(--nav-fg); }
+.hm-hero .ds-eyebrow::after { border-top-color: rgba(241, 238, 229, 0.28); }
 .hm-hero__title {
-  margin-top: 24px;
-  max-width: 15ch;
+  margin-top: 18px;
+  max-width: 14ch;
   font-family: var(--font-serif), serif;
   font-weight: 400;
-  font-size: clamp(42px, 6.6vw, 84px);
+  font-size: clamp(40px, 5.6vw, 76px);
   line-height: 0.98;
   letter-spacing: 0.005em;
-  color: var(--ink);
+  color: var(--nav-fg);
   text-wrap: balance;
 }
 .hm-hero__title em { font-style: italic; color: var(--ox-accent); }
@@ -50,7 +68,7 @@
   font-family: var(--font-sans), sans-serif;
   font-size: clamp(16.5px, 1.8vw, 19px);
   line-height: 1.6;
-  color: var(--ink-mid);
+  color: rgba(241, 238, 229, 0.82);
   text-wrap: pretty;
 }
 .hm-hero__cta {
@@ -59,20 +77,6 @@
   gap: 14px;
   margin-top: 32px;
 }
-
-/* Flash-art panel — Jackie's hand-drawn illustration, framed as a bold art block */
-.hm-hero__art { display: flex; justify-content: center; }
-.hm-flash {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  border: 2px solid #1a1614;
-  border-radius: 6px;
-  overflow: hidden;
-  line-height: 0;
-  box-shadow: 0 24px 60px -26px rgba(26, 22, 20, 0.6);
-}
-.hm-flash img { display: block; width: 100%; height: auto; }
 
 /* ══════════ PROOF STRIP (dark band) ══════════ */
 .hm-proof {
@@ -157,7 +161,7 @@
   border: 0.5px solid var(--ink-dim);
   overflow: hidden;
 }
-.hm-about__portrait img { object-fit: cover; }
+.hm-about__portrait img { object-fit: cover; object-position: 50% 30%; filter: grayscale(1) contrast(1.03); }
 .hm-about__portrait.is-empty {
   display: grid;
   place-items: center;

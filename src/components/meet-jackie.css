@@ -77,7 +77,7 @@
 }
 .mj-photo__frame img {
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 18%;
   /* B&W keeps oxblood the only color — a design-system rule */
   filter: grayscale(1) contrast(1.03);
 }

@@ -49,8 +49,9 @@
   --color-ox:     var(--ox);
   --color-cover:  var(--cover-bg);
 
-  --font-serif: var(--font-serif);
-  --font-sans:  var(--font-sans);
+  --font-serif:  var(--font-serif);
+  --font-sans:   var(--font-sans);
+  --font-display: var(--font-display);
   --font-hand:  var(--font-hand);
 }
 

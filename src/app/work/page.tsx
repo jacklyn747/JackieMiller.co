@@ -25,7 +25,7 @@ export default function WorkPage() {
             <span>Instructional Design · Correctional Education</span>
           </div>
           <h1 className="wk-thesis">
-            Designing for learners is one thing. Designing for learners <em>inside</em> is another.
+            Designing for learners is one thing. Designing for learners <span className="ds-punch">inside</span> is another.
           </h1>
           <p className="wk-sub">
             I build learning for incarcerated and reentry-bound adults — designed around the realities of the

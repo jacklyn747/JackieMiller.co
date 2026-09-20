@@ -1,5 +1,3 @@
-import { existsSync } from "fs";
-import path from "path";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,15 +13,6 @@ export const metadata: Metadata = {
   description:
     "Jackie Miller designs learning people actually want to do — built around real people, real constraints, and the belief that learning is the way out.",
 };
-
-// Portrait appears once dropped at public/about/portrait.(jpg|jpeg|png|webp).
-function findPortrait(): string | null {
-  for (const ext of ["jpg", "jpeg", "png", "webp"]) {
-    const rel = `about/portrait.${ext}`;
-    if (existsSync(path.join(process.cwd(), "public", rel))) return `/${rel}`;
-  }
-  return null;
-}
 
 const PROOF = [
   <>MEd · <b>Instructional Design</b></>,
@@ -59,18 +48,25 @@ const HOW: HowCard[] = [
 const TESTIMONIALS: { quote: string; name: string; role: string }[] = [];
 
 export default function Home() {
-  const portrait = findPortrait();
-
   return (
     <>
       <SiteNav />
       <main className="home">
-        {/* ── HERO ── */}
-        <section className="hm hm-hero">
-          <div className="hm-hero__lede">
-            <p className="ds-eyebrow">Instructional Designer</p>
+        {/* ── HERO: split — photo one side, headline the other ── */}
+        <section className="hm-hero">
+          <div className="hm-hero__media">
+            <Image
+              src="/home/hero-portrait.jpg"
+              alt="Portrait of Jackie Miller, smiling"
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+          </div>
+          <div className="hm-hero__content">
+            <p className="ds-eyebrow ds-eyebrow--solo">Instructional Designer</p>
             <h1 className="hm-hero__title">
-              Most learning is boring. <em>Mine isn&apos;t.</em>
+              Most learning is <span className="ds-punch">boring.</span> <em>Mine isn&apos;t.</em>
             </h1>
             <p className="hm-hero__sub">
               I&apos;m Jackie Miller. I design learning people actually want to do — built around real
@@ -80,21 +76,9 @@ export default function Home() {
               <Link href="/work" className="ds-btn ds-btn--solid">
                 See the work <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/about" className="ds-btn ds-btn--ghost">
+              <Link href="/about" className="ds-btn ds-btn--ghost ds-btn--dark">
                 Read my story
               </Link>
-            </div>
-          </div>
-          <div className="hm-hero__art">
-            <div className="hm-flash">
-              <Image
-                src="/home/hero-flash.png"
-                alt="Flash-tattoo illustration: an open book over an oxblood sunburst, with a banner reading The Way Out."
-                width={2400}
-                height={2800}
-                priority
-                sizes="(max-width: 900px) 90vw, 500px"
-              />
             </div>
           </div>
         </section>
@@ -166,13 +150,14 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            {portrait ? (
-              <div className="hm-about__portrait">
-                <Image src={portrait} alt="Jackie Miller" fill sizes="(max-width: 820px) 100vw, 360px" />
-              </div>
-            ) : (
-              <div className="hm-about__portrait is-empty">Portrait</div>
-            )}
+            <div className="hm-about__portrait">
+              <Image
+                src="/home/about-teaser.jpg"
+                alt="Jackie Miller, mid-conversation"
+                fill
+                sizes="(max-width: 820px) 100vw, 360px"
+              />
+            </div>
           </div>
         </section>
 

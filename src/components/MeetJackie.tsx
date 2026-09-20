@@ -46,7 +46,7 @@ const CURATED = INTERVIEW.filter((x) => x.key);
 
 export default function MeetJackie({ portrait }: { portrait: string | null }) {
   return (
-    <main className="about-page">
+    <main className="about-page" id="main-content">
       <div className="mj-inner">
         {/* ── Hero: portrait + thesis + routes ── */}
         <header className={`mj-hero${portrait ? "" : " mj-hero--solo"}`}>
@@ -71,7 +71,7 @@ export default function MeetJackie({ portrait }: { portrait: string | null }) {
         </header>
 
         {/* ── Curated interview ── */}
-        <section className="mj-voice" aria-label="In her words">
+        <section className="mj-voice rv" aria-label="In her words">
           <div className="ds-eyebrow mj-voice__label"><span>In her words</span></div>
           <ol className="qa">
             {CURATED.map((item, i) => (
@@ -87,7 +87,7 @@ export default function MeetJackie({ portrait }: { portrait: string | null }) {
         </section>
 
         {/* ── Closer ── */}
-        <section className="mj-close">
+        <section className="mj-close rv">
           <p className="mj-close__line">There’s something on the other side of a person’s past. I design the way through.</p>
           <Link href="/contact" className="ds-btn ds-btn--solid">Start a conversation <span aria-hidden="true">→</span></Link>
         </section>

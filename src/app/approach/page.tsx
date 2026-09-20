@@ -50,7 +50,7 @@ export default function ApproachPage() {
   return (
     <>
       <SiteNav />
-      <main className="work-page">
+      <main className="work-page" id="main-content">
         {/* ── Hero: the thesis, straight from how she actually talks about the work ── */}
         <section className="wk-hero">
           <div className="ds-eyebrow">
@@ -67,7 +67,7 @@ export default function ApproachPage() {
         </section>
 
         {/* ── The six principles — reused from /work, this is now their home ── */}
-        <section className="wk-block">
+        <section className="wk-block rv">
           <div className="ds-eyebrow"><span>The Approach</span></div>
           <p className="wk-approach-lead">
             Learning designed to be <em>experienced,</em> not endured.
@@ -83,7 +83,7 @@ export default function ApproachPage() {
         </section>
 
         {/* ── The frameworks every case study is tagged against ── */}
-        <section className="wk-block">
+        <section className="wk-block rv">
           <div className="ds-eyebrow"><span>Grounded In</span></div>
           <p className="ap-fw-lead">
             Every &ldquo;Grounded in&rdquo; tag on a case study points back here.
@@ -103,7 +103,7 @@ export default function ApproachPage() {
         </section>
 
         {/* ── Working with AI — moved here from /work, this is a methodology question ── */}
-        <section className="wk-block">
+        <section className="wk-block rv">
           <div className="ds-eyebrow"><span>Working with AI</span></div>
           <p className="wk-lead">AI is my force-multiplier — I direct the instructional design; AI accelerates the build.</p>
           <div className="ap-ai-layout">
@@ -122,7 +122,7 @@ export default function ApproachPage() {
         </section>
 
         {/* ── Closer: send them to see it applied ── */}
-        <section className="wk-closer">
+        <section className="wk-closer rv">
           <p className="wk-closer-line">See these six commitments applied, not just stated.</p>
           <Link href="/work" className="ds-btn ds-btn--solid">
             See the work <span aria-hidden="true">→</span>

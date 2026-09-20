@@ -18,7 +18,7 @@ export default function WorkPage() {
   return (
     <>
       <SiteNav />
-      <main className="work-page">
+      <main className="work-page" id="main-content">
         {/* ── Hero: thesis + one line + scannable constraints ── */}
         <section className="wk-hero">
           <div className="ds-eyebrow">
@@ -39,7 +39,7 @@ export default function WorkPage() {
         </section>
 
         {/* ── Selected Work: cards, high on the page ── */}
-        <section className="wk-block">
+        <section className="wk-block rv">
           <div className="ds-eyebrow"><span>Selected Work</span></div>
           <div className="wk-cards">
             {caseStudies.map((cs) => (
@@ -72,7 +72,7 @@ export default function WorkPage() {
         </section>
 
         {/* ── The Approach: teaser only — the full six commitments + frameworks + AI stance live at /approach ── */}
-        <section className="wk-block">
+        <section className="wk-block rv">
           <div className="ds-eyebrow"><span>The Approach</span></div>
           <p className="wk-approach-lead">
             Learning designed to be <em>experienced,</em> not endured.
@@ -87,7 +87,7 @@ export default function WorkPage() {
         </section>
 
         {/* ── Closer + CTA ── */}
-        <section className="wk-closer">
+        <section className="wk-closer rv">
           <p className="wk-closer-line">Different environment. Different problems. Different design.</p>
           <Link href="/contact" className="ds-btn ds-btn--solid">
             Start a conversation <span aria-hidden="true">→</span>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Archivo, Anton, Caveat } from "next/font/google";
+import ScrollAnimations from "@/components/ScrollAnimations";
 import "./globals.css";
 import "./system.css";
 
@@ -31,7 +32,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jackiemiller.co"),
+  metadataBase: new URL("https://www.jackiemiller.co"),
   title: {
     default: "Jackie Miller — Instructional Designer",
     template: "%s",
@@ -75,7 +76,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full overflow-x-hidden">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         {children}
+        <ScrollAnimations />
       </body>
     </html>
   );

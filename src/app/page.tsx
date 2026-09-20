@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <>
       <SiteNav />
-      <main className="home">
+      <main className="home" id="main-content">
         {/* ── HERO: split — photo one side, headline the other ── */}
         <section className="hm-hero">
           <div className="hm-hero__media">
@@ -84,7 +84,7 @@ export default function Home() {
         </section>
 
         {/* ── PROOF STRIP ── */}
-        <section className="hm-proof" aria-label="Credentials at a glance">
+        <section className="hm-proof rv" aria-label="Credentials at a glance">
           <div className="hm-proof__in">
             {PROOF.map((item, i) => (
               <span key={i} className="hm-proof__item">
@@ -95,7 +95,7 @@ export default function Home() {
         </section>
 
         {/* ── SELECTED WORK ── */}
-        <section className="hm hm-sec">
+        <section className="hm hm-sec rv">
           <div className="hm-sec__head">
             <p className="ds-eyebrow">Selected Work</p>
             <h2 className="hm-sec__title">
@@ -133,7 +133,7 @@ export default function Home() {
         </section>
 
         {/* ── ABOUT TEASER ── */}
-        <section className="hm hm-sec hm-about">
+        <section className="hm hm-sec hm-about rv">
           <div className="hm-about__grid">
             <div>
               <p className="ds-eyebrow">About</p>
@@ -162,7 +162,7 @@ export default function Home() {
         </section>
 
         {/* ── HOW I WORK ── */}
-        <section className="hm hm-sec">
+        <section className="hm hm-sec rv">
           <div className="hm-sec__head">
             <p className="ds-eyebrow">How I Work</p>
             <h2 className="hm-sec__title">
@@ -193,7 +193,7 @@ export default function Home() {
         )}
 
         {/* ── CLOSING CTA ── */}
-        <section className="hm-close">
+        <section className="hm-close rv">
           <div className="hm">
             <p className="hm-close__line">
               Let&apos;s make learning <em>worth someone&apos;s time.</em>

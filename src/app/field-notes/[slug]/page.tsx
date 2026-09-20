@@ -36,7 +36,7 @@ export default async function FieldNotePage({
   return (
     <>
       <SiteNav />
-      <main style={{ minHeight: "100vh", background: "var(--paper)" }}>
+      <main id="main-content" style={{ minHeight: "100vh", background: "var(--paper)" }}>
         <article style={{ maxWidth: 672, margin: "0 auto", padding: "80px 24px" }}>
         <p
           style={{

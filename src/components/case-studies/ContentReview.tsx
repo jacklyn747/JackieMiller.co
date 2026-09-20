@@ -233,7 +233,7 @@ export default function ContentReview() {
   });
 
   return (
-    <main className="cr-root">
+    <main className="cr-root" id="main-content">
       <div style={{ position: "relative" }}>
         {/* ── Hero + dark body (global SiteNav sits above this) ── */}
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "0 48px" }}>

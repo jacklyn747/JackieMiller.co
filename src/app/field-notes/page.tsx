@@ -19,7 +19,7 @@ export default function FieldNotesPage() {
   return (
     <>
       <SiteNav />
-      <main style={{ minHeight: "100vh", background: "var(--paper)" }}>
+      <main id="main-content" style={{ minHeight: "100vh", background: "var(--paper)" }}>
         <section style={{ maxWidth: 672, margin: "0 auto", padding: "80px 24px" }}>
         <h1
           style={{

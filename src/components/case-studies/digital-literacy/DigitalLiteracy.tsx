@@ -54,7 +54,7 @@ const FILL: Record<number, string> = { 1: "var(--oxblood)", 2: "rgba(93,15,14,0.
 
 export default function DigitalLiteracy() {
   return (
-    <main className="cr-root">
+    <main className="cr-root" id="main-content">
       <div style={{ position: "relative" }}>
         <div className="cr-wrap" style={{ position: "relative", maxWidth: 1160, margin: "0 auto", padding: "0 48px" }}>
 

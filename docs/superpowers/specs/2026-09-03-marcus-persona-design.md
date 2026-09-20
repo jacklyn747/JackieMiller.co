@@ -1,7 +1,7 @@
 # Design spec — Marcus, the living learner persona
 
 **Date:** 2026-09-03
-**Status:** Approved design, ready to build
+**Status:** Built and live at `/persona` (shipped 2026-09-20)
 **Source research:** [docs/research/2026-09-03-edovo-learner-interview.md](../../research/2026-09-03-edovo-learner-interview.md)
 
 ## Goal

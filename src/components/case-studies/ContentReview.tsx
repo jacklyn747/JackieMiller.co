@@ -18,9 +18,11 @@
    ───────────────────────────────────────────────────────────── */
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import CaseNav from "./CaseNav";
 import GroundedIn from "./GroundedIn";
+import SectionLabel from "./SectionLabel";
 import "./content-review.css";
 
 const IMG_BASE = "/case-studies/content-review";
@@ -172,40 +174,6 @@ const DOC_TITLES = [
   "Evaluation Plan",
 ];
 
-/* ── Shared bits of chrome ── */
-
-function SectionLabel({
-  children,
-  trailing,
-  margin,
-  color = "rgba(241,238,229,0.72)",
-}: {
-  children: React.ReactNode;
-  trailing?: React.ReactNode;
-  margin: string;
-  color?: string;
-}) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 14,
-        fontSize: 11,
-        fontWeight: 500,
-        letterSpacing: "0.20em",
-        textTransform: "uppercase",
-        color,
-        margin,
-      }}
-    >
-      <span>{children}</span>
-      <span style={{ flex: 1, height: 0, borderTop: "0.5px solid rgba(241,238,229,0.18)" }} />
-      {trailing}
-    </div>
-  );
-}
-
 export default function ContentReview() {
   const [openCard, setOpenCard] = useState<number | null>(null);
   const [docsOpen, setDocsOpen] = useState(false);
@@ -302,12 +270,19 @@ export default function ContentReview() {
             <GroundedIn items={["ADDIE", "Trauma-Informed", "UDL", "Cognitive Load", "Learner Autonomy", "Constructivism", "Kirkpatrick", "Accessibility (WCAG)"]} />
           </div>
 
-          {/* The Challenge */}
-          <SectionLabel margin="96px 0 30px">The Challenge</SectionLabel>
+          {/* The Challenge — a friction audit: environmental first, then the psychological one underneath it */}
+          <SectionLabel margin="96px 0 30px" trailing={<span style={{ color: "rgba(241,238,229,0.55)" }}>A friction audit, not a content review</span>}>
+            The Challenge
+          </SectionLabel>
           <p style={{ maxWidth: "64ch", fontSize: 17, lineHeight: 1.72, color: "rgba(241,238,229,0.90)", margin: 0, textWrap: "pretty" }}>
-            Course content on a secure learning platform assumes the learner can already operate the device it&apos;s delivered on. For a meaningful portion of this population, that assumption doesn&apos;t hold. Some learners are encountering a touchscreen for the first time as adults, with no internet access, no IT support on demand, and real consequences for visible failure in front of peers or staff.
+            Course content on a secure learning platform assumes the learner can already operate the device it&apos;s delivered on. For a meaningful portion of this population, that assumption doesn&apos;t hold. Some learners are encountering a touchscreen for the first time as adults — three of the four barriers below are purely environmental (the device, the platform, the room); the fourth is the psychological one sitting underneath all of them: real consequences for visible failure in front of peers or staff.
           </p>
-          <div className="cr-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0, marginTop: 56, borderTop: "0.5px solid rgba(241,238,229,0.18)" }}>
+          <p style={{ marginTop: 14 }}>
+            <Link href="/persona" style={{ fontSize: 12.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              This kind of friction, from a real learner →
+            </Link>
+          </p>
+          <div className="cr-grid-4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 0, marginTop: 40, borderTop: "0.5px solid rgba(241,238,229,0.18)" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20, padding: "30px 26px 0 0", borderRight: "0.5px solid rgba(241,238,229,0.18)" }}>
               <svg viewBox="0 0 32 32" width="38" height="38" fill="none" stroke="var(--paper)" strokeWidth="1.25" style={{ display: "block", overflow: "visible" }}>
                 <circle cx="16" cy="16" r="11" />

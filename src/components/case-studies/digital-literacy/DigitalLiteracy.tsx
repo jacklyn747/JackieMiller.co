@@ -4,6 +4,7 @@ import TabletMock from "./TabletMock";
 import ProcessDocs from "./ProcessDocs";
 import CaseNav from "../CaseNav";
 import GroundedIn from "../GroundedIn";
+import SectionLabel from "../SectionLabel";
 import "../content-review.css"; // reuse the dark-editorial case-study chrome (.cr-root, .cr-wrap, grids)
 import "./dl.css";
 
@@ -23,16 +24,6 @@ const DOCS = [
 /* Digital Literacy Fundamentals — full-course case study.
    Same dark-editorial language as Content Review (continuity), adapted for a
    built course: glam tablet lesson mockups + a live capstone simulation. */
-
-function SectionLabel({ children, trailing, margin }: { children: React.ReactNode; trailing?: React.ReactNode; margin: string }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 11, fontWeight: 500, letterSpacing: "0.20em", textTransform: "uppercase", color: "rgba(241,238,229,0.72)", margin }}>
-      <span>{children}</span>
-      <span style={{ flex: 1, height: 0, borderTop: "0.5px solid rgba(241,238,229,0.18)" }} />
-      {trailing}
-    </div>
-  );
-}
 
 const LESSONS = [
   { n: 1, unit: "Orientation", head: "Motivation before mechanics.", teaches: "Laptop fluency is framed against something the learner already wants — a job, an interview, a message home — before a single skill is taught." },
@@ -139,6 +130,11 @@ export default function DigitalLiteracy() {
                 </div>
               ))}
             </div>
+            <p style={{ marginTop: 24 }}>
+              <Link href="/persona" style={{ fontSize: 12.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                This came from a real learner — read the full research →
+              </Link>
+            </p>
           </div>
 
           {/* The Course — 6-lesson architecture */}

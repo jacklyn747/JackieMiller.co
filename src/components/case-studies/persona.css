@@ -1,0 +1,132 @@
+/* Persona page + the simulated-session chat — dark-editorial chrome,
+   same tokens as content-review.css (.cr-root pins --ink/--paper/--oxblood). */
+
+.persona-chat {
+  border: 0.5px solid rgba(241, 238, 229, 0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(241, 238, 229, 0.02);
+}
+.persona-chat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 22px;
+  border-bottom: 0.5px solid rgba(241, 238, 229, 0.18);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(241, 238, 229, 0.5);
+}
+.persona-chat__replay {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e3c8c2;
+  background: none;
+  border: 0.5px solid rgba(227, 200, 194, 0.4);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+.persona-chat__replay:hover,
+.persona-chat__replay:focus-visible {
+  background: rgba(227, 200, 194, 0.1);
+  color: var(--paper, #f1eee5);
+  outline: none;
+}
+.persona-chat__body {
+  padding: clamp(20px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 120px;
+}
+.persona-chat__row {
+  max-width: 34ch;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.persona-chat__row.is-jackie {
+  align-self: flex-end;
+  align-items: flex-end;
+  text-align: right;
+}
+.persona-chat__row.is-marcus {
+  align-self: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+.persona-chat__who {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(241, 238, 229, 0.4);
+}
+.persona-chat__row.is-marcus .persona-chat__who { color: #e3c8c2; }
+.persona-chat__text {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  text-wrap: pretty;
+}
+.persona-chat__row.is-jackie .persona-chat__text {
+  background: rgba(241, 238, 229, 0.06);
+  color: rgba(241, 238, 229, 0.82);
+  border-bottom-right-radius: 4px;
+}
+.persona-chat__row.is-marcus .persona-chat__text {
+  background: rgba(93, 15, 14, 0.16);
+  color: var(--paper, #f1eee5);
+  border-bottom-left-radius: 4px;
+}
+.persona-chat__cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  margin-left: 2px;
+  background: currentColor;
+  vertical-align: middle;
+  animation: persona-blink 0.9s step-end infinite;
+}
+@keyframes persona-blink {
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .persona-chat__cursor { animation: none; }
+}
+
+/* Friction map — reuses the "what happened → design demand" row device
+   already established in the Digital Literacy persona card. */
+.persona-friction {
+  margin-top: clamp(24px, 3vw, 34px);
+  border-top: 0.5px solid rgba(241, 238, 229, 0.18);
+}
+.persona-friction__row {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 0.5px solid rgba(241, 238, 229, 0.18);
+  padding: 16px 0;
+}
+.persona-friction__row span:first-child { font-size: 13.5px; line-height: 1.5; color: rgba(241, 238, 229, 0.68); text-wrap: pretty; }
+.persona-friction__row span:last-child { font-size: 13.5px; line-height: 1.5; color: var(--paper, #f1eee5); text-wrap: pretty; font-weight: 500; }
+.persona-friction__arrow { color: rgba(241, 238, 229, 0.35); text-align: center; }
+@media (max-width: 720px) {
+  .persona-friction__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 18px 0;
+  }
+  .persona-friction__arrow { display: none; }
+}

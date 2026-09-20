@@ -64,6 +64,12 @@ export default function ApproachPage() {
             hardest environment I design for: incarceration and reentry. The same commitments hold anywhere the
             stakes are real and the margin for a confusing screen is zero.
           </p>
+          <p className="wk-sub" style={{ marginTop: 18 }}>
+            The method underneath all six: a <strong>friction audit</strong> — every barrier that stops a specific
+            learner, split into what&apos;s environmental (the device, the room, the interruptions) and what&apos;s
+            internal (working memory, motivation, what a losing streak does to whether trying still feels worth it).
+            Diagnose the friction, then build the fix — fast enough to prove it works, not just propose it.
+          </p>
         </section>
 
         {/* ── The six principles — reused from /work, this is now their home ── */}
@@ -80,6 +86,11 @@ export default function ApproachPage() {
               </div>
             ))}
           </div>
+          <p style={{ marginTop: 24 }}>
+            <Link href="/persona" className="ds-btn ds-btn--ghost">
+              See a friction audit, worked — from a real interview <span aria-hidden="true">→</span>
+            </Link>
+          </p>
         </section>
 
         {/* ── The frameworks every case study is tagged against ── */}

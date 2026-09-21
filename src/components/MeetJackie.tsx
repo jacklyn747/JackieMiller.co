@@ -32,7 +32,7 @@ const INTERVIEW: QA[] = [
   { q: "Your mission?", a: "Build learning that gives people a reason to believe there’s something on the other side of their past.", long: true, key: true },
   { q: "What makes a learning experience good?", a: "It respects the learner’s time, intelligence, experience, and reality.", long: true },
   { q: "So what happens when the learner has experienced trauma?", a: "You design differently." },
-  { q: "How?", a: "You reduce unnecessary cognitive load. Build psychological safety. Give learners control where possible. Use clear language. Create predictable structure.", long: true },
+  { q: "How?", a: "You reduce unnecessary cognitive load. Build psychological safety. Give learners control where possible. Use clear language. Create predictable structure.", long: true, key: true },
   { q: "And that matters in instructional design because…?", a: "If a learner struggles with a course, I want to ask what we designed badly before I ask what the learner did wrong.", long: true },
   { q: "What do you bring besides lived experience?", a: "Storytelling. Visual design. Instructional design. Technology. AI. Research. And a slightly obsessive interest in making complicated things make sense.", long: true },
   { q: "AI?", a: "I use it as a tool, and to automate. Not a substitute for judgment.", long: true, key: true },

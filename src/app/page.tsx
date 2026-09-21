@@ -5,6 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import TabletMock from "@/components/case-studies/digital-literacy/TabletMock";
 import { caseStudies } from "@/lib/caseStudies";
+import { getFieldNotes } from "@/lib/fieldNotes";
 import "./home.css";
 import "./work/work.css";
 
@@ -18,13 +19,14 @@ const PROOF = [
   <>MEd · <b>Instructional Design</b></>,
   <>Trained LLMs at <b>Character.AI</b></>,
   <>Built a <b>live, playable course</b></>,
+  <>Idea to prototype in <b>days, not months</b></>,
 ];
 
 type HowCard = { t: string; d: string; icon?: string; iw?: number; ih?: number; alt?: string };
 const HOW: HowCard[] = [
   {
     t: "Boring is the enemy",
-    d: "I treat visual craft as instructional craft. If a course looks like a chore, it teaches like one — so mine don't.",
+    d: "I design against cognitive overload — chunked, low-friction, no wasted motion. If a course looks like a chore, it teaches like one, so mine don't.",
     icon: "/home/icon-lightning.png", iw: 1640, ih: 2360, alt: "Lightning bolt",
   },
   {
@@ -64,13 +66,15 @@ export default function Home() {
             />
           </div>
           <div className="hm-hero__content">
-            <p className="ds-eyebrow ds-eyebrow--solo">Instructional Designer</p>
+            <p className="ds-eyebrow ds-eyebrow--solo">Instructional Designer · Learning Science + AI</p>
             <h1 className="hm-hero__title">
               Most learning is <span className="ds-punch">boring.</span> <em>Mine isn&apos;t.</em>
             </h1>
             <p className="hm-hero__sub">
-              I&apos;m Jackie Miller. I design learning people actually want to do — built around real
-              people, real constraints, and the belief that learning is the way out.
+              I&apos;m Jackie Miller. I design against how the brain actually learns — chunked,
+              low-friction, no wasted motion — then use AI to take that thinking from idea to a working
+              prototype in days, not months. Built for real people, real constraints, and the belief
+              that learning is the way out.
             </p>
             <div className="hm-hero__cta">
               <Link href="/work" className="ds-btn ds-btn--solid">
@@ -94,12 +98,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── SELECTED WORK ── */}
+        {/* ── FEATURED PROTOTYPES ── */}
         <section className="hm hm-sec rv">
           <div className="hm-sec__head">
-            <p className="ds-eyebrow">Selected Work</p>
+            <p className="ds-eyebrow">Featured Prototypes</p>
             <h2 className="hm-sec__title">
-              Courses built to be <em>worth someone&apos;s time.</em>
+              Courses built to be worth someone&apos;s time — <em>and prototyped fast enough to prove it.</em>
             </h2>
           </div>
           <div className="wk-cards">
@@ -121,6 +125,11 @@ export default function Home() {
                 </div>
                 <h3 className="work-card__title">{cs.title}</h3>
                 <p className="work-card__summary">{cs.summary}</p>
+                {cs.builtWithAI && (
+                  <p style={{ marginTop: 10 }}>
+                    <span className="ds-chip">Built with AI</span>
+                  </p>
+                )}
                 <div className="work-card__meta">
                   <span>{cs.role}</span>
                   <span className="spacer" />
@@ -129,6 +138,33 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* ── FIELD NOTES ── */}
+        <section className="hm hm-sec hm-sec--alt rv">
+          <div className="hm-sec__head">
+            <p className="ds-eyebrow">Field Notes</p>
+            <h2 className="hm-sec__title">
+              Notes from building with AI, <em>in public.</em>
+            </h2>
+          </div>
+          <div className="ds-index">
+            {getFieldNotes().length === 0 ? (
+              <p style={{ padding: "24px 0", color: "var(--ink-mid)" }}>First note lands soon.</p>
+            ) : (
+              getFieldNotes().slice(0, 3).map((note) => (
+                <Link key={note.slug} href={`/field-notes/${note.slug}`} className="ds-index__row block">
+                  <h3 className="ds-index__t">{note.title}</h3>
+                  {note.summary && <p className="ds-index__d">{note.summary}</p>}
+                </Link>
+              ))
+            )}
+          </div>
+          <div className="hm-cta-inline">
+            <Link href="/field-notes" className="ds-btn ds-btn--ghost">
+              Read all field notes <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </section>
 
@@ -182,6 +218,11 @@ export default function Home() {
                 <p>{c.d}</p>
               </div>
             ))}
+          </div>
+          <div className="hm-cta-inline">
+            <Link href="/approach" className="ds-btn ds-btn--ghost">
+              Read the full philosophy <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </section>
 

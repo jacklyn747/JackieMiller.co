@@ -13,6 +13,7 @@ export type CaseStudy = {
   cover: string;
   coverAlt: string;
   live?: boolean; // render a live component cover (see /work page) instead of an image
+  builtWithAI?: boolean; // shows a "Built with AI" chip — reserve for prototypes actually built with AI tooling
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -27,6 +28,7 @@ export const caseStudies: CaseStudy[] = [
     focus: "Full Course Design",
     cover: "/case-studies/digital-literacy/cover.png",
     coverAlt: "The Digital Literacy Fundamentals course open to its title screen on a tablet.",
+    builtWithAI: true,
   },
   {
     slug: "content-review",

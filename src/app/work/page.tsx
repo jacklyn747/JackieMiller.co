@@ -60,6 +60,11 @@ export default function WorkPage() {
                 </div>
                 <h2 className="work-card__title">{cs.title}</h2>
                 <p className="work-card__summary">{cs.summary}</p>
+                {cs.builtWithAI && (
+                  <p style={{ marginTop: 10 }}>
+                    <span className="ds-chip">Built with AI</span>
+                  </p>
+                )}
                 <div className="work-card__meta">
                   <span>{cs.role}</span>
                   <span className="spacer" />

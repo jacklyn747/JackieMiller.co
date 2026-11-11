@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import Swatch from "../Swatch.jsx";
 import ColorWheel from "../ColorWheel.jsx";
-import { bestToner, lower, tonerWorks } from "../lib.js";
+import { lower, tonerWorks } from "../lib.js";
 
 export default function FixIt({ data, headingRef, initialPigmentId }) {
+  const selectId = useId();
   const [pigmentId, setPigmentId] = useState(initialPigmentId);
   const [selected, setSelected] = useState(null); // toner chosen by tap/keyboard
   const [result, setResult] = useState(null); // { tonerId, correct }
@@ -36,7 +37,7 @@ export default function FixIt({ data, headingRef, initialPigmentId }) {
   // Pointer drag works for mouse, pen and touch.
   const onPointerDown = (e, tonerId) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    dragStart.current = { x: e.clientX, y: e.clientY, tonerId, id: e.pointerId };
+    dragStart.current = { x: e.clientX, y: e.clientY, tonerId };
     e.currentTarget.setPointerCapture(e.pointerId);
   };
   const onPointerMove = (e) => {
@@ -59,7 +60,6 @@ export default function FixIt({ data, headingRef, initialPigmentId }) {
     dragStart.current = null;
     setDrag(null);
   };
-
   const onChipClick = (tonerId) => {
     if (suppressClick.current) {
       suppressClick.current = false;
@@ -70,34 +70,35 @@ export default function FixIt({ data, headingRef, initialPigmentId }) {
 
   const shownToner = result ? data.tonerById[result.tonerId] : null;
   const hintToner = selected ? data.tonerById[selected] : null;
+  const dragToner = drag ? data.tonerById[drag.tonerId] : null;
+
+  let hint = "Drag a toner onto the hair, or tap one and then tap the hair.";
+  if (dragToner) hint = drag.over ? `Let go to apply ${lower(dragToner.name)}.` : "Drop it on the hair.";
+  else if (hintToner) hint = `Now tap the hair to apply ${lower(hintToner.name)}.`;
+  else if (result) hint = " ";
 
   return (
     <section aria-labelledby="fix-title">
-      <span className="eyebrow">Fix it</span>
-      <h2 id="fix-title" ref={headingRef} tabIndex={-1}>
-        Cancel the warmth on the color wheel
-      </h2>
-      <p className="lede">
-        Colors that sit opposite each other on the wheel cancel out. Drag a toner onto the hair, or
-        tap a toner and then tap the hair.
-      </p>
+      <div className="center">
+        <p className="label">Fix it</p>
+        <h2 id="fix-title" className="title" ref={headingRef} tabIndex={-1}>
+          Cancel it
+        </h2>
+        <p className="body">Colors opposite each other on the wheel cancel out.</p>
 
-      <fieldset className="chip-group">
-        <legend className="h-small">Warmth to fix</legend>
-        {data.pigments.map((p) => (
-          <label key={p.id} className={`chip${p.id === pigmentId ? " is-on" : ""}`}>
-            <input
-              type="radio"
-              name="fix-pigment"
-              value={p.id}
-              checked={p.id === pigmentId}
-              onChange={() => choosePigment(p.id)}
-            />
-            <span className="chip__dot" style={{ background: p.swatch_hex }} aria-hidden="true" />
-            {p.name}
+        <div className="select block--tight">
+          <label htmlFor={selectId} className="label" style={{ display: "block" }}>
+            Warmth to fix
           </label>
-        ))}
-      </fieldset>
+          <select id={selectId} value={pigmentId} onChange={(e) => choosePigment(e.target.value)}>
+            {data.pigments.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
       <div className={`wheel-wrap${drag?.over ? " is-over" : ""}`} ref={dropRef}>
         <ColorWheel
@@ -125,86 +126,69 @@ export default function FixIt({ data, headingRef, initialPigmentId }) {
         </button>
       </div>
 
-      <p className="wheel-status">
-        Hair now: <strong>{solved ? pigment.neutral_label : `${pigment.name} warmth`}</strong>
-      </p>
+      <div className="center">
+        <p className="wheel-status strong">
+          {solved ? pigment.neutral_label : `${pigment.name} warmth`}
+        </p>
+        <p className="drop-hint small" aria-live="polite">
+          {hint}
+        </p>
 
-      <p className="drop-hint" aria-live="polite">
-        {drag
-          ? drag.over
-            ? `Let go to apply ${lower(data.tonerById[drag.tonerId].name)}.`
-            : "Drop it on the hair."
-          : hintToner
-            ? `${hintToner.name} picked. Now tap the hair in the middle of the wheel.`
-            : " "}
-      </p>
+        <div className="toner-tray" role="group" aria-label="Toners">
+          {data.toners.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              className={`pill toner${selected === t.id ? " is-on" : ""}${drag?.tonerId === t.id ? " is-dragging" : ""}`}
+              aria-pressed={selected === t.id}
+              onPointerDown={(e) => onPointerDown(e, t.id)}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerCancel}
+              onClick={() => onChipClick(t.id)}
+            >
+              <span className="pill__dot" style={{ background: t.hex }} aria-hidden="true" />
+              {t.name}
+            </button>
+          ))}
+        </div>
 
-      <div className="toner-tray" role="group" aria-label="Toners">
-        {data.toners.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            className={`toner${selected === t.id ? " is-on" : ""}${drag?.tonerId === t.id ? " is-dragging" : ""}`}
-            aria-pressed={selected === t.id}
-            onPointerDown={(e) => onPointerDown(e, t.id)}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerCancel}
-            onClick={() => onChipClick(t.id)}
-          >
-            <span className="toner__dot" style={{ background: t.hex }} aria-hidden="true" />
-            {t.name}
-          </button>
-        ))}
+        <div aria-live="polite">
+          {result && (
+            <div className="feedback">
+              <p className="strong">
+                {result.correct ? "Neutral. That's the one." : `Not ${lower(shownToner.name)}. Here's why.`}
+              </p>
+              <p className="body">
+                {result.correct
+                  ? `${shownToner.name} sits opposite ${lower(pigment.name)}, so it cancels it.`
+                  : `${shownToner.wrong_effect} Look straight across from ${lower(pigment.name)}.`}
+                {result.correct &&
+                  pigment.neutralized_by.length > 1 &&
+                  ` ${pigment.name} sits between two slices, so ${pigment.neutralized_by
+                    .map((id) => lower(data.tonerById[id].name))
+                    .join(" or ")} both work.`}
+              </p>
+              <div className="actions">
+                {result.correct ? (
+                  <p className="small">Pick another warmth above and try again.</p>
+                ) : (
+                  <button type="button" className="btn btn--quiet" onClick={() => setResult(null)}>
+                    Try again
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {drag && (
-        <div className="drag-ghost" style={{ left: drag.x, top: drag.y }} aria-hidden="true">
-          <span className="toner__dot" style={{ background: data.tonerById[drag.tonerId].hex }} />
-          {data.tonerById[drag.tonerId].name}
+      {dragToner && (
+        <div className="pill drag-ghost" style={{ left: drag.x, top: drag.y }} aria-hidden="true">
+          <span className="pill__dot" style={{ background: dragToner.hex }} />
+          {dragToner.name}
         </div>
       )}
-
-      <div aria-live="polite" className="feedback-slot">
-        {result && (
-          <div className={`feedback ${result.correct ? "feedback--right" : "feedback--miss"}`}>
-            <p className="feedback__title">
-              {result.correct ? "Neutral. That's the one." : `Not that one. Here's what ${lower(shownToner.name)} would do.`}
-            </p>
-            <p>
-              {result.correct
-                ? `${shownToner.name} sits opposite ${lower(pigment.name)} on the wheel. Opposites cancel, so the warmth goes neutral.`
-                : `${shownToner.wrong_effect} Look for the color directly across from ${lower(pigment.name)}.`}
-            </p>
-            {result.correct && pigment.neutralized_by.length > 1 && (
-              <p className="small">
-                {pigment.name} sits between two slices, so{" "}
-                {pigment.neutralized_by.map((id) => lower(data.tonerById[id].name)).join(" or ")} both
-                work here.
-              </p>
-            )}
-            {!result.correct && (
-              <button type="button" className="btn btn--ghost btn--small" onClick={() => setResult(null)}>
-                Try again
-              </button>
-            )}
-            {result.correct && (
-              <p className="small">Pick another warmth above and cancel that one too.</p>
-            )}
-          </div>
-        )}
-      </div>
-
-      <details className="rules">
-        <summary>Cheat sheet: what cancels what</summary>
-        <ul>
-          {data.pigments.map((p) => (
-            <li key={p.id}>
-              {p.name} ({p.levels.includes(" ") ? "levels" : "level"} {p.levels}): {bestToner(data, p).name.toLowerCase()}
-            </li>
-          ))}
-        </ul>
-      </details>
     </section>
   );
 }

@@ -12,120 +12,99 @@ export default function LevelLab({ data, lab, setLab, headingRef }) {
   const lifted = [];
   for (let l = start + 1; l <= target; l++) lifted.push(l);
 
+  let detail;
+  if (!exposed) detail = data.callouts.no_lift.text;
+  else if (colored) detail = null;
+  else if (dev) detail = `${lift} ${lift === 1 ? "level" : "levels"} of lift. Usually ${dev.volume} volume developer.`;
+  else detail = `${lift} levels of lift. ${data.callouts.beyond_developer.text}`;
+
   return (
     <section aria-labelledby="lab-title">
-      <span className="eyebrow">Explore</span>
-      <h2 id="lab-title" ref={headingRef} tabIndex={-1}>
-        The Level Lab
-      </h2>
-      <p className="lede">
-        Every head of hair has warm pigment hiding under the color you see. Lighten it and the
-        warmth comes forward, darkest first. Move the sliders and watch what shows up.
-      </p>
+      <div className="center">
+        <p className="label">Level Lab</p>
+        <h2 id="lab-title" className="title" ref={headingRef} tabIndex={-1}>
+          Lift it
+        </h2>
+        <p className="body">
+          Warm pigment hides under every head of hair. Lighten it and the warmth comes forward. Move
+          the sliders.
+        </p>
+      </div>
 
-      <div className="sliders">
+      <div className="panel block--tight">
         <LevelSlider
-          label="Natural starting level"
+          label="Starting level"
           value={start}
           data={data}
           onChange={(v) => set({ start: v })}
         />
-        <LevelSlider
-          label="Target level"
-          value={target}
-          data={data}
-          onChange={(v) => set({ target: v })}
-        />
+        <LevelSlider label="Target level" value={target} data={data} onChange={(v) => set({ target: v })} />
+        <label className="toggle">
+          <span>Hair already colored</span>
+          <input
+            type="checkbox"
+            role="switch"
+            checked={colored}
+            onChange={(e) => set({ colored: e.target.checked })}
+          />
+        </label>
       </div>
 
-      <label className="toggle">
-        <input
-          type="checkbox"
-          checked={colored}
-          onChange={(e) => set({ colored: e.target.checked })}
-        />
-        <span>Hair already colored</span>
-      </label>
-
-      <div aria-live="polite" className="lab-result">
-        {!exposed ? (
-          <p className="callout">{data.callouts.no_lift.text}</p>
-        ) : (
+      <div className="result center block" aria-live="polite">
+        {exposed ? (
           <>
-            <div className="exposed">
-              <Swatch
-                hex={exposed.swatch_hex}
-                label={`${exposed.name} exposed at level ${target}`}
-                size="lg"
-              />
-              <div>
-                <p className="big-stat">
-                  <span className="big-stat__num">{lift}</span>{" "}
-                  {lift === 1 ? "level" : "levels"} of lift
-                </p>
-                <p>
-                  At level {target}, the warmth left behind is{" "}
-                  <strong>{lower(exposed.name)}</strong>. That's what you'll need to tone.
-                </p>
-              </div>
-            </div>
-
-            <h3 className="h-small">What shows up on the way</h3>
-            <ol className="lift-row">
-              {lifted.map((l) => {
-                const p = pigmentForLevel(data, l);
-                return (
-                  <li key={l} className={l === target ? "is-target" : undefined}>
-                    <Swatch hex={p.swatch_hex} label={`Level ${l}: ${p.name}`} size="sm" />
-                  </li>
-                );
-              })}
-            </ol>
-
+            <Swatch hex={exposed.swatch_hex} label={`${exposed.name} warmth`} size="lg" />
+            <p className="label">At level {target} you'll see</p>
+            <p className="answer">{exposed.name}</p>
             {colored ? (
-              <div className="callout callout--alert" role="note">
-                <p className="callout__title">{data.callouts.color_doesnt_lift_color.title}</p>
-                <p>{data.callouts.color_doesnt_lift_color.text}</p>
-              </div>
+              <p className="body">
+                <strong>{data.callouts.color_doesnt_lift_color.title}</strong>{" "}
+                {data.callouts.color_doesnt_lift_color.text}
+              </p>
             ) : (
-              <div className="dev-card">
-                <h3 className="h-small">Developer usually needed</h3>
-                {dev ? (
-                  <p>
-                    For {lift} {lift === 1 ? "level" : "levels"} of lift, I'd expect{" "}
-                    <strong>{dev.volume} volume</strong>.
-                  </p>
-                ) : (
-                  <p className="callout callout--alert">{data.callouts.beyond_developer.text}</p>
-                )}
-                <table className="dev-table">
-                  <caption className="sr-only">Developer volume and typical lift</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Developer</th>
-                      <th scope="col">Typical lift</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.developers.map((d) => {
-                      const match = dev && d.volume === dev.volume;
-                      return (
-                        <tr key={d.volume} className={match ? "is-match" : undefined}>
-                          <th scope="row">
-                            {d.volume} vol
-                            {match && <span className="match-tag"> ← your lift</span>}
-                          </th>
-                          <td>{d.lift_label}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+              <p className="body">{detail}</p>
             )}
           </>
+        ) : (
+          <p className="body">{detail}</p>
         )}
       </div>
+
+      {exposed && (
+        <div className="block center">
+          <p className="label">On the way up</p>
+          <ol className="lift-row">
+            {lifted.map((l) => {
+              const p = pigmentForLevel(data, l);
+              return (
+                <li key={l} className={l === target ? "is-target" : undefined}>
+                  <Swatch hex={p.swatch_hex} label={`${l} · ${p.name}`} size="sm" />
+                </li>
+              );
+            })}
+          </ol>
+
+          <details className="disclosure">
+            <summary>Developer guide</summary>
+            <table className="dev-table">
+              <caption className="sr-only">Developer volume and typical lift</caption>
+              <tbody>
+                {data.developers.map((d) => {
+                  const match = !colored && dev && d.volume === dev.volume;
+                  return (
+                    <tr key={d.volume} className={match ? "is-match" : undefined}>
+                      <th scope="row">
+                        {d.volume} volume{match && <span className="sr-only"> (matches your lift)</span>}
+                      </th>
+                      <td>{d.lift_label}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </details>
+        </div>
+      )}
     </section>
   );
 }
@@ -140,7 +119,7 @@ function LevelSlider({ label, value, data, onChange }) {
           {label}
         </label>
         <span className="slider__value" aria-hidden="true">
-          Level {value} · {lvl.name}
+          {value} · {lvl.name}
         </span>
       </div>
       <div className="slider__body">
@@ -151,7 +130,7 @@ function LevelSlider({ label, value, data, onChange }) {
           max={10}
           step={1}
           value={value}
-          aria-valuetext={`Level ${value}, ${lvl.name}`}
+          aria-valuetext={`Level ${value}, ${lower(lvl.name)}`}
           onChange={(e) => onChange(Number(e.target.value))}
         />
         <Swatch hex={lvl.hex} label={`Level ${value}: ${lvl.name}`} size="xs" hideCaption />

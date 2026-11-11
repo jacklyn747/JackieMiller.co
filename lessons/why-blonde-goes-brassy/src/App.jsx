@@ -25,28 +25,30 @@ export default function App() {
       .catch(() => setError(true));
   }, []);
 
-  // Move focus to the new screen's heading so keyboard and screen reader
+  // Move focus to the new screen's title so keyboard and screen reader
   // users land at the top of each step.
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
       return;
     }
-    headingRef.current?.focus();
-    headingRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+    window.scrollTo({ top: 0 });
+    headingRef.current?.focus({ preventScroll: true });
   }, [step]);
 
   if (error) {
     return (
       <Shell>
-        <p className="notice">I couldn't load the lesson data. Refresh the page to try again.</p>
+        <p className="notice body">I couldn't load the lesson. Refresh the page to try again.</p>
       </Shell>
     );
   }
   if (!data) {
     return (
       <Shell>
-        <p className="notice" aria-live="polite">Loading the lesson…</p>
+        <p className="notice small" aria-live="polite">
+          Loading…
+        </p>
       </Shell>
     );
   }
@@ -71,12 +73,9 @@ export default function App() {
             </li>
           ))}
         </ol>
-        <p className="progress__text">
-          Step {step + 1} of {STEPS.length} · {STEPS[step]}
-        </p>
       </nav>
 
-      <main className="screen">
+      <main>
         {step === 0 && <Hook data={data} headingRef={headingRef} onStart={() => go(1)} />}
         {step === 1 && <LevelLab data={data} lab={lab} setLab={setLab} headingRef={headingRef} />}
         {step === 2 && (
@@ -87,8 +86,8 @@ export default function App() {
 
       {step > 0 && (
         <div className="stepnav">
-          <button type="button" className="btn btn--ghost" onClick={() => go(step - 1)}>
-            Back
+          <button type="button" className="btn btn--quiet" onClick={() => go(step - 1)}>
+            ← Back
           </button>
           {step < STEPS.length - 1 && (
             <button
@@ -110,7 +109,7 @@ function Shell({ children }) {
   return (
     <div className="app">
       {children}
-      <footer className="footer">Built by Jackie Miller.</footer>
+      <footer className="footer">Built by Jackie Miller</footer>
     </div>
   );
 }

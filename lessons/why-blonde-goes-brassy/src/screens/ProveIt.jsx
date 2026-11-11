@@ -21,31 +21,36 @@ export default function ProveIt({ data, headingRef, onRestart }) {
 
   if (finished) {
     return (
-      <section aria-labelledby="prove-title">
-        <span className="eyebrow">Prove it</span>
-        <h2 id="prove-title" ref={headingRef} tabIndex={-1}>
-          You got {score} of {max}.
+      <section className="center" aria-labelledby="prove-title">
+        <p className="label">Your score</p>
+        <h2 id="prove-title" className="title" ref={headingRef} tabIndex={-1}>
+          {score} of {max}
         </h2>
-        <p className="lede">
+        <p className="body">
           {score === max
             ? "Clean sweep. You can call the warmth before you mix a thing."
             : score >= max - 2
-              ? "Close. Go back to the Level Lab for the one that slipped."
+              ? "Close. Revisit the Level Lab for the one that slipped."
               : "Worth another lap. Run the Level Lab again, then come back."}
         </p>
-        <ol className="recap">
+        <ul className="recap">
           {data.scenarios.map((s, i) => {
             const p = pigmentForLevel(data, s.goal);
             return (
               <li key={s.id}>
-                Client {i + 1}: level {s.start} to {s.goal}. Warmth: {lower(p.name)}
-                {scored[i].pigment ? " (you got it)" : " (missed)"}. Toner: {lower(bestToner(data, p).name)}
-                {scored[i].toner ? " (you got it)" : " (missed)"}.
+                <span className="strong">
+                  Level {s.start} to {s.goal}
+                </span>
+                <br />
+                <span className="small">
+                  {p.name} {scored[i].pigment ? "✓" : "✗"} · {bestToner(data, p).name}{" "}
+                  {scored[i].toner ? "✓" : "✗"}
+                </span>
               </li>
             );
           })}
-        </ol>
-        <div className="row">
+        </ul>
+        <div className="actions">
           <button
             type="button"
             className="btn"
@@ -54,10 +59,10 @@ export default function ProveIt({ data, headingRef, onRestart }) {
               setIndex(0);
             }}
           >
-            Try the clients again
+            Try again
           </button>
-          <button type="button" className="btn btn--ghost" onClick={onRestart}>
-            Start the lesson over
+          <button type="button" className="btn btn--quiet" onClick={onRestart}>
+            Start over
           </button>
         </div>
       </section>
@@ -70,104 +75,117 @@ export default function ProveIt({ data, headingRef, onRestart }) {
   const correctP = pigmentForLevel(data, s.goal);
   const startLvl = data.levelByNum[s.start];
   const goalLvl = data.levelByNum[s.goal];
+  const pigmentRight = a.pigment === correctP.id;
+  const tonerRight = a.toner && tonerWorks(correctP, a.toner);
 
   const pigmentLine = () => {
-    if (a.pigment === correctP.id)
-      return `Right. Lifting to level ${s.goal} exposes ${lower(correctP.name)}.`;
+    if (pigmentRight) return `Right. Level ${s.goal} exposes ${lower(correctP.name)}.`;
     const chosen = data.pigmentById[a.pigment];
-    return `Not quite. ${chosen.name} shows up around ${levelWord(chosen.levels)}. At level ${s.goal} you're fighting ${lower(correctP.name)}.`;
+    return `Not quite. ${chosen.name} shows up around ${levelWord(chosen.levels)}. At level ${s.goal} it's ${lower(correctP.name)}.`;
   };
   const tonerLine = () => {
     const t = data.tonerById[a.toner];
-    if (tonerWorks(correctP, a.toner))
-      return `Right. ${t.name} sits opposite ${lower(correctP.name)}, so it cancels it.`;
-    return `Not quite. ${t.wrong_effect} For ${lower(correctP.name)}, reach for ${lower(bestToner(data, correctP).name)}.`;
+    if (tonerRight) return `Right. ${t.name} sits opposite ${lower(correctP.name)}.`;
+    return `Not quite. ${t.wrong_effect} For ${lower(correctP.name)}, use ${lower(bestToner(data, correctP).name)}.`;
   };
 
   return (
     <section aria-labelledby="prove-title">
-      <span className="eyebrow">Prove it · Client {index + 1} of {total}</span>
-      <h2 id="prove-title" ref={headingRef} tabIndex={-1}>
-        Call it before you mix it
-      </h2>
+      <div className="center">
+        <p className="label">
+          Client {index + 1} of {total}
+        </p>
+        <h2 id="prove-title" className="title" ref={headingRef} tabIndex={-1}>
+          Call it
+        </h2>
+        <p className="body">{s.client}</p>
 
-      <div className="client">
-        <div className="client__swatches">
-          <Swatch hex={startLvl.hex} label={`Now: level ${s.start}, ${lower(startLvl.name)}`} size="md" />
-          <span className="client__arrow" aria-hidden="true">→</span>
-          <Swatch hex={goalLvl.hex} label={`Goal: level ${s.goal}, ${lower(goalLvl.name)}`} size="md" />
+        <div className="client-swatches">
+          <Swatch hex={startLvl.hex} label={`Now · ${s.start} ${startLvl.name}`} size="md" />
+          <Swatch hex={goalLvl.hex} label={`Goal · ${s.goal} ${goalLvl.name}`} size="md" />
         </div>
-        <p className="client__text">{s.client}</p>
       </div>
 
-      <fieldset className="chip-group" disabled={a.checked}>
-        <legend className="h-small">1. Which warmth will show up?</legend>
-        {data.pigments.map((p) => (
-          <label key={p.id} className={`chip${a.pigment === p.id ? " is-on" : ""}`}>
-            <input
-              type="radio"
-              name={`${s.id}-pigment`}
-              value={p.id}
-              checked={a.pigment === p.id}
-              onChange={() => set({ pigment: p.id })}
-            />
-            <span className="chip__dot" style={{ background: p.swatch_hex }} aria-hidden="true" />
-            {p.name}
-          </label>
-        ))}
-      </fieldset>
+      <div className="block--tight center">
+        <Choices
+          legend="Which warmth shows up?"
+          name={`${s.id}-pigment`}
+          items={data.pigments.map((p) => ({ id: p.id, name: p.name, hex: p.swatch_hex }))}
+          value={a.pigment}
+          disabled={a.checked}
+          onChange={(v) => set({ pigment: v })}
+        />
+        <Choices
+          legend="Which toner cancels it?"
+          name={`${s.id}-toner`}
+          items={data.toners.map((t) => ({ id: t.id, name: t.name, hex: t.hex }))}
+          value={a.toner}
+          disabled={a.checked}
+          onChange={(v) => set({ toner: v })}
+        />
 
-      <fieldset className="chip-group" disabled={a.checked}>
-        <legend className="h-small">2. Which toner cancels it?</legend>
-        {data.toners.map((t) => (
-          <label key={t.id} className={`chip${a.toner === t.id ? " is-on" : ""}`}>
-            <input
-              type="radio"
-              name={`${s.id}-toner`}
-              value={t.id}
-              checked={a.toner === t.id}
-              onChange={() => set({ toner: t.id })}
-            />
-            <span className="chip__dot" style={{ background: t.hex }} aria-hidden="true" />
-            {t.name}
-          </label>
-        ))}
-      </fieldset>
+        <div aria-live="polite">
+          {a.checked && (
+            <ul className="answers">
+              <li>
+                <span className="mark" aria-hidden="true">
+                  {pigmentRight ? "✓" : "✗"}
+                </span>
+                <span>{pigmentLine()}</span>
+              </li>
+              <li>
+                <span className="mark" aria-hidden="true">
+                  {tonerRight ? "✓" : "✗"}
+                </span>
+                <span>{tonerLine()}</span>
+              </li>
+            </ul>
+          )}
+        </div>
 
-      <div aria-live="polite">
-        {a.checked && (
-          <ul className="answer-feedback">
-            <li className={a.pigment === correctP.id ? "is-right" : "is-miss"}>
-              <span className="mark" aria-hidden="true">{a.pigment === correctP.id ? "✓" : "✗"}</span>
-              {pigmentLine()}
-            </li>
-            <li className={tonerWorks(correctP, a.toner) ? "is-right" : "is-miss"}>
-              <span className="mark" aria-hidden="true">{tonerWorks(correctP, a.toner) ? "✓" : "✗"}</span>
-              {tonerLine()}
-            </li>
-          </ul>
-        )}
-      </div>
-
-      <div className="row">
-        {!a.checked ? (
-          <button
-            type="button"
-            className="btn"
-            disabled={!a.pigment || !a.toner}
-            onClick={() => set({ checked: true })}
-          >
-            Check my answers
-          </button>
-        ) : (
-          <button type="button" className="btn" onClick={() => setIndex(index + 1)}>
-            {index + 1 < total ? "Next client" : "See my score"}
-          </button>
-        )}
-        <p className="score" aria-live="polite">
-          Score so far: {score} of {max}
+        <div className="actions">
+          {!a.checked ? (
+            <button
+              type="button"
+              className="btn"
+              disabled={!a.pigment || !a.toner}
+              onClick={() => set({ checked: true })}
+            >
+              Check
+            </button>
+          ) : (
+            <button type="button" className="btn" onClick={() => setIndex(index + 1)}>
+              {index + 1 < total ? "Next client" : "See my score"}
+            </button>
+          )}
+        </div>
+        <p className="small score" aria-live="polite" style={{ marginTop: "var(--s2)" }}>
+          {score} of {max} so far
         </p>
       </div>
     </section>
+  );
+}
+
+function Choices({ legend, name, items, value, disabled, onChange }) {
+  return (
+    <fieldset className="choices question" disabled={disabled}>
+      <legend className="label">{legend}</legend>
+      <div className="choices__list">
+        {items.map((it) => (
+          <label key={it.id} className={`pill${value === it.id ? " is-on" : ""}`}>
+            <input
+              type="radio"
+              name={name}
+              value={it.id}
+              checked={value === it.id}
+              onChange={() => onChange(it.id)}
+            />
+            <span className="pill__dot" style={{ background: it.hex }} aria-hidden="true" />
+            {it.name}
+          </label>
+        ))}
+      </div>
+    </fieldset>
   );
 }

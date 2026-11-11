@@ -39,7 +39,7 @@ export default function ColorWheel({ wheel, exposedId, tonerId }) {
       aria-label={`Color wheel. ${exposedName} is the exposed tone${tonerName ? `. ${tonerName} toner is in play` : ""}. Opposite colors cancel.`}
     >
       {wheel.map((w, i) => (
-        <path key={w.id} d={wedge(i, n)} fill={w.hex} stroke="#F2EFE8" strokeWidth="2">
+        <path key={w.id} d={wedge(i, n)} fill={w.hex} stroke="#EDE8E0" strokeWidth="2">
           <title>{w.name}</title>
         </path>
       ))}
@@ -50,15 +50,15 @@ export default function ColorWheel({ wheel, exposedId, tonerId }) {
           y1={mid(ei, R_OUT)[1]}
           x2={mid(ti, R_OUT)[0]}
           y2={mid(ti, R_OUT)[1]}
-          stroke="#141210"
+          stroke="#171513"
           strokeWidth="2"
           strokeDasharray="4 5"
         />
       )}
 
-      {ei >= 0 && <path d={wedge(ei, n)} fill="none" stroke="#141210" strokeWidth="5" />}
+      {ei >= 0 && <path d={wedge(ei, n)} fill="none" stroke="#171513" strokeWidth="3" />}
       {ti >= 0 && ti !== ei && (
-        <path d={wedge(ti, n)} fill="none" stroke="#141210" strokeWidth="4" strokeDasharray="7 5" />
+        <path d={wedge(ti, n)} fill="none" stroke="#171513" strokeWidth="2.5" strokeDasharray="6 4" />
       )}
 
       {wheel.map((w, i) => {

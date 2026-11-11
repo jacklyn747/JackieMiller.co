@@ -91,8 +91,13 @@ export default function App() {
             Back
           </button>
           {step < STEPS.length - 1 && (
-            <button type="button" className="btn" onClick={() => go(step + 1)}>
-              Next: {STEPS[step + 1]}
+            <button
+              type="button"
+              className="btn"
+              aria-label={`Next: ${STEPS[step + 1]}`}
+              onClick={() => go(step + 1)}
+            >
+              Next
             </button>
           )}
         </div>

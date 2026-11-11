@@ -1,21 +1,30 @@
-/* Matches the live jackiemiller.co (light sections):
-   Bebas Neue headlines, IBM Plex Sans body, IBM Plex Mono labels,
-   warm paper ground, near-black ink, one red accent (on paper only).
-   Kept deliberately quiet: hairlines and space instead of boxes.
-   Swatches are the only real color on the page. */
+/* Matches the live jackiemiller.co: true black ground, bone type, warm
+   gray body. Humane for the big display moment, Bebas Neue for headings,
+   IBM Plex Sans for reading, IBM Plex Mono for labels. Same font setup as
+   Clean Station. Red never sits on black, so this page has no red.
+   Kept quiet: hairlines and space instead of boxes. Swatches are the only
+   real color on the page. */
+@font-face {
+  font-family: "Humane";
+  src: url("https://cdn.prod.website-files.com/6ae591ce087f836810280258/6ae591d0087f8368102802a7_Humane-Regular.ttf")
+    format("truetype");
+  font-display: swap;
+}
 :root {
-  --paper: #ede8e0;
-  --ink: #171513;
-  --ink-soft: #5f5953; /* 5.6:1 on paper */
-  --line: rgba(23, 21, 19, 0.14);
-  --line-strong: rgba(23, 21, 19, 0.32);
-  --red: #b5121b; /* 5.6:1 on paper. Never on black. */
+  --paper: #0a0a0a; /* page ground */
+  --surf: #1c1c1c;
+  --ink: #f2eee6; /* headings, primary text */
+  --ink-soft: #cfcac2; /* body, labels */
+  --ink-mute: rgba(207, 202, 194, 0.68);
+  --line: rgba(242, 238, 230, 0.14);
+  --line-strong: rgba(242, 238, 230, 0.34);
   --tap: 48px;
-  --display: "Bebas Neue", "Arial Narrow", sans-serif;
-  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --humane: "Humane", "Bebas Neue", Arial, sans-serif;
+  --display: "Bebas Neue", Arial, sans-serif;
+  --sans: "IBM Plex Sans", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *,
@@ -53,7 +62,10 @@ h2 {
   text-wrap: balance;
 }
 h1 {
-  font-size: clamp(3.4rem, 13vw, 5.6rem);
+  font-family: var(--humane);
+  font-size: clamp(5.5rem, 26vw, 10rem);
+  line-height: 0.82;
+  text-transform: uppercase;
 }
 h2 {
   font-size: clamp(2.6rem, 9vw, 3.8rem);
@@ -64,7 +76,7 @@ h2:focus {
 }
 h1:focus-visible,
 h2:focus-visible {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--ink);
   outline-offset: 6px;
 }
 p {
@@ -93,7 +105,7 @@ p {
 }
 .eyebrow {
   display: block;
-  color: var(--red);
+  color: var(--ink);
 }
 .eyebrow::before {
   content: "/ ";
@@ -121,7 +133,7 @@ strong {
 }
 
 :focus-visible {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -160,11 +172,11 @@ strong {
   transition: background 200ms var(--ease), transform 200ms var(--ease);
 }
 .dot.is-done::after {
-  background: var(--ink);
+  background: var(--ink-soft);
 }
 .dot.is-current::after {
-  background: var(--red);
-  transform: scale(1.25);
+  background: var(--ink);
+  transform: scale(1.4);
 }
 .dot:disabled {
   cursor: default;
@@ -253,6 +265,8 @@ strong {
       transparent 6px 10px
     );
   border-radius: 18px;
+  /* hairline so the darkest levels still read against black */
+  box-shadow: inset 0 0 0 1px rgba(242, 238, 230, 0.1);
   transition: background-color 800ms var(--ease);
 }
 .swatch__label {
@@ -417,6 +431,9 @@ input[type="range"]::-moz-range-thumb {
   background: var(--ink);
 }
 .toggle input:checked::after {
+  background: var(--paper);
+}
+.toggle input:checked::after {
   transform: translateX(18px);
 }
 
@@ -439,8 +456,8 @@ input[type="range"]::-moz-range-thumb {
   color: var(--ink-soft);
 }
 .big-stat__num {
-  font-family: var(--display);
-  font-size: 3.6rem;
+  font-family: var(--humane);
+  font-size: 5.2rem;
   line-height: 0.9;
   color: var(--ink);
   vertical-align: -0.1em;
@@ -501,7 +518,7 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.72rem;
   font-weight: 400;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--ink);
   margin-left: 6px;
 }
 
@@ -512,14 +529,14 @@ input[type="range"]::-moz-range-thumb {
   color: var(--ink-soft);
 }
 .callout--alert {
-  border-left-color: var(--red);
+  border-left-color: var(--ink);
   color: var(--ink);
 }
 .callout__title {
   font-family: var(--display);
   font-size: 2rem;
   line-height: 1;
-  color: var(--red);
+  color: var(--ink);
   margin-bottom: 0.25em;
 }
 
@@ -556,7 +573,7 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 .chip:focus-within {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 .chip.is-on {
@@ -658,7 +675,7 @@ fieldset:disabled .chip:not(.is-on) {
   padding: 10px 20px 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
-  background: #f7f4ef;
+  background: var(--surf);
   color: var(--ink);
   font: inherit;
   font-weight: 500;
@@ -666,7 +683,7 @@ fieldset:disabled .chip:not(.is-on) {
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  box-shadow: 0 1px 2px rgba(23, 21, 19, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: background 150ms var(--ease), color 150ms var(--ease);
 }
 .toner.is-on {
@@ -686,10 +703,12 @@ fieldset:disabled .chip:not(.is-on) {
   gap: 8px;
   padding: 10px 18px;
   border-radius: 999px;
-  background: #f7f4ef;
+  background: var(--surf);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
   font-weight: 500;
   pointer-events: none;
-  box-shadow: 0 10px 30px rgba(23, 21, 19, 0.22);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Feedback: a label and a sentence. No boxes. */
@@ -699,16 +718,13 @@ fieldset:disabled .chip:not(.is-on) {
   margin-top: 8px;
 }
 .feedback--miss {
-  border-left-color: var(--red);
+  border-left: 2px dashed var(--ink-soft);
 }
 .feedback__title {
   font-family: var(--display);
   font-size: 1.9rem;
   line-height: 1;
   margin-bottom: 0.3em;
-}
-.feedback--miss .feedback__title {
-  color: var(--red);
 }
 .rules {
   margin-top: 32px;
@@ -775,13 +791,10 @@ fieldset:disabled .chip:not(.is-on) {
   border-left: 2px solid var(--ink);
 }
 .answer-feedback li.is-miss {
-  border-left-color: var(--red);
+  border-left: 2px dashed var(--ink-soft);
 }
 .mark {
   font-weight: 600;
-}
-.is-miss .mark {
-  color: var(--red);
 }
 .score {
   margin: 0;

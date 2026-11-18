@@ -14,7 +14,7 @@ Live today: Home, 404, 401. Everything else is a draft.
 |---|---------|----------|
 | 1 | The homepage's only H1 is the word **"Bad"** | Live HTML. The real headline is not an H1. |
 | 2 | Mobile is slow: **LCP 29.1s**, CLS 0.166. Desktop LCP 4.4s, blocking time 705ms | Ubersuggest PageSpeed run, 2026-11-18 |
-| 3 | Three images carry most of that weight: `Reputation.png` 3.0MB, hero stylist JPEG 2.35MB, `976.webp` 734KB. Plus 605KB of unused JS | Measured from the CDN |
+| 3 | One background image, `Group 10268.png` (1.83MB, a template leftover set in CSS), is almost half the page. Corrected after pass 1: the 3.0MB and 2.35MB originals exist but browsers load smaller variants | Browser load, pass 1 |
 | 4 | Sitemap lists one URL. No service or case-study page is indexable | `/sitemap.xml` |
 | 5 | Price conflict: Custom Courses draft says **"Starting at $6,500"**. Working range is $15k to $50k | Draft page copy and SEO description |
 | 6 | Contact form: placeholders mark all four fields required, only Email and Comment are. No confirmation email, no thank-you redirect, so no conversion to track | Webflow form settings |
@@ -77,3 +77,38 @@ Not done: the homepage and header nav do not link to any of these pages yet. Tha
 3. Keep or cut the "state approval" line.
 4. Delete the template and old-LXD drafts, or keep them parked.
 5. This repo: archive it, or point a subdomain at it.
+
+## Pass 1 results (2026-11-18): live homepage
+
+Three checks run: an Ubersuggest crawl, a real-browser load at phone and desktop size, and an automated accessibility scan (axe, WCAG 2 A and AA).
+
+**Limit on this pass.** The test browser could not reach the host that serves jQuery, so Webflow's animations never ran. Layout screenshots from it are not trustworthy and are not used here. Structure, weight and accessibility findings do not depend on that script.
+
+### New findings
+
+| # | Finding | Evidence |
+|---|---------|----------|
+| 19 | **74 elements start at `opacity:0`** and wait for JavaScript to reveal them. If the script is slow or blocked, most of the page is blank. This is the likely cause of the 29s mobile LCP, not confirmed | Inline styles in live HTML; blank render when the script was blocked |
+| 20 | No `prefers-reduced-motion` handling anywhere | Site CSS and HTML |
+| 21 | Page weight is about 4MB, 3.5 to 3.9MB of it images | Browser load |
+| 22 | No `<main>` landmark, and 27 to 28 blocks of content sit outside any landmark | axe |
+| 23 | Form fields have no labels, only placeholders. No `autocomplete` on name, email or phone | Browser DOM |
+| 24 | Heading outline is broken: "MS", "BFA", "03", "01" and the footer wordmark are H2s; the phone number is an H3 and the email an H4 | Browser DOM |
+| 25 | The project and newsletter cards render twice in the DOM (slider duplicate), so every card link and heading is doubled for screen readers and crawlers | Browser DOM |
+| 26 | Horizontal overflow on desktop: the "Who I am" image block runs 12px past the viewport | Browser DOM |
+| 27 | Tap targets under 24px tall: Menu (20px), phone and email links (16px on mobile) | Browser DOM |
+| 28 | Ubersuggest health score 68. It crawled 6 URLs, including `work.jackiemiller.co`, and flags thin content there: the work hub has 29 words, the Brassy lesson 192 | Ubersuggest crawl |
+| 29 | Ubersuggest reports no sitemap, although `/sitemap.xml` returns 200 and `robots.txt` points to it. Unresolved; check in Google Search Console | Ubersuggest crawl vs direct fetch |
+| 30 | No traffic, keyword or backlink data exists for the domain yet | Ubersuggest domain overview returned empty |
+
+### Confirmed from the scoping list
+
+Rows 1 (H1 is "Bad"), 6 (form required-field mismatch), 8 (no `lang`), 12 (the call link only scrolls to the form).
+
+### Clean
+
+No broken links, no 4xx responses, no duplicate titles or descriptions, canonical tag present, JSON-LD present (WebSite and Person), every image lazy-loaded, no colour-contrast failures detected.
+
+### Not yet run
+
+Steps 2 to 6 of the plan: copy consistency, a real form submission, layout QA on staging with scripts loading, search baseline, publish gate.

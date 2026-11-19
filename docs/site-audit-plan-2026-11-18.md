@@ -112,3 +112,16 @@ No broken links, no 4xx responses, no duplicate titles or descriptions, canonica
 ### Not yet run
 
 Steps 2 to 6 of the plan: copy consistency, a real form submission, layout QA on staging with scripts loading, search baseline, publish gate.
+
+## Fixes shipped (2026-11-19, published to jackiemiller.co and www)
+
+| Row | Fix | Verified on the live domain |
+|-----|-----|-----------------------------|
+| 1 | The H1 is now "For beauty educators who've outgrown the PDF. Students who can actually do the work." The decorative "Bad" is an H2 | One H1 on the page. Both elements keep the same size and position on phone and desktop |
+| 8 | Page language set to English through a one-line script in the site's head code | Browser reports `lang="en"` |
+
+**Not fixed: row 3, the 1.83MB background image.** Webflow's compressor rejected it because the converted file came out larger than the original. It is a static-noise texture, which does not compress. The asset is unchanged. Options: replace it with a small repeating noise tile, or drop the texture and keep the flat black.
+
+**Better fix for row 8 when convenient:** set the language code in Webflow under Site settings, General. That writes it into the HTML itself, and the head script can then be removed.
+
+The publish was site-wide. Draft pages stayed unpublished (all six still return 404) and the sitemap still lists one URL.
